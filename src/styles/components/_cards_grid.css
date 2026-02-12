@@ -1,0 +1,119 @@
+/* Cards Grid - Mobile First */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 columna en móviles por defecto */
+  column-gap: 16px; 
+  row-gap: 35px;
+  padding: 20px 0;
+  
+  & .card {
+    & .badges-wrapper {
+      animation: slideInLeft 0.5s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+  }
+  
+  & .data-video {
+    animation: slideInTop 0.5s ease-out forwards;
+    animation-delay: 0.7s;
+  }
+}
+
+/* Tablet (min-width: 601px) */
+@media (min-width: 601px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+  }
+}
+
+/* Desktop (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .cards-grid {
+    /* Las clases específicas sobrescriben el grid por defecto */
+    &.grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &.grid-cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    &.grid-cols-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación complementaria */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Coming Soon - Deshabilita enlaces y aplica opacidad progresiva */
+.cards-grid.coming-soon {
+  & .card-link {
+    pointer-events: none;
+    cursor: default;
+  }
+  
+  /* Opacidad progresiva en los primeros 5 elementos: 0%, 5%, 10%, 15%, 20% */
+  & .card:nth-child(1) .card-link {
+    opacity: 1;
+  }
+  
+  & .card:nth-child(2) .card-link {
+    opacity: 0.7;
+  }
+  
+  & .card:nth-child(3) .card-link {
+    opacity: 0.6;
+  }
+  
+  & .card:nth-child(4) .card-link {
+    opacity: 0.5;
+  }
+  
+  & .card:nth-child(5) .card-link {
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "mi-proyecto-puro",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist node_modules package-lock.json"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.2",
+    "postcss-nesting": "^13.0.1",
+    "typescript": "~5.7.3",
+    "vite": "^6.1.0",
+    "vite-plugin-html-inject": "^1.1.2"
+  },
+  "browserslist": [
+    ">0.3%",
+    "last 2 versions",
+    "not dead",
+    "not op_mini all",
+    "Chrome >= 80",
+    "Safari >= 13.1"
+  ]
+}

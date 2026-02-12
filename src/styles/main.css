@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+@import "./base/_variables.css";
+@import "./base/_reset.css";
+@import "./components/_button.css";
+@import "./components/_card.css";
+@import "./components/_general-titles.css";
+@import "./components/_cards_grid.css";
+@import "./components/_swiper.css";
+@import "./components/_pagination.css";
+
+/* Estilos globales adicionales */
+body {
+  background: var(--bg-color);
+  font-family: var(--font-base);
+  font-size: 13px;
+  font-weight: 300;  
+}
+.container{
+  width:100%;
+  max-width: 1765px;
+  box-sizing: border-box;
+  padding:0 15px;
+  margin-right: auto;
+  margin-left: auto;
+}

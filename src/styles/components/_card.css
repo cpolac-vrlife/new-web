@@ -1,0 +1,169 @@
+.card {
+  position: relative;
+  width: 100%;
+
+  /* Enlace de la card */
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+    /* Efecto hover sobre la tarjeta */
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:focus {      
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+  }
+
+  /* Contenedor de la imagen (corregido para evitar duplicidad) */
+  .img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    position: relative;
+    display: block;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+  }
+
+  /* Badges (Etiquetas) */
+  .badges-wrapper {
+    position: absolute;
+    z-index: 2; /* Subido para asegurar visibilidad */
+    right: 10px;
+    top: -10px;
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: max-content;
+    opacity: 0;
+    transform: translateX(20px);
+    /* No ponemos la transición aquí si vamos a usar keyframes en el padre */
+
+    .badge-item {
+      font-size: 15px;
+      font-weight: 800;
+      padding: 2px 6px;
+      margin-left: 5px;
+      transform: skewX(-10deg);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+      color: #fff; /* Aseguramos color por defecto */
+      &.exclusive { 
+        background: var(--terciary); 
+        color:#000;
+      }
+      &.interactive { 
+        background: var(--primary); 
+        img {
+          width: 17px;
+          height: 15px;
+          margin-right: 4px;
+        }
+      }
+      &.quality { 
+        background: #fff; color: #000; 
+      }
+      &.top { 
+        background: var(--orange); 
+      }
+      span {
+        display: inline-block;
+        transform: skewX(10deg); /* Compensa el skew del padre */
+        line-height: 1;
+      }
+    }
+  }
+
+  /* Información del video */
+  .data-video {
+    font-family: var(--font-base);
+    padding-top: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .data-left{
+      padding-right:10px;
+    }
+    .data-right{
+      display: flex; align-items: center; justify-content: flex-end;
+      *{
+       display: flex; align-items: center; justify-content: flex-end; 
+      }
+    }
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+
+    .cast {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 300;
+      display: block;
+      margin-top: 2px;
+    }
+    .rate{
+      font-size: 13px;
+      color:#fff;
+      .material-symbols-outlined{
+        font-size: 15px;
+        margin-right: 3px;
+      }
+    }
+    .favorite{
+      color:#fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+      margin-right: 5px;
+      &:hover{
+        background: rgba(255,255,255,0.15);
+        transition: all linear .2s;
+        svg{
+          fill:var(--primary);
+          animation: beat .25s infinite alternate; 
+        }
+      } 
+      svg{
+        fill:#fff;
+      }  
+    }
+  }
+}
+
+/* Keyframes mantenidos fuera */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes beat {
+    to {
+        transform: scale(1.1);
+    }
+}

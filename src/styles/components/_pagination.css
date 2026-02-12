@@ -1,0 +1,146 @@
+/* Controles de paginación - Mobile First */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.pagination-btn {
+  padding: 8px 12px;
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  font-size: 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &.prev::before {
+    content: '←';
+    font-size: 16px;
+  }
+
+  &.next::before {
+    content: '→';
+    font-size: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--color-text-muted, #94a3b8);
+    color: var(--color-text-muted, #94a3b8);
+  }
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination-page {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  background: transparent;
+  border: 2px solid transparent;
+  color: var(--color-text, #334155);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+  }
+
+  &.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  }
+}
+
+.pagination-dots {
+  color: var(--color-text-muted, #94a3b8);
+  padding: 0 4px;
+  user-select: none;
+}
+
+/* Animación para las cards al cambiar de página */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet y superiores (min-width: 481px) */
+@media (min-width: 481px) {
+  .pagination-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+
+    &.prev::before,
+    &.next::before {
+      content: none;
+    }
+
+    &.prev::after {
+      content: '←';
+    }
+
+    &.next::after {
+      content: '→';
+    }
+  }
+
+  .pagination-page {
+    min-width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .pagination-pages {
+    gap: 6px;
+  }
+}
+
+/* Desktop (min-width: 769px) */
+@media (min-width: 769px) {
+  .pagination-controls {
+    gap: 12px;
+  }
+
+  .pagination-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .pagination-page {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+}

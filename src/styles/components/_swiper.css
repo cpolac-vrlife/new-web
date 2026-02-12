@@ -1,0 +1,222 @@
+/* Variables de configuración del Slider */
+:root {
+  --slider-max-width: 1765px;
+  --slider-gap: 16px;
+  --slider-padding: 15px; /* Alineado con el padding del container */
+  --slider-content-width: calc(var(--slider-max-width) - (2 * var(--slider-padding))); /* Ancho real de contenido */
+}
+
+.swiper {
+  width: 100%;
+  overflow: hidden;
+  padding-top: 10px; /* Móvil: menos padding */
+  position: relative;
+
+  /* Tablet y superiores: más padding */
+  @media (min-width: 769px) {
+    padding-top: 20px;
+  }
+
+  /* Contenedor de los slides */
+  .swiper-wrapper {
+    display: flex;
+    width: max-content;
+    box-sizing: content-box;
+    will-change: transform;
+    gap: 12px; /* Móvil: gap más pequeño */
+    padding-inline: calc(max(0px, (100% - var(--slider-max-width)) / 2) + var(--slider-padding));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+    /* Mobile First: Base (móvil) - 1 slide visible + parte del siguiente */
+    .swiper-slide {
+      flex: 0 0 calc(85vw - var(--slider-padding));
+      max-width: 400px; /* Límite máximo para móviles pequeños */
+      .more-videos{
+        background: rgba(255,255,255,0.15);
+        color:#fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        aspect-ratio: 16 / 9; /* Mismo ratio que los thumbnails de video */
+        width: 100%;
+        height: auto;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        &:hover{                 
+          transform: scale(1.05);    
+        }
+      }
+    }
+
+    /* Tablet (min-width: 601px) - 2 slides visibles */
+    @media (min-width: 601px) {
+      gap: var(--slider-gap);
+      
+      .swiper-slide {
+        flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - var(--slider-gap)) / 2);
+        max-width: none;
+      }
+    }
+
+    /* Laptop (min-width: 769px) - Configuración intermedia según clase */
+    @media (min-width: 769px) {
+      &.three-items {
+        .swiper-slide {
+          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - var(--slider-gap)) / 2);
+        }
+      }
+
+      &.four-items {
+        .swiper-slide {
+          /* 2.5 slides visibles: 2 completos + medio */
+          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (2 * var(--slider-gap))) / 2.5);
+        }
+      }
+
+      &.five-items {
+        .swiper-slide {
+          /* 3.5 slides visibles: 3 completos + medio */
+          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (3 * var(--slider-gap))) / 3.5);
+        }
+      }
+    }
+
+    /* Desktop (min-width: 1025px) - Aplicar configuración según clase */
+    @media (min-width: 1025px) {
+      &.three-items {
+        .swiper-slide {
+          flex: 0 0 calc((var(--slider-content-width) - (2 * var(--slider-gap))) / 3);
+        }
+      }
+
+      &.four-items {
+        .swiper-slide {
+          flex: 0 0 calc((var(--slider-content-width) - (3 * var(--slider-gap))) / 4);
+        }
+      }
+
+      &.five-items {
+        .swiper-slide {
+          flex: 0 0 calc((var(--slider-content-width) - (4 * var(--slider-gap))) / 5);
+        }
+      }
+    }
+  }
+
+  /* El Slide individual - Mobile First */
+  .swiper-slide {
+    user-select: none;
+    margin-bottom: 15px; /* Móvil: menos margen */
+    position: relative;
+
+    /* Tablet y superiores: más margen */
+    @media (min-width: 769px) {
+      margin-bottom: 26px;
+    }
+
+    /* Lógica de Animación cuando entra en el viewport */
+    &.is-visible {
+      .card {
+        .badges-wrapper {
+          animation: slideInLeft 0.5s ease-out forwards;
+          animation-delay: 0.3s;
+        }
+        .data-video {
+          animation: slideInTop 0.5s ease-out forwards;
+          animation-delay: 0.5s;
+        }
+      }
+    }    
+  }
+
+  /* Botones de navegación - Mobile First */
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: var(--primary, #000);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+
+    .material-symbols-outlined {
+      font-size: 24px;
+      transition: transform 0.2s ease;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0 !important;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: var(--terciary, #333);
+      .material-symbols-outlined {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Tablet y Desktop: Botones más grandes */
+    @media (min-width: 769px) {
+      width: 50px;
+      height: 50px;
+
+      .material-symbols-outlined {
+        font-size: 32px;
+      }
+    }
+  }
+
+  .swiper-button-next { 
+    right: 10px;
+    
+    @media (min-width: 769px) {
+      right: 15px;
+    }
+  }
+  
+  .swiper-button-prev { 
+    left: 10px;
+    
+    @media (min-width: 769px) {
+      left: 15px;
+    }
+  }
+}
+
+/* Keyframes (Fuera del anidamiento para evitar errores de scope) */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

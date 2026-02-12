@@ -1,0 +1,12 @@
+:root {
+  --bg-color:#000;
+  --primary: #e4003a;
+  --secondary: #64748b;
+  --terciary:#ffc600;
+  --orange:#ff7815;
+  --gold:#f2b03c;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --font-base:'Poppins', sans-serif; 
+}
