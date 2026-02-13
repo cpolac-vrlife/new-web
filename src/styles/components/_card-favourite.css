@@ -1,0 +1,148 @@
+/* Card Favourite Styles - Mobile First */
+.card-favourite {
+  position: relative;
+
+  /* Image Wrapper */
+  .img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    .progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      .progress-bar {
+        height: 100%;
+        background: var(--primary);
+        width: 0;
+        transition: width 3s ease-out 0.2s;
+      }
+    }
+  }
+
+  /* Poster Thumbnail - Mobile First */
+  .poster-thumb {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 160px;
+    height: auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    transition: transform 0.3s ease;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Tablet y superiores */
+    @media (min-width: 769px) {
+      top: 5px;
+      right: 5px;
+      width: 170px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  /* Play Button - Mobile First */
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--primary);      
+    }
+
+    /* Tablet y superiores */
+    @media (min-width: 769px) {
+      width: 60px;
+      height: 60px;
+
+      svg {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+
+  /* Title with Tag */
+  .title-with-tag {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-direction: column;
+    
+    h3 {
+      margin: 0;
+      width: 100%;
+    }
+
+    /* Tablet y superiores */
+    @media (min-width: 769px) {
+      flex-direction: row;
+      align-items: center;
+      gap:5px;
+
+      h3 {
+        width: auto;
+      }
+    }
+  }
+
+  /* Tag Primary - Mobile First */
+  .tag-primary {
+    display: inline-block;    
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    @media (min-width: 769px) {      
+      font-size: 16px;
+    }
+  }
+
+  /* Badges Wrapper */
+  .badges-wrapper {
+    z-index: 1;
+  }
+
+  /* Hover States */
+  &:hover {
+    .poster-thumb {
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      background-color: rgba(255, 255, 255, 1);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+}
+
+/* Cuando el slide es visible, la progress-bar usa su width del HTML */
+.swiper-slide:not(.is-visible) .card-favourite .progress-bar {
+  width: 0 !important;
+}

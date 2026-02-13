@@ -96,6 +96,17 @@
     cursor: default;
   }
   
+  /* Mostrar release-date y ocultar rate/favorite en coming-soon */
+  & .card .data-video {
+    .release-date {
+      display: flex;
+    }
+    .rate,
+    .favorite {
+      display: none;
+    }
+  }
+  
   /* Opacidad progresiva en los primeros 5 elementos: 0%, 5%, 10%, 15%, 20% */
   & .card:nth-child(1) .card-link {
     opacity: 1;

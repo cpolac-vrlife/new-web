@@ -43,7 +43,7 @@ class GridPagination {
     // Botón anterior
     const prevBtn = document.createElement('button');
     prevBtn.className = 'pagination-btn prev';
-    prevBtn.innerHTML = '';
+    prevBtn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
     prevBtn.addEventListener('click', () => this.goToPage(this.config.currentPage - 1));
 
     // Contenedor de números de página
@@ -53,7 +53,7 @@ class GridPagination {
     // Botón siguiente
     const nextBtn = document.createElement('button');
     nextBtn.className = 'pagination-btn next';
-    nextBtn.innerHTML = '';
+    nextBtn.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
     nextBtn.addEventListener('click', () => this.goToPage(this.config.currentPage + 1));
 
     container.appendChild(prevBtn);
@@ -173,6 +173,24 @@ export const initGrids = () => {
     // Verificamos que tenga un valor real y no sea el valor por defecto
     if (gridType && gridType !== 'default') {
       grid.classList.add(gridType);
+    }
+
+    // Verificar si es coming-soon
+    const isComingSoon = grid.getAttribute('data-coming-soon') === 'true';
+    if (isComingSoon) {
+      // Añadir clase coming-soon
+      grid.classList.add('coming-soon');
+      
+      // Limitar elementos a 5
+      const cards = Array.from(grid.querySelectorAll<HTMLElement>('.card'));
+      cards.forEach((card, index) => {
+        if (index >= 5) {
+          card.style.display = 'none';
+        }
+      });
+      
+      // No inicializar paginación para grids coming-soon
+      return;
     }
 
     // Inicializar paginación si está habilitada

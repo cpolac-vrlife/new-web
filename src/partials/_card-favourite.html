@@ -1,0 +1,35 @@
+<div class="card card-favourite">
+    <a href="{{videoUrl}}" class="card-link" data-video-id="{{videoId}}" data-video-url="{{videoUrl}}" target="_blank" rel="noopener">
+        <div class="img-wrapper">            
+            <!-- Imagen principal de pictures -->
+            <div class="img">
+                <img src="{{image1}}" width="420" height="auto" loading="lazy" decoding="async" alt="{{title}}">
+            </div>
+            
+            <!-- Poster pequeño en esquina superior derecha -->
+            <div class="poster-thumb">
+                <img src="{{poster}}" alt="{{title}} poster">
+            </div>
+            
+            <!-- Botón de play en el centro -->
+            <div class="play-button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#fff">
+                    <path d="M320-200v-560l440 280-440 280Z"/>
+                </svg>
+            </div>
+            <!-- Progress bar del punto del video -->
+             <div class="progress-container">
+                <div class="progress-bar" style="width:50%;"></div>
+             </div>
+        </div>
+    </a>
+    <div class="data-video">
+        <div class="data-left">
+            <div class="title-with-tag">
+                <h3>{{title}}</h3>
+                <span class="tag-primary">#{{tag}}</span>
+            </div>
+            <div class="cast">{{performers}}</div>
+        </div>
+    </div>    
+</div>

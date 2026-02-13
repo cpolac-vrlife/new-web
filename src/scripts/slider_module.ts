@@ -44,12 +44,12 @@ export class CustomSlider {
     this.prevBtn.addEventListener('click', () => this.moveByButton(-1));
 
     this.wrapper.addEventListener('mousedown', (e) => this.dragStart(e));
-    window.addEventListener('mousemove', (e) => this.dragAction(e));
+    window.addEventListener('mousemove', (e) => this.dragAction(e), { passive: true });
     window.addEventListener('mouseup', () => this.dragEnd());
 
     this.wrapper.addEventListener('touchstart', (e) => this.dragStart(e), { passive: true });
     this.wrapper.addEventListener('touchmove', (e) => this.dragAction(e), { passive: false });
-    this.wrapper.addEventListener('touchend', () => this.dragEnd());
+    this.wrapper.addEventListener('touchend', () => this.dragEnd(), { passive: true });
 
     this.wrapper.addEventListener('dragstart', (e) => e.preventDefault());
 

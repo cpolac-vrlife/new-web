@@ -1,14 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto Nativo 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-</head>
-<body>
-<main class="">
+<load src="src/layouts/_layout-top.html" />
+
+<!-- Hero Banner -->
+<load src="src/partials/_hero-banner.html" />
+
+<main class="page-home">
+<div class="slider-section">
+    <div class="container">
+        <div class="title_container">
+            <div class="left_section">
+                <div class="pre-title">
+                    top 10
+                </div>
+                <div class="title">
+                    Got Everyone<br> Hooked Today!
+                </div>
+            </div>
+            <div class="right_section">
+                <div class="text">
+                    Our <b>most popular scenes</b> ranked by viewer ratings and engagement.
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="slider-wrapper" data-slider-items="4">
+        <div class="swiper" data-source="api" data-tags="Big Tits" data-top10 data-limit="10" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper">
+                <!-- Contenido dinámico: Top 10 videos -->
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="title_container">
         <div class="left_section">
@@ -25,8 +46,8 @@
             </div>
         </div>
     </div>
-    <div class="cards-grid" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="8">
-        <load src="src/partials/_cards-grid.html" />
+    <div class="cards-grid" data-source="api" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="8" data-limit="24" data-sort="release_date" data-order="desc">
+        <!-- Contenido dinámico: últimos 24 videos -->
     </div> 
 </div>
 <div class="container">
@@ -36,7 +57,7 @@
                 coming soon
             </div>
             <div class="title">
-                Más de 1000 escenas nos avalan
+                THe Next Big Drops. <br>Stay Tuned!
             </div>
         </div>
         <div class="right_section">
@@ -45,8 +66,8 @@
             </div>
         </div>
     </div>
-    <div class="cards-grid coming-soon" data-grid-type="grid-cols-5" data-pagination="true" data-items-per-page="5">
-        <load src="src/partials/_cards-grid.html" />
+    <div class="cards-grid" data-source="api" data-grid-type="grid-cols-5" data-coming-soon="true" data-limit="5" data-sort="release_date" data-order="desc">
+        <!-- Contenido dinámico: próximos 5 videos -->
     </div> 
 </div>
 <div class="">
@@ -54,10 +75,10 @@
         <div class="title_container">
             <div class="left_section">
                 <div class="pre-title">
-                    lastest videos
+                    interactive videos
                 </div>
                 <div class="title">
-                    Más de 1000 escenas nos avalan
+                    Do you want a extra<br> realistic experience?
                 </div>
             </div>
             <div class="right_section">
@@ -68,19 +89,48 @@
         </div>
     </div>
     <div class="slider-wrapper" data-slider-items="4">
-        <load src="src/partials/_slider.html" />
+        <div class="swiper" data-source="api" data-limit="9" data-tags="Anal" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper">
+                <!-- Contenido dinámico: últimos 9 videos con tag Anal -->
+            </div>
+        </div>
     </div>
 </div>
-
-</div><div class="slider-section">
+<div class="slider-section">
     <div class="container">
         <div class="title_container">
             <div class="left_section">
                 <div class="pre-title">
-                    lastest videos
+                    old but gold
                 </div>
                 <div class="title">
-                    Más de 1000 escenas nos avalan
+                    The Classics you<br> somehow missed.
+                </div>
+            </div>
+            <div class="right_section">
+                <div class="text">
+                    We work to make each new scene more <b>immersive and realistic than the previous one</b>.
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="slider-wrapper" data-slider-items="4">
+        <div class="swiper" data-source="api" data-limit="9" data-tags="orgy" data-min-quality="5K" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper">
+                <!-- Contenido dinámico: últimos 9 videos en 5K+ -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="slider-section">
+    <div class="container">
+        <div class="title_container">
+            <div class="left_section">
+                <div class="pre-title">
+                    hidden gems
+                </div>
+                <div class="title">
+                    You've been <br>sleeping on these.
                 </div>
             </div>
             <div class="right_section">
@@ -91,10 +141,39 @@
         </div>
     </div> 
     <div class="slider-wrapper" data-slider-items="5">
-        <load src="src/partials/_slider.html" />
+        <div class="swiper" data-source="api" data-limit="9" data-tags="Blonde" data-min-quality="5K" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper">
+                <!-- Contenido dinámico: últimos 9 videos en 5K+ -->
+            </div>
+        </div>
     </div>
 </div>
-    
-  </main>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+<div class="slider-section">
+    <div class="container">
+        <div class="title_container">
+            <div class="left_section">
+                <div class="pre-title">
+                    you know the moment...
+                </div>
+                <div class="title">
+                    The scenes you<br> always go back.
+                </div>
+            </div>
+            <div class="right_section">
+                <div class="text">
+                    Handpicked selections featuring <b>the most immersive and realistic experiences</b>.
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="slider-wrapper" data-slider-items="4">
+        <div class="swiper" data-source="api" data-favourite-scenes data-limit="10" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper">
+                <!-- Contenido dinámico: favourite scenes con template especial -->
+            </div>
+        </div>
+    </div>
+</div>    
+</main>
+
+<load src="src/layouts/_layout-bottom.html" />

@@ -1,12 +1,38 @@
 import './styles/main.css';
 import { CustomSlider } from './scripts/slider_module';
 import { initGrids } from './scripts/GridManager';
+import { initHeader } from './scripts/HeaderModule';
+import { initFooter } from './scripts/FooterModule';
+import { initHeroBanner } from './scripts/HeroBannerModule';
+import { initDynamicContent } from './scripts/ContentRenderer';
 
 /**
- * Inicializa todos los componentes de la página
+ * Inicializa componentes críticos above-the-fold (LCP)
  */
-const initApp = () => {
-  // Primero configuramos los grids (estructura y paginación)
+const initCritical = () => {
+  // Header es above-the-fold, inicializar inmediatamente
+  initHeader();
+
+  // Hero banner es el LCP candidato, inicializar inmediatamente
+  if (document.querySelector('.hero-banner')) {
+    initHeroBanner({
+      autoPlay: true,
+      autoPlayInterval: 6000
+    });
+  }
+};
+
+/**
+ * Inicializa componentes no críticos (below-the-fold) de forma diferida
+ */
+const initDeferred = async () => {
+  // Footer está below the fold
+  initFooter();
+
+  // Cargar contenido dinámico desde la API (grids y sliders con data-source="api")
+  await initDynamicContent();
+
+  // Luego configuramos los grids (estructura y paginación)
   initGrids();
 
   // Luego inicializamos los sliders (comportamiento)
@@ -40,6 +66,24 @@ const initApp = () => {
       container.classList.add('swiper-initialized');
     });
   });
+};
+
+/**
+ * Inicializa la aplicación con prioridades:
+ * 1. Crítico (above-the-fold): inmediato
+ * 2. Diferido (below-the-fold): tras idle o fallback
+ */
+const initApp = () => {
+  // 1. Inicializar lo crítico inmediatamente
+  initCritical();
+
+  // 2. Diferir lo no crítico usando requestIdleCallback (o fallback)
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => initDeferred(), { timeout: 2000 });
+  } else {
+    // Fallback: usar setTimeout con un pequeño delay
+    setTimeout(() => initDeferred(), 100);
+  }
 };
 
 // Ejecución segura del DOM

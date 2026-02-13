@@ -1,0 +1,45 @@
+/* Slider Top 10 - Cards más pequeñas con números de ranking */
+
+.swiper.slider-top10 {
+  .swiper-slide {
+    position: relative;
+    
+    /* Número de ranking detrás de la card */
+    .rank-number {
+      position: absolute;
+      top: 40%;
+      left: 0%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(4rem, 15vw, 4.5rem);
+      font-weight: 900;
+      color: #fff;
+      z-index: 0;
+      pointer-events: none;
+      font-family: var(--font-base);
+      font-style: italic;
+      line-height: 1;
+      user-select: none;
+    }
+    
+    /* La card se posiciona por encima del número */
+    .card {
+      position: relative;
+      z-index: 1;
+      transform: scale(0.85); /* Cards ligeramente más pequeñas */
+      transform-origin: center center;
+      
+      @media (min-width: 768px) {
+        transform: scale(0.8);
+      }
+      
+      @media (min-width: 1024px) {
+        transform: scale(0.90);
+      }
+      
+      /* Ajustar el hover para compensar el scale */
+      .card:hover {
+        transform: scale(1.15);
+      }
+    }
+  }
+}

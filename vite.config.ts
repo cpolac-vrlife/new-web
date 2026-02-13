@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite';
 import injectHTML from 'vite-plugin-html-inject';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import nesting from 'postcss-nesting'; 
 import autoprefixer from 'autoprefixer';
+import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [injectHTML({
-    sourceAttr: 'src',
-  })],
+  plugins: [
+    injectHTML({
+      sourceAttr: 'src',
+    }),
+    createHtmlPlugin({
+      minify: true,
+    }),
+  ],
   css: {
     // Eliminamos la duplicidad y la referencia al archivo externo
     // Al definir los plugins aquí, Vite ignora el postcss.config.cjs
@@ -19,10 +26,27 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true 
+    open: true,
+    proxy: {
+      '/api/vrp': {
+        target: 'https://np.virtualrealhub.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/vrp/, '/affiliates/json-export/vrp'),
+        secure: true
+      }
+    }
   },
   build: {
     // Esto asegura que el CSS final sea compatible y no use sintaxis experimental
-    cssTarget: 'chrome80', 
+    cssTarget: 'chrome80',
+    // Multi-page app - define los puntos de entrada
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        videos: resolve(__dirname, 'videos.html'),
+        categories: resolve(__dirname, 'categories.html'),
+        models: resolve(__dirname, 'models.html'),
+      }
+    }
   }
 });
