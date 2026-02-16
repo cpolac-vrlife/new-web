@@ -10,6 +10,12 @@
         <span class="filters-bar__toggle-arrow material-symbols-outlined">expand_more</span>
       </button>
       <div class="filters-bar__dropdown filters-bar__dropdown--combo">
+        <div class="filters-bar__modal-header">
+          <span class="filters-bar__modal-title">Choose your combo</span>
+          <button class="filters-bar__modal-close" data-close="combo">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
         <div class="filters-bar__combo-grid" id="combo-grid">
           <!-- Categories injected by FilterManager -->
         </div>
@@ -28,6 +34,12 @@
         <span class="filters-bar__toggle-arrow material-symbols-outlined">expand_more</span>
       </button>
       <div class="filters-bar__dropdown filters-bar__dropdown--pornstar">
+        <div class="filters-bar__modal-header">
+          <span class="filters-bar__modal-title">Pornstar</span>
+          <button class="filters-bar__modal-close" data-close="pornstar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
         <div class="filters-bar__search-wrapper">
           <span class="material-symbols-outlined">search</span>
           <input type="text" class="filters-bar__search-input" id="pornstar-search" placeholder="Search actress..." autocomplete="off">
@@ -47,6 +59,11 @@
         </div>
       </div>
     </div>
+
+    <!-- Clear all button (mobile only) -->
+    <button class="filters-bar__clear-mobile" id="clear-all-mobile" title="Clear all filters">
+      <span class="material-symbols-outlined">filter_alt_off</span>
+    </button>
 
     <!-- Active filters summary -->
     <div class="filters-bar__active" id="active-filters" style="display:none;">
@@ -75,4 +92,6 @@
     </div>
   </div>
 
+  <!-- Modal backdrop for mobile -->
+  <div class="filters-bar__backdrop"></div>
 </div>

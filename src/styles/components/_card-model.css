@@ -1,0 +1,167 @@
+/* Card Model - Mobile First */
+.card-model {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.card-model__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-model__image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 12px;
+
+  @media (min-width: 769px) {
+    margin-bottom: 16px;
+  }
+}
+
+.card-model__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+
+  .card-model:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.card-model__favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+  z-index: 2;
+
+  .card-model:hover & {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &:hover {
+    background: rgba(228, 0, 58, 0.8);
+  }
+
+  &.is-favorite {
+    opacity: 1;
+    background: var(--primary);
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+  }
+}
+
+.card-model__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.card-model__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (min-width: 769px) {
+    font-size: 16px;
+  }
+}
+
+.card-model__videos {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+
+  @media (min-width: 769px) {
+    font-size: 14px;
+  }
+}
+
+/* Models Slider - Responsive behavior */
+.models-slider {
+  /* Mobile: slider con 2.5 modelos visibles - comportamiento estándar */
+  .swiper-wrapper {
+    .swiper-slide {
+      /* 2.5 slides visibles en móvil usando el sistema estándar */
+      flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (1.5 * var(--slider-gap))) / 2.5) !important;
+      max-width: none !important;
+    }
+  }
+  
+  /* Tablet (768px): convertir a grid de 4 columnas centrado */
+  @media (min-width: 768px) {
+    .swiper-wrapper {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: auto !important;
+      max-width: calc(var(--slider-max-width) - (2 * var(--slider-padding)));
+      margin: 0 auto;
+      padding-inline: calc(max(0px, (100% - var(--slider-max-width)) / 2) + var(--slider-padding)) !important;
+      transform: none !important;
+      box-sizing: border-box;
+    }
+
+    .swiper-slide {
+      width: 100% !important;
+      max-width: none !important;
+      flex: none !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Ocultar botones de navegación en tablet/desktop */
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none !important;
+    }
+  }
+
+  /* Desktop (1024px): convertir a grid de 8 columnas */
+  @media (min-width: 1024px) {
+    .swiper-wrapper {
+      grid-template-columns: repeat(8, 1fr);
+      gap: 24px;
+    }
+  }
+}

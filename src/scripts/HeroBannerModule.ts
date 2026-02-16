@@ -246,11 +246,6 @@ class HeroBanner {
     });
   }
 
-  private getReorderedIndices(_activeIndex: number, _total: number): number[] {
-    // No longer used - kept for compatibility
-    return [];
-  }
-
   private nextSlide() {
     const nextIndex = (this.currentSlide + 1) % this.slides.length;
     this.goToSlide(nextIndex);

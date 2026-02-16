@@ -4,7 +4,6 @@ class Header {
   private header: HTMLElement | null;
   private mobileToggle: HTMLButtonElement | null;
   private nav: HTMLElement | null;
-  private searchInput: HTMLInputElement | null;
   private isMenuOpen: boolean = false;
   private hasHeroBanner: boolean = false;
 
@@ -12,7 +11,6 @@ class Header {
     this.header = document.querySelector('.header');
     this.mobileToggle = document.querySelector('.header__mobile-toggle');
     this.nav = document.querySelector('.header__nav');
-    this.searchInput = document.querySelector('.header__search-input');
     this.hasHeroBanner = document.querySelector('.hero-banner') !== null;
 
     this.init();
@@ -43,20 +41,6 @@ class Header {
         this.toggleMobileMenu();
       }
     });
-
-    // Search functionality
-    if (this.searchInput) {
-      this.searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          this.handleSearch();
-        }
-      });
-    }
-
-    const searchBtn = document.querySelector('.header__search-btn');
-    if (searchBtn) {
-      searchBtn.addEventListener('click', () => this.handleSearch());
-    }
   }
 
   private toggleMobileMenu() {
@@ -100,17 +84,6 @@ class Header {
       } else {
         this.header.classList.remove('header--scrolled');
       }
-    }
-  }
-
-  private handleSearch() {
-    if (!this.searchInput) return;
-
-    const searchTerm = this.searchInput.value.trim();
-    if (searchTerm) {
-      console.log('Searching for:', searchTerm);
-      // Aquí puedes implementar la lógica de búsqueda
-      // Por ejemplo: window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
     }
   }
 }

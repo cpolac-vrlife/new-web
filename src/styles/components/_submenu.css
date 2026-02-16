@@ -13,15 +13,22 @@
 }
 
 .submenu__item {
-  flex: 1 1 auto;
-  min-width: fit-content;
+  flex: 1 1 calc(33.333% - 6px);
+  min-width: 0;
+  display: flex;
+
+  @media (min-width: 769px) {
+    flex: 1 1 auto;
+    min-width: fit-content;
+  }
 }
 
 .submenu__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 16px;
+  padding: 8px 10px;
+  min-height: 44px;
   background: rgba(255, 255, 255, 0.04);
   border:1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
@@ -31,8 +38,10 @@
   font-weight: 400;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
   width: 100%;
+  line-height: 1.3;
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);

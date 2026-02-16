@@ -5,6 +5,7 @@ import { initFooter } from './scripts/FooterModule';
 import { initHeroBanner } from './scripts/HeroBannerModule';
 import { initDynamicContent } from './scripts/ContentRenderer';
 import { initFilters } from './scripts/FilterManager';
+import { initSearch } from './scripts/SearchModule';
 
 /**
  * Inicializa componentes críticos above-the-fold (LCP)
@@ -12,6 +13,9 @@ import { initFilters } from './scripts/FilterManager';
 const initCritical = () => {
   // Header es above-the-fold, inicializar inmediatamente
   initHeader();
+
+  // Search overlay (se vincula al botón del header)
+  initSearch();
 
   // Hero banner es el LCP candidato, inicializar inmediatamente
   if (document.querySelector('.hero-banner')) {

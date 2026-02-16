@@ -83,6 +83,13 @@
           flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (3 * var(--slider-gap))) / 3.5);
         }
       }
+
+      &.eight-items {
+        .swiper-slide {
+          /* 4 slides visibles en tablet */
+          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (3 * var(--slider-gap))) / 4);
+        }
+      }
     }
 
     /* Desktop (min-width: 1025px) - Aplicar configuración según clase */
@@ -102,6 +109,12 @@
       &.five-items {
         .swiper-slide {
           flex: 0 0 calc((var(--slider-content-width) - (4 * var(--slider-gap))) / 5);
+        }
+      }
+
+      &.eight-items {
+        .swiper-slide {
+          flex: 0 0 calc((var(--slider-content-width) - (7 * var(--slider-gap))) / 8);
         }
       }
     }

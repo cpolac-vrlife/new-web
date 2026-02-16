@@ -6,8 +6,10 @@
 @import "./components/_vrp-badge.css";
 @import "./components/_button.css";
 @import "./components/_card.css";
+@import "./components/_card-model.css";
 @import "./components/_card-favourite.css";
 @import "./components/_general-titles.css";
+@import "./components/_most-searched-categories.css";
 @import "./components/_submenu.css";
 @import "./components/_cards_grid.css";
 @import "./components/_swiper.css";
@@ -15,6 +17,7 @@
 @import "./components/_pagination.css";
 @import "./components/_filters-bar.css";
 @import "./components/_skeleton.css";
+@import "./components/_search-overlay.css";
 @import "./components/_footer.css";
 
 /* Estilos globales adicionales */

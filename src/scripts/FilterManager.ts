@@ -56,6 +56,9 @@ export class FilterManager {
   private comboGroup: HTMLElement | null = null;
   private pornstarGroup: HTMLElement | null = null;
   private sortGroup: HTMLElement | null = null;
+  private backdrop: HTMLElement | null = null;
+  private clearMobileBtn: HTMLElement | null = null;
+  private scrollY: number = 0;
 
   constructor() {}
 
@@ -71,6 +74,8 @@ export class FilterManager {
     this.comboGroup = document.querySelector('.filters-bar__group--combo');
     this.pornstarGroup = document.querySelector('.filters-bar__group--pornstar');
     this.sortGroup = document.querySelector('.filters-bar__group--sort');
+    this.backdrop = document.querySelector('.filters-bar__backdrop');
+    this.clearMobileBtn = document.getElementById('clear-all-mobile');
 
     // Fetch data
     try {
@@ -281,6 +286,10 @@ export class FilterManager {
   /* ====================================
      EVENTS
      ==================================== */
+  private isMobile(): boolean {
+    return window.innerWidth < 769;
+  }
+
   private bindEvents(): void {
     // Toggle dropdowns
     document.querySelectorAll<HTMLElement>('.filters-bar__toggle').forEach(btn => {
@@ -291,12 +300,25 @@ export class FilterManager {
       });
     });
 
-    // Close dropdowns on outside click
+    // Close dropdowns on outside click (desktop only)
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
       if (!target.closest('.filters-bar__group')) {
         this.closeAllDropdowns();
       }
+    });
+
+    // Modal close buttons (mobile)
+    document.querySelectorAll<HTMLElement>('.filters-bar__modal-close').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeAllDropdowns();
+      });
+    });
+
+    // Backdrop click (mobile)
+    this.backdrop?.addEventListener('click', () => {
+      this.closeAllDropdowns();
     });
 
     // Combo item click
@@ -373,6 +395,12 @@ export class FilterManager {
       const label = this.sortGroup?.querySelector('.filters-bar__toggle-label');
       if (label) label.textContent = option.textContent || 'Latest';
 
+      // Update sort icon to reflect selected option
+      const icon = this.sortGroup?.querySelector('.filters-bar__toggle-icon');
+      if (icon && this.isMobile()) {
+        // Keep swap_vert icon on mobile
+      }
+
       // Map sort value
       const sortVal = option.dataset.sort!;
       switch (sortVal) {
@@ -396,6 +424,11 @@ export class FilterManager {
 
     // Clear all active filters
     document.getElementById('clear-all-filters')?.addEventListener('click', () => {
+      this.clearAll();
+    });
+
+    // Clear all mobile button
+    this.clearMobileBtn?.addEventListener('click', () => {
       this.clearAll();
     });
   }
@@ -434,7 +467,6 @@ export class FilterManager {
      DROPDOWN MANAGEMENT
      ==================================== */
   private toggleDropdown(filterType: string): void {
-    const groups = document.querySelectorAll<HTMLElement>('.filters-bar__group');
     const targetGroup = document.querySelector<HTMLElement>(`.filters-bar__group--${filterType}`);
 
     if (!targetGroup) return;
@@ -442,11 +474,19 @@ export class FilterManager {
     const wasOpen = targetGroup.classList.contains('is-open');
 
     // Close all
-    groups.forEach(g => g.classList.remove('is-open'));
+    this.closeAllDropdowns();
 
     // Toggle target
     if (!wasOpen) {
       targetGroup.classList.add('is-open');
+
+      // On mobile, show backdrop and lock scroll for combo/pornstar (not sort)
+      if (this.isMobile() && filterType !== 'sort') {
+        this.backdrop?.classList.add('is-visible');
+        this.scrollY = window.scrollY;
+        document.body.classList.add('filters-modal-open');
+        document.body.style.top = `-${this.scrollY}px`;
+      }
     }
   }
 
@@ -454,6 +494,14 @@ export class FilterManager {
     document.querySelectorAll('.filters-bar__group').forEach(g => {
       g.classList.remove('is-open');
     });
+
+    // Remove backdrop and unlock scroll
+    this.backdrop?.classList.remove('is-visible');
+    if (document.body.classList.contains('filters-modal-open')) {
+      document.body.classList.remove('filters-modal-open');
+      document.body.style.top = '';
+      window.scrollTo(0, this.scrollY);
+    }
   }
 
   /* ====================================
@@ -494,6 +542,15 @@ export class FilterManager {
 
     const hasTags = this.state.selectedTags.size > 0;
     const hasPerformer = this.state.selectedPerformer !== null;
+
+    // Toggle mobile clear button
+    if (this.clearMobileBtn) {
+      if (hasTags || hasPerformer) {
+        this.clearMobileBtn.classList.add('is-active');
+      } else {
+        this.clearMobileBtn.classList.remove('is-active');
+      }
+    }
 
     if (!hasTags && !hasPerformer) {
       container.style.display = 'none';
