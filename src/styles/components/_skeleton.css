@@ -1,0 +1,242 @@
+/* Skeleton/Placeholder Styles - CLS Prevention */
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Base skeleton element */
+.skeleton-element {
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 0%,
+    #252525 50%,
+    #1a1a1a 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 4px;
+}
+
+/* Card skeleton */
+.card--skeleton {
+  pointer-events: none;
+  contain: layout style paint;
+  
+  /* Prevent hover effects */
+  .card-link {
+    cursor: default;
+    
+    &:hover {
+      transform: none;
+      will-change: auto;
+    }
+  }
+  
+  /* Disable animations that cause CLS */
+  .badges-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .data-video {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Skeleton image */
+  .skeleton-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 10px;
+  }
+  
+  /* Skeleton badges */
+  .skeleton-badge {
+    width: 50px;
+    height: 20px;
+    margin-left: 5px;
+    background: linear-gradient(
+      90deg,
+      #252525 0%,
+      #303030 50%,
+      #252525 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 3px;
+    
+    &:first-child {
+      width: 70px;
+    }
+  }
+  
+  /* Data video section - force visible */
+  .data-video {
+    opacity: 1;
+    transform: none;
+  }
+  
+  /* Skeleton title */
+  .skeleton-title {
+    width: 85%;
+    height: 18px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  /* Skeleton cast */
+  .skeleton-cast {
+    width: 60%;
+    height: 14px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+  }
+  
+  /* Skeleton icons */
+  .skeleton-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 50%;
+  }
+  
+  /* Force badges visible */
+  .badges-wrapper {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Filter skeleton items */
+.filters-bar__combo-item--skeleton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  
+  .skeleton-check {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 3px;
+  }
+  
+  .skeleton-text {
+    flex: 1;
+    height: 12px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+  }
+  
+  .skeleton-count {
+    width: 20px;
+    height: 10px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+  }
+}
+
+.filters-bar__pornstar-item--skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  pointer-events: none;
+  
+  .skeleton-name {
+    flex: 1;
+    height: 12px;
+    max-width: 120px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+  }
+  
+  .skeleton-count {
+    width: 20px;
+    height: 10px;
+    background: linear-gradient(
+      90deg,
+      #1a1a1a 0%,
+      #252525 50%,
+      #1a1a1a 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+  }
+}
+
+/* Hide skeletons class */
+.skeletons-hidden {
+  display: none !important;
+}

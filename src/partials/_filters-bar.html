@@ -1,0 +1,78 @@
+<div class="filters-bar">
+
+  <!-- Left section: Combo + Pornstar + Active filters -->
+  <div class="filters-bar__left">
+    <!-- Combo filter (categories) -->
+    <div class="filters-bar__group filters-bar__group--combo">
+      <button class="filters-bar__toggle" data-filter="combo">
+        <span class="filters-bar__toggle-icon material-symbols-outlined">tune</span>
+        <span class="filters-bar__toggle-label">Choose your combo</span>
+        <span class="filters-bar__toggle-arrow material-symbols-outlined">expand_more</span>
+      </button>
+      <div class="filters-bar__dropdown filters-bar__dropdown--combo">
+        <div class="filters-bar__combo-grid" id="combo-grid">
+          <!-- Categories injected by FilterManager -->
+        </div>
+        <div class="filters-bar__combo-actions">
+          <button class="filters-bar__combo-clear" id="combo-clear">Clear all</button>
+          <button class="filters-bar__combo-apply" id="combo-apply">Apply filters</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pornstar filter -->
+    <div class="filters-bar__group filters-bar__group--pornstar">
+      <button class="filters-bar__toggle" data-filter="pornstar">
+        <span class="filters-bar__toggle-icon material-symbols-outlined">person_search</span>
+        <span class="filters-bar__toggle-label">Pornstar</span>
+        <span class="filters-bar__toggle-arrow material-symbols-outlined">expand_more</span>
+      </button>
+      <div class="filters-bar__dropdown filters-bar__dropdown--pornstar">
+        <div class="filters-bar__search-wrapper">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="filters-bar__search-input" id="pornstar-search" placeholder="Search actress..." autocomplete="off">
+        </div>
+        <!-- Featured actresses -->
+        <div class="filters-bar__featured" id="featured-actresses">
+          <div class="filters-bar__featured-title">Trending this week</div>
+          <div class="filters-bar__featured-grid" id="featured-grid">
+            <!-- 5 featured actresses injected by FilterManager -->
+          </div>
+        </div>
+        <!-- Full list as grid -->
+        <div class="filters-bar__pornstar-grid-wrapper">
+          <div class="filters-bar__pornstar-grid" id="pornstar-list">
+            <!-- Pornstars injected by FilterManager -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active filters summary -->
+    <div class="filters-bar__active" id="active-filters" style="display:none;">
+      <div class="filters-bar__active-list" id="active-filters-list"></div>
+      <button class="filters-bar__active-clear" id="clear-all-filters">
+        <span class="material-symbols-outlined">close</span> Clear all
+      </button>
+    </div>
+  </div>
+
+  <!-- Right section: Sort -->
+  <div class="filters-bar__right">
+    <div class="filters-bar__group filters-bar__group--sort">
+      <button class="filters-bar__toggle" data-filter="sort">
+        <span class="filters-bar__toggle-icon material-symbols-outlined">swap_vert</span>
+        <span class="filters-bar__toggle-label">Latest</span>
+        <span class="filters-bar__toggle-arrow material-symbols-outlined">expand_more</span>
+      </button>
+      <div class="filters-bar__dropdown filters-bar__dropdown--sort">
+        <ul class="filters-bar__sort-list">
+          <li class="filters-bar__sort-option active" data-sort="latest">Latest</li>
+          <li class="filters-bar__sort-option" data-sort="best">Best rated</li>
+          <li class="filters-bar__sort-option" data-sort="most-viewed">Most viewed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

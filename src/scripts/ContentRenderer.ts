@@ -123,6 +123,9 @@ export async function renderGrid(
     container.classList.add('loading');
     const videos = await queryVideos(options);
 
+    // Remove skeleton placeholders
+    container.querySelectorAll('.card-skeleton').forEach(el => el.remove());
+
     const cardsHTML = videos.map(v => renderCard(v));
     container.innerHTML = cardsHTML.join('');
     container.classList.remove('loading');
@@ -159,6 +162,10 @@ export async function renderSlider(
 
     const slidesHTML = videos.map((v, index) => renderSlide(v, isFavourite, isTop10 ? index + 1 : undefined)).join('');
     const moreLink = `<div class="swiper-slide"><a class="more-videos" href="">more videos</a></div>`;
+
+    // Remove skeleton placeholders
+    const skeleton = swiperContainer.querySelector('[data-skeleton]');
+    if (skeleton) skeleton.remove();
 
     wrapper.innerHTML = slidesHTML + moreLink;
     swiperContainer.classList.remove('loading');

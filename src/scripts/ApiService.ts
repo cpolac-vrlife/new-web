@@ -328,6 +328,23 @@ export async function getAvailablePerformers(): Promise<Map<string, number>> {
 }
 
 /**
+ * Obtiene solo las performers femeninas (con conteo), ordenadas por cantidad de vídeos
+ */
+export async function getAvailableFemalePerformers(): Promise<Map<string, number>> {
+  const videos = await fetchAllVideos();
+  const performerCount = new Map<string, number>();
+
+  videos.forEach(video => {
+    const females = video.performers_names.female || [];
+    females.forEach(name => {
+      performerCount.set(name, (performerCount.get(name) || 0) + 1);
+    });
+  });
+
+  return new Map([...performerCount.entries()].sort((a, b) => b[1] - a[1]));
+}
+
+/**
  * Invalida el cache forzando una nueva petición en la próxima consulta
  */
 export function invalidateCache(): void {

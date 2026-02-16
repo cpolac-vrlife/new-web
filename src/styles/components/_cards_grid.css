@@ -6,16 +6,16 @@
   row-gap: 35px;
   padding: 20px 0;
   
-  & .card {
+  & .card:not(.card--skeleton) {
     & .badges-wrapper {
       animation: slideInLeft 0.5s ease-out forwards;
       animation-delay: 0.5s;
     }
-  }
-  
-  & .data-video {
-    animation: slideInTop 0.5s ease-out forwards;
-    animation-delay: 0.7s;
+    
+    & .data-video {
+      animation: slideInTop 0.5s ease-out forwards;
+      animation-delay: 0.7s;
+    }
   }
 }
 

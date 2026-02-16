@@ -1,10 +1,10 @@
-import './styles/main.css';
 import { CustomSlider } from './scripts/slider_module';
 import { initGrids } from './scripts/GridManager';
 import { initHeader } from './scripts/HeaderModule';
 import { initFooter } from './scripts/FooterModule';
 import { initHeroBanner } from './scripts/HeroBannerModule';
 import { initDynamicContent } from './scripts/ContentRenderer';
+import { initFilters } from './scripts/FilterManager';
 
 /**
  * Inicializa componentes críticos above-the-fold (LCP)
@@ -31,6 +31,9 @@ const initDeferred = async () => {
 
   // Cargar contenido dinámico desde la API (grids y sliders con data-source="api")
   await initDynamicContent();
+
+  // Inicializar filtros de la página /videos
+  await initFilters();
 
   // Luego configuramos los grids (estructura y paginación)
   initGrids();

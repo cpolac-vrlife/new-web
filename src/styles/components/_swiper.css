@@ -120,7 +120,7 @@
 
     /* Lógica de Animación cuando entra en el viewport */
     &.is-visible {
-      .card {
+      .card:not(.card--skeleton) {
         .badges-wrapper {
           animation: slideInLeft 0.5s ease-out forwards;
           animation-delay: 0.3s;
