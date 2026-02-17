@@ -1,0 +1,135 @@
+/* Categories Grid & Cards - Mobile First */
+
+/* ========== GRID ========== */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 12px;
+  margin-bottom: 40px;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 14px;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 16px;
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px 18px;
+    margin-bottom: 50px;
+  }
+}
+
+/* Featured grid: same 5 cols but 2 rows of 5 */
+.categories-grid--featured {
+  margin-bottom: 50px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 60px;
+  }
+}
+
+/* ========== CARD ========== */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .category-card__image img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Image container */
+.category-card__image {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a1a;
+  margin-bottom: 8px;
+
+  @media (min-width: 769px) {
+    margin-bottom: 10px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+}
+
+.category-card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.category-card__name {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  text-align: left;
+  flex: 1;
+
+  @media (min-width: 769px) {
+    font-size: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+.category-card__count {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.2;
+  white-space: nowrap;
+
+  @media (min-width: 769px) {
+    font-size: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 13px;
+  }
+}
+
+/* Featured card */
+.category-card--featured {
+  .category-card__image {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .category-card__name {
+    font-size: 15px;
+
+    @media (min-width: 769px) {
+      font-size: 16px;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 18px;
+    }
+  }
+}

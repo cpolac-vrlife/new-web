@@ -1,0 +1,31 @@
+/* Category Detail Page - Mobile First */
+
+/* ========== LOCKED COMBO ITEM ========== */
+.filters-bar__combo-item.is-locked {
+  opacity: 0.85;
+  cursor: default;
+  pointer-events: none;
+  border-color: rgba(229, 9, 20, 0.4);
+  background: rgba(229, 9, 20, 0.1);
+
+  .filters-bar__combo-check {
+    background: var(--accent-color, #e50914);
+    border-color: var(--accent-color, #e50914);
+
+    .material-symbols-outlined {
+      font-size: 14px;
+      color: #fff;
+    }
+  }
+
+  .filters-bar__combo-name {
+    font-weight: 600;
+    color: #fff;
+  }
+}
+
+/* ========== CATEGORY DETAIL COUNT ========== */
+.category-detail__count {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}

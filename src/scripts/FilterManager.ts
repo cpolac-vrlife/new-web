@@ -24,6 +24,16 @@ interface FilterState {
 }
 
 /**
+ * Configuración opcional para FilterManager
+ */
+interface FilterManagerOptions {
+  /** Selector CSS del contenedor de la página */
+  pageSelector: string;
+  /** Tag fija que no puede deseleccionarse (para páginas de categoría) */
+  lockedTag?: string;
+}
+
+/**
  * FilterManager — controla el sistema de filtros de /videos
  *
  * Responsabilidades:
@@ -39,6 +49,10 @@ export class FilterManager {
   private filteredVideos: VideoItem[] = [];
   private allTags: Map<string, number> = new Map();
   private allPerformers: Map<string, number> = new Map();
+  private options: FilterManagerOptions;
+
+  /** Videos pre-filtrados por la categoría fija (para performers y combos) */
+  private categoryVideos: VideoItem[] = [];
 
   private state: FilterState = {
     selectedTags: new Set(),
@@ -60,7 +74,9 @@ export class FilterManager {
   private clearMobileBtn: HTMLElement | null = null;
   private scrollY: number = 0;
 
-  constructor() {}
+  constructor(options?: FilterManagerOptions) {
+    this.options = options || { pageSelector: '.page-videos' };
+  }
 
   /* ====================================
      INIT
@@ -68,8 +84,10 @@ export class FilterManager {
   async init(): Promise<void> {
     console.log('[FilterManager] Initializing...');
 
+    const pageEl = document.querySelector(this.options.pageSelector);
+
     // Cache DOM elements
-    this.gridContainer = document.querySelector('.page-videos .cards-grid');
+    this.gridContainer = pageEl?.querySelector('.cards-grid') || null;
     this.resultsCounter = document.getElementById('results-counter');
     this.comboGroup = document.querySelector('.filters-bar__group--combo');
     this.pornstarGroup = document.querySelector('.filters-bar__group--pornstar');
@@ -85,6 +103,35 @@ export class FilterManager {
     } catch (err) {
       console.error('[FilterManager] Failed to load data:', err);
       return;
+    }
+
+    // Si hay una categoría fija, pre-seleccionarla y pre-filtrar datos
+    if (this.options.lockedTag) {
+      this.state.selectedTags.add(this.options.lockedTag);
+
+      // Pre-filtrar videos de esta categoría
+      this.categoryVideos = this.allVideos.filter(v =>
+        v.video_tags.some(t => t.toLowerCase() === this.options.lockedTag!.toLowerCase())
+      );
+
+      // Recalcular tags solo dentro de esta categoría
+      const categoryTags = new Map<string, number>();
+      this.categoryVideos.forEach(video => {
+        video.video_tags.forEach(tag => {
+          categoryTags.set(tag, (categoryTags.get(tag) || 0) + 1);
+        });
+      });
+      this.allTags = new Map([...categoryTags.entries()].sort((a, b) => b[1] - a[1]));
+
+      // Recalcular performers solo dentro de esta categoría
+      const categoryPerformers = new Map<string, number>();
+      this.categoryVideos.forEach(video => {
+        const females = video.performers_names.female || [];
+        females.forEach(name => {
+          categoryPerformers.set(name, (categoryPerformers.get(name) || 0) + 1);
+        });
+      });
+      this.allPerformers = new Map([...categoryPerformers.entries()].sort((a, b) => b[1] - a[1]));
     }
 
     // Build UI
@@ -109,12 +156,16 @@ export class FilterManager {
     grid.innerHTML = '';
 
     this.allTags.forEach((count, tag) => {
+      const isLocked = this.options.lockedTag?.toLowerCase() === tag.toLowerCase();
       const item = document.createElement('label');
       item.className = 'filters-bar__combo-item';
+      if (isLocked) {
+        item.classList.add('is-checked', 'is-locked');
+      }
       item.dataset.tag = tag;
       item.innerHTML = `
         <span class="filters-bar__combo-check">
-          <span class="material-symbols-outlined">check</span>
+          <span class="material-symbols-outlined">${isLocked ? 'lock' : 'check'}</span>
         </span>
         <span class="filters-bar__combo-name">${tag}</span>
         <span class="filters-bar__combo-count">${count}</span>
@@ -133,17 +184,26 @@ export class FilterManager {
 
     const selected = this.state.selectedTags;
     
-    if (selected.size === 0) {
-      label.textContent = 'Choose your combo';
+    // En categoría, no contar la locked tag en el label
+    const displayTags = this.options.lockedTag
+      ? Array.from(selected).filter(t => t.toLowerCase() !== this.options.lockedTag!.toLowerCase())
+      : Array.from(selected);
+
+    if (displayTags.length === 0) {
+      label.textContent = this.options.lockedTag
+        ? `${this.options.lockedTag} + combo`
+        : 'Choose your combo';
       return;
     }
 
     // Mostrar hasta 3 tags, luego "..."
-    const tags = Array.from(selected);
-    if (tags.length <= 3) {
-      label.textContent = tags.join(', ');
+    if (displayTags.length <= 3) {
+      label.textContent = this.options.lockedTag
+        ? `${this.options.lockedTag} + ${displayTags.join(', ')}`
+        : displayTags.join(', ');
     } else {
-      label.textContent = `${tags.slice(0, 3).join(', ')}...`;
+      const prefix = this.options.lockedTag ? `${this.options.lockedTag} + ` : '';
+      label.textContent = `${prefix}${displayTags.slice(0, 2).join(', ')}...`;
     }
   }
 
@@ -160,9 +220,14 @@ export class FilterManager {
     // Actualizar el label del toggle
     this.updateComboToggleLabel();
 
-    // Si no hay ninguna seleccionada, todo habilitado
-    if (selected.size === 0) {
+    // Si no hay ninguna seleccionada (o solo la locked), todo habilitado
+    const effectiveSelected = this.options.lockedTag
+      ? new Set([...selected].filter(t => t.toLowerCase() !== this.options.lockedTag!.toLowerCase()))
+      : selected;
+
+    if (selected.size === 0 || (this.options.lockedTag && effectiveSelected.size === 0)) {
       grid.querySelectorAll<HTMLElement>('.filters-bar__combo-item').forEach(el => {
+        if (el.classList.contains('is-locked')) return;
         el.classList.remove('is-disabled');
         // Restaurar conteo original
         const tag = el.dataset.tag!;
@@ -324,7 +389,7 @@ export class FilterManager {
     // Combo item click
     document.getElementById('combo-grid')?.addEventListener('click', (e) => {
       const item = (e.target as HTMLElement).closest<HTMLElement>('.filters-bar__combo-item');
-      if (!item || item.classList.contains('is-disabled')) return;
+      if (!item || item.classList.contains('is-disabled') || item.classList.contains('is-locked')) return;
 
       const tag = item.dataset.tag!;
       if (this.state.selectedTags.has(tag)) {
@@ -344,6 +409,14 @@ export class FilterManager {
       document.querySelectorAll('.filters-bar__combo-item').forEach(el => {
         el.classList.remove('is-checked');
       });
+
+      // Restaurar la tag fija
+      if (this.options.lockedTag) {
+        this.state.selectedTags.add(this.options.lockedTag);
+        const lockedItem = document.querySelector<HTMLElement>(`.filters-bar__combo-item.is-locked`);
+        if (lockedItem) lockedItem.classList.add('is-checked');
+      }
+
       this.updateComboAvailability();
       this.state.currentPage = 1;
       this.applyAndRender();
@@ -510,6 +583,32 @@ export class FilterManager {
   private updateMutualExclusion(): void {
     if (!this.comboGroup || !this.pornstarGroup) return;
 
+    // En páginas de categoría, la exclusión mutua se basa en tags EXTRA (no la locked)
+    if (this.options.lockedTag) {
+      const hasExtraTags = this.state.selectedTags.size > 1; // más allá de la locked
+      const hasPerformer = this.state.selectedPerformer !== null;
+
+      // Combo extra seleccionado → deshabilitar pornstar
+      if (hasExtraTags) {
+        this.pornstarGroup.classList.add('is-disabled');
+        this.comboGroup.classList.add('has-selection');
+      } else {
+        this.pornstarGroup.classList.remove('is-disabled');
+        this.comboGroup.classList.remove('has-selection');
+      }
+
+      // Pornstar seleccionada → deshabilitar combo
+      if (hasPerformer) {
+        this.comboGroup.classList.add('is-disabled');
+        this.pornstarGroup.classList.add('has-selection');
+      } else {
+        this.comboGroup.classList.remove('is-disabled');
+        this.pornstarGroup.classList.remove('has-selection');
+      }
+
+      return;
+    }
+
     const hasTags = this.state.selectedTags.size > 0;
     const hasPerformer = this.state.selectedPerformer !== null;
 
@@ -543,16 +642,21 @@ export class FilterManager {
     const hasTags = this.state.selectedTags.size > 0;
     const hasPerformer = this.state.selectedPerformer !== null;
 
+    // En categoría, no contar la locked tag como filtro activo
+    const activeTags = this.options.lockedTag
+      ? this.state.selectedTags.size > 1
+      : hasTags;
+
     // Toggle mobile clear button
     if (this.clearMobileBtn) {
-      if (hasTags || hasPerformer) {
+      if (activeTags || hasPerformer) {
         this.clearMobileBtn.classList.add('is-active');
       } else {
         this.clearMobileBtn.classList.remove('is-active');
       }
     }
 
-    if (!hasTags && !hasPerformer) {
+    if (!activeTags && !hasPerformer) {
       container.style.display = 'none';
       return;
     }
@@ -562,6 +666,11 @@ export class FilterManager {
 
     // Tag pills
     this.state.selectedTags.forEach(tag => {
+      const isLocked = this.options.lockedTag?.toLowerCase() === tag.toLowerCase();
+      
+      // No mostrar la tag fija como pill removible
+      if (isLocked) return;
+
       const pill = document.createElement('span');
       pill.className = 'filters-bar__active-tag';
       pill.dataset.tag = tag;
@@ -581,6 +690,9 @@ export class FilterManager {
   }
 
   private removeTag(tag: string): void {
+    // No permitir eliminar la tag fija
+    if (this.options.lockedTag?.toLowerCase() === tag.toLowerCase()) return;
+
     this.state.selectedTags.delete(tag);
 
     // Uncheck in grid
@@ -613,10 +725,20 @@ export class FilterManager {
     this.state.selectedPerformer = null;
     this.state.currentPage = 1;
 
+    // Restaurar la tag fija si existe
+    if (this.options.lockedTag) {
+      this.state.selectedTags.add(this.options.lockedTag);
+    }
+
     // Reset UI
     document.querySelectorAll('.filters-bar__combo-item').forEach(el => {
       el.classList.remove('is-checked');
     });
+    // Re-marcar la locked tag
+    if (this.options.lockedTag) {
+      const lockedItem = document.querySelector<HTMLElement>(`.filters-bar__combo-item.is-locked`);
+      if (lockedItem) lockedItem.classList.add('is-checked');
+    }
     document.querySelectorAll('.filters-bar__pornstar-item.is-selected').forEach(el => {
       el.classList.remove('is-selected');
     });
@@ -702,7 +824,7 @@ export class FilterManager {
      ==================================== */
   private renderPagination(): void {
     // Remove existing pagination
-    const existing = document.querySelector('.page-videos .pagination-controls');
+    const existing = document.querySelector(`${this.options.pageSelector} .pagination-controls`);
     if (existing) existing.remove();
 
     const totalPages = Math.ceil(this.filteredVideos.length / this.state.itemsPerPage);
@@ -787,7 +909,7 @@ export class FilterManager {
     this.renderPagination();
 
     // Scroll to top of grid
-    const titleContainer = document.querySelector('.page-videos .title_container');
+    const titleContainer = document.querySelector(`${this.options.pageSelector} .title_container`);
     if (titleContainer) {
       titleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -795,12 +917,31 @@ export class FilterManager {
 }
 
 /**
- * Inicializa FilterManager si estamos en la página /videos
+ * Inicializa FilterManager si estamos en la página /videos o en una categoría
  */
 export async function initFilters(): Promise<void> {
+  // Página de videos general
   const isVideosPage = document.querySelector('.page-videos');
-  if (!isVideosPage) return;
+  if (isVideosPage) {
+    const fm = new FilterManager({ pageSelector: '.page-videos' });
+    await fm.init();
+    return;
+  }
 
-  const fm = new FilterManager();
-  await fm.init();
+  // Página de categoría concreta
+  const isCategoryPage = document.querySelector('.page-category-detail');
+  if (isCategoryPage) {
+    // Leer la categoría fija del atributo data-locked-tag del main
+    const lockedTag = isCategoryPage.getAttribute('data-locked-tag');
+    if (!lockedTag) {
+      console.warn('[FilterManager] Category page found but no data-locked-tag attribute');
+      return;
+    }
+
+    const fm = new FilterManager({
+      pageSelector: '.page-category-detail',
+      lockedTag,
+    });
+    await fm.init();
+  }
 }

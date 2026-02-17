@@ -39,13 +39,30 @@ export default defineConfig({
   build: {
     // Esto asegura que el CSS final sea compatible y no use sintaxis experimental
     cssTarget: 'chrome80',
+    // Minificación para producción
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    // Optimizar chunks
+    cssCodeSplit: true,
     // Multi-page app - define los puntos de entrada
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         videos: resolve(__dirname, 'videos.html'),
         categories: resolve(__dirname, 'categories.html'),
+        'categories-big-tits': resolve(__dirname, 'categories/big-tits.html'),
         models: resolve(__dirname, 'models.html'),
+      },
+      output: {
+        // Mejor hashing para cache
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
       }
     }
   }

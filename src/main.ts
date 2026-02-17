@@ -99,3 +99,18 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
+
+// Soporte para back/forward cache (bfcache)
+// Restaurar estado cuando se vuelve desde el cache
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    // Página restaurada desde bfcache, reinicializar componentes si es necesario
+    console.log('Page restored from bfcache');
+  }
+});
+
+// No usar unload/beforeunload ya que previenen bfcache
+// Usar pagehide para cleanup si es necesario
+window.addEventListener('pagehide', () => {
+  // Cleanup ligero si es necesario
+});

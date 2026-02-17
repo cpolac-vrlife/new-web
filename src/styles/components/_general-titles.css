@@ -1,4 +1,6 @@
 /* General Titles - Mobile First */
+
+/* Reset for page-level h1 - hidden for SEO but not displayed */
 .title_container {
   margin-top: 15px;
   padding-top: 12px;
@@ -55,6 +57,17 @@
       font-size: 15px;
       top: -13px;
     }
+
+    /* Reset heading styles */
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+      text-transform: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
   }
 
   /* Title */
@@ -69,6 +82,16 @@
       font-size: 36px;
       line-height: 42px;
       margin-bottom: 10px;
+    }
+
+    /* Reset heading styles */
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+      font-weight: inherit;
+      line-height: inherit;
     }
   }
 
@@ -86,6 +109,16 @@
     @media (min-width: 769px) {
       font-size: 20px;
       line-height: 22px;
+    }
+
+    /* Reset heading styles */
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+      font-weight: inherit;
+      line-height: inherit;
     }
   }
 }
