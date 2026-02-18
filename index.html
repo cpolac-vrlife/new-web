@@ -35,38 +35,43 @@
         </div>
     </div>
 </div>
-
+<section>
 <!-- Most Searched Categories -->
 <load src="src/partials/_most-searched-categories.html" />
-
-<div class="container">
-    <div class="title_container">
-        <div class="left_section">
-            <div class="pre-title">
-                lastest videos
+</section>
+<!-- Most Lastest Videos -->
+<section>
+    <div class="container">
+        <div class="title_container">
+            <div class="left_section">
+                <div class="pre-title">
+                    lastest videos
+                </div>
+                <div class="title">
+                    Más de 1000 escenas nos avalan
+                </div>
             </div>
-            <div class="title">
-                Más de 1000 escenas nos avalan
+            <div class="right_section">
+                <div class="text">
+                    We work to make each new scene more immersive and realistic than the previous one.
+                </div>
             </div>
         </div>
-        <div class="right_section">
-            <div class="text">
-                We work to make each new scene more immersive and realistic than the previous one.
-            </div>
-        </div>
+        <div class="cards-grid grid-cols-4" data-source="api" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="8" data-limit="24" data-sort="release_date" data-order="desc">
+            <!-- Skeleton placeholders -->
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+            <load src="src/partials/_card-skeleton.html" />
+        </div> 
     </div>
-    <div class="cards-grid grid-cols-4" data-source="api" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="8" data-limit="24" data-sort="release_date" data-order="desc">
-        <!-- Skeleton placeholders -->
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-    </div> 
-</div>
+</section>
+<!-- Coming Soon Videos -->
+<section>
 <div class="container">
     <div class="title_container">
         <div class="left_section">
@@ -92,7 +97,41 @@
         <load src="src/partials/_card-skeleton.html" />
     </div> 
 </div>
-<div class="">
+</section>
+<!-- External Videos -->
+<section>
+<div class="container">
+    <div class="title_container logo">
+        <div class="left_section">
+            <div class="pre-title">
+                <img src="/images/core/white-complete-logo-trans.svg" alt="Logo" width="150" height="" fetchpriority="high" />
+            </div>
+            <div class="title">
+                Are you looking for<br>a different experience?
+            </div>
+        </div>
+        <div class="right_section">
+            <div class="text">
+                Experience the <b>most passionate and fiery performances</b> from stunning Latin beauties.
+            </div>
+        </div>
+    </div>
+    <div class="cards-grid grid-cols-5" data-source="api" data-grid-type="grid-cols-5" data-external-videos="true" data-tags="Latina" data-limit="5" data-sort="release_date" data-order="desc">
+        <!-- Skeleton placeholders -->
+        <load src="src/partials/_card-skeleton.html" />
+        <load src="src/partials/_card-skeleton.html" />
+        <load src="src/partials/_card-skeleton.html" />
+        <load src="src/partials/_card-skeleton.html" />
+        <load src="src/partials/_card-skeleton.html" />
+    </div> 
+    <div class="btn-container">
+        <div class="offer-inline"><span class="material-symbols-outlined">auto_awesome</span> Let's Real from €13.99/month <span class="hero-banner__offer-separator">|</span> Cancel Anytime</div>
+        <a href="#" class="btn btn-custom trans">obtener virtual real <span>trans</span></a>
+    </div>
+</div>
+</section>
+<!-- Most Interactive Videos -->
+<section>
     <div class="container">
         <div class="title_container">
             <div class="left_section">
@@ -122,272 +161,503 @@
             </div>
         </div>
     </div>
-</div>
-
+</section>
+<!-- Series Section -->
+<section>
+    <div class="slider-section">
+        <div class="container">
+            <div class="title_container">
+                <div class="left_section">
+                    <div class="pre-title">
+                        series
+                    </div>
+                    <div class="title">
+                        Binge-Worthy<br>VR Experiences
+                    </div>
+                </div>
+                <div class="right_section">
+                    <div class="text">
+                        Follow your <b>favorite performers</b> through multiple episodes of immersive content.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-wrapper" data-slider-items="4">
+            <div class="swiper series-slider">
+                <div class="swiper-wrapper four-items">
+                    <!-- Series Card Placeholder -->
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-series">
+                            <a href="#" class="card-link">
+                                <div class="card-series__image-container">
+                                    <div class="card-series__background">
+                                        <img src="/images/series/wos/serie_back.jpg" alt="WOS background" loading="lazy">
+                                    </div>
+                                    <div class="card-series__pornstar">
+                                        <img src="/images/series/wos/serie_pornstar.png" alt="Main Actress" loading="lazy">
+                                    </div>
+                                    <div class="card-series__logo">
+                                        <img src="/images/series/wos/serie-logo.png" alt="WOS logo" loading="lazy">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="data-video">
+                                <div class="data-left">
+                                    <h3>Walk of Shame - 9 episodes</h3>
+                                    <div class="cast">Actriz Principal</div>
+                                </div>
+                                <div class="data-right">
+                                    <div class="badge-series">
+                                        <svg class="badge-series__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 75.4">
+                                            <path d="M132,37.7C132,16.9,115.1,0,94.3,0h-56.6C16.9,0,0,16.8,0,37.7s16.9,37.7,37.7,37.7h56.6c20.8,0,37.7-16.9,37.7-37.7h0ZM122.6,37.7c0,15.6-12.7,28.3-28.3,28.3h-56.6c-15.6,0-28.3-12.7-28.3-28.3s12.7-28.3,28.3-28.3h56.6c15.6,0,28.3,12.7,28.3,28.3h0Z" fill="#ffffff"/>
+                                            <path class="badge-series__heart" d="M89.3,34.6c1.3-1.3,1.3-3.4,0-4.7l-10.1-10.1c-1.3-1.3-3.4-1.3-4.7,0l-8.5,8.5-8.5-8.5c-1.3-1.3-3.4-1.3-4.7,0l-10.1,10.1c-1.3,1.3-1.3,3.4,0,4.7l21,21c.5.5,1.1.8,1.7.9,1,.2,2.2,0,3-.9l20.9-21h0Z" fill="#ffffff"/>
+                                        </svg>
+                                        <div class="badge-series__label"><span>SERIES</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Más slides se pueden agregar aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Featured Models Section -->
-<div class="slider-section">
-    <div class="container">
-        <div class="title_container">
-            <div class="left_section">
-                <div class="pre-title">
-                    featured models
+<section>
+    <div class="slider-section">
+        <div class="container">
+            <div class="title_container">
+                <div class="left_section">
+                    <div class="pre-title">
+                        featured models
+                    </div>
+                    <div class="title">
+                        Meet the <br>Most Popular Stars
+                    </div>
                 </div>
-                <div class="title">
-                    Meet the <br>Most Popular Stars
+                <div class="right_section">
+                    <div class="text">
+                        Discover the <b>hottest performers</b> with the most exclusive content on our platform.
+                    </div>
                 </div>
             </div>
-            <div class="right_section">
-                <div class="text">
-                    Discover the <b>hottest performers</b> with the most exclusive content on our platform.
+        </div>
+        <div class="slider-wrapper" data-slider-items="8">
+            <div class="swiper models-slider">
+                <div class="swiper-wrapper eight-items">
+                    <!-- Model: Abella Danger -->
+                    <div class="swiper-slide">
+                        <a href="/models/abella-danger" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/abella-danger.webp" alt="Abella Danger" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Abella Danger</div>
+                                <div class="card-model__videos">42 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Agatha Vega -->
+                    <div class="swiper-slide">
+                        <a href="/models/agatha-vega" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/agatha-vega.webp" alt="Agatha Vega" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Agatha Vega</div>
+                                <div class="card-model__videos">38 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Eve Sweet -->
+                    <div class="swiper-slide">
+                        <a href="/models/eve-sweet" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/eve-sweet.webp" alt="Eve Sweet" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Eve Sweet</div>
+                                <div class="card-model__videos">35 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Liya Silver -->
+                    <div class="swiper-slide">
+                        <a href="/models/liya-silver" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/liya-silver.webp" alt="Liya Silver" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Liya Silver</div>
+                                <div class="card-model__videos">47 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Melody Marks -->
+                    <div class="swiper-slide">
+                        <a href="/models/melody-marks" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/melody-marks.webp" alt="Melody Marks" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Melody Marks</div>
+                                <div class="card-model__videos">29 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Sumire Mizukawa -->
+                    <div class="swiper-slide">
+                        <a href="/models/sumire-mizukawa" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/sumire-mizukawa.webp" alt="Sumire Mizukawa" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Sumire Mizukawa</div>
+                                <div class="card-model__videos">31 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Tru Kait -->
+                    <div class="swiper-slide">
+                        <a href="/models/tru-kait" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/tru-kait.webp" alt="Tru Kait" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Tru Kait</div>
+                                <div class="card-model__videos">33 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Model: Veronica Leal -->
+                    <div class="swiper-slide">
+                        <a href="/models/veronica-leal" class="card-model">
+                            <div class="card-model__image-wrapper">
+                                <img src="/images/pornstars/veronica-leal.webp" alt="Veronica Leal" class="card-model__image" loading="lazy">
+                                <button class="card-model__favourite" aria-label="Add to favourites">
+                                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="card-model__info">
+                                <div class="card-model__name">Veronica Leal</div>
+                                <div class="card-model__videos">45 videos</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <a href="/models" class="btn btn-custom">View All Models</a>            
+        </div>
+    </div>
+</section>
+<section>
+    <div class="slider-section">
+        <div class="container">
+            <div class="title_container">
+                <div class="left_section">
+                    <div class="pre-title">
+                        old but gold
+                    </div>
+                    <div class="title">
+                        The Classics you<br> somehow missed.
+                    </div>
+                </div>
+                <div class="right_section">
+                    <div class="text">
+                        We work to make each new scene more <b>immersive and realistic than the previous one</b>.
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="slider-wrapper" data-slider-items="4">
+            <div class="swiper" data-source="api" data-limit="9" data-tags="orgy" data-min-quality="5K" data-sort="release_date" data-order="desc">
+                <div class="swiper-wrapper four-items">
+                    <!-- Skeleton slides -->
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="slider-wrapper" data-slider-items="8">
-        <div class="swiper models-slider">
-            <div class="swiper-wrapper eight-items">
-                <!-- Model: Abella Danger -->
-                <div class="swiper-slide">
-                    <a href="/models/abella-danger" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/abella-danger.webp" alt="Abella Danger" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Abella Danger</div>
-                            <div class="card-model__videos">42 videos</div>
-                        </div>
-                    </a>
+</section>
+<section>
+    <div class="slider-section">
+        <div class="container">
+            <div class="title_container">
+                <div class="left_section">
+                    <div class="pre-title">
+                        hidden gems
+                    </div>
+                    <div class="title">
+                        You've been <br>sleeping on these.
+                    </div>
                 </div>
-                
-                <!-- Model: Agatha Vega -->
-                <div class="swiper-slide">
-                    <a href="/models/agatha-vega" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/agatha-vega.webp" alt="Agatha Vega" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Agatha Vega</div>
-                            <div class="card-model__videos">38 videos</div>
-                        </div>
-                    </a>
+                <div class="right_section">
+                    <div class="text">
+                        We work to make each new scene more <b>immersive and realistic than the previous one</b>.
+                    </div>
                 </div>
-                
-                <!-- Model: Eve Sweet -->
-                <div class="swiper-slide">
-                    <a href="/models/eve-sweet" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/eve-sweet.webp" alt="Eve Sweet" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Eve Sweet</div>
-                            <div class="card-model__videos">35 videos</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Model: Liya Silver -->
-                <div class="swiper-slide">
-                    <a href="/models/liya-silver" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/liya-silver.webp" alt="Liya Silver" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Liya Silver</div>
-                            <div class="card-model__videos">47 videos</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Model: Melody Marks -->
-                <div class="swiper-slide">
-                    <a href="/models/melody-marks" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/melody-marks.webp" alt="Melody Marks" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Melody Marks</div>
-                            <div class="card-model__videos">29 videos</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Model: Sumire Mizukawa -->
-                <div class="swiper-slide">
-                    <a href="/models/sumire-mizukawa" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/sumire-mizukawa.webp" alt="Sumire Mizukawa" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Sumire Mizukawa</div>
-                            <div class="card-model__videos">31 videos</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Model: Tru Kait -->
-                <div class="swiper-slide">
-                    <a href="/models/tru-kait" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/tru-kait.webp" alt="Tru Kait" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Tru Kait</div>
-                            <div class="card-model__videos">33 videos</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Model: Veronica Leal -->
-                <div class="swiper-slide">
-                    <a href="/models/veronica-leal" class="card-model">
-                        <div class="card-model__image-wrapper">
-                            <img src="/images/pornstars/veronica-leal.webp" alt="Veronica Leal" class="card-model__image" loading="lazy">
-                            <button class="card-model__favourite" aria-label="Add to favourites">
-                                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="card-model__info">
-                            <div class="card-model__name">Veronica Leal</div>
-                            <div class="card-model__videos">45 videos</div>
-                        </div>
-                    </a>
+            </div>
+        </div> 
+        <div class="slider-wrapper" data-slider-items="5">
+            <div class="swiper" data-source="api" data-limit="9" data-tags="Blonde" data-min-quality="5K" data-sort="release_date" data-order="desc">
+                <div class="swiper-wrapper five-items">
+                    <!-- Skeleton slides -->
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="slider-section">
-    <div class="container">
-        <div class="title_container">
-            <div class="left_section">
-                <div class="pre-title">
-                    old but gold
+    </section>
+    <section>
+    <div class="slider-section">
+        <div class="container">
+            <div class="title_container">
+                <div class="left_section">
+                    <div class="pre-title">
+                        you know the moment...
+                    </div>
+                    <div class="title">
+                        The scenes you<br> always go back.
+                    </div>
                 </div>
-                <div class="title">
-                    The Classics you<br> somehow missed.
-                </div>
-            </div>
-            <div class="right_section">
-                <div class="text">
-                    We work to make each new scene more <b>immersive and realistic than the previous one</b>.
-                </div>
-            </div>
-        </div>
-    </div> 
-    <div class="slider-wrapper" data-slider-items="4">
-        <div class="swiper" data-source="api" data-limit="9" data-tags="orgy" data-min-quality="5K" data-sort="release_date" data-order="desc">
-            <div class="swiper-wrapper four-items">
-                <!-- Skeleton slides -->
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="slider-section">
-    <div class="container">
-        <div class="title_container">
-            <div class="left_section">
-                <div class="pre-title">
-                    hidden gems
-                </div>
-                <div class="title">
-                    You've been <br>sleeping on these.
+                <div class="right_section">
+                    <div class="text">
+                        Handpicked selections featuring <b>the most immersive and realistic experiences</b>.
+                    </div>
                 </div>
             </div>
-            <div class="right_section">
-                <div class="text">
-                    We work to make each new scene more <b>immersive and realistic than the previous one</b>.
+        </div> 
+        <div class="slider-wrapper" data-slider-items="4">
+            <div class="swiper" data-source="api" data-favourite-scenes data-limit="10" data-sort="release_date" data-order="desc">
+                <div class="swiper-wrapper four-items">
+                    <!-- Skeleton slides -->
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                    <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
                 </div>
             </div>
         </div>
-    </div> 
-    <div class="slider-wrapper" data-slider-items="5">
-        <div class="swiper" data-source="api" data-limit="9" data-tags="Blonde" data-min-quality="5K" data-sort="release_date" data-order="desc">
-            <div class="swiper-wrapper five-items">
-                <!-- Skeleton slides -->
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="slider-section">
-    <div class="container">
-        <div class="title_container">
-            <div class="left_section">
-                <div class="pre-title">
-                    you know the moment...
-                </div>
-                <div class="title">
-                    The scenes you<br> always go back.
-                </div>
-            </div>
-            <div class="right_section">
-                <div class="text">
-                    Handpicked selections featuring <b>the most immersive and realistic experiences</b>.
-                </div>
-            </div>
-        </div>
-    </div> 
-    <div class="slider-wrapper" data-slider-items="4">
-        <div class="swiper" data-source="api" data-favourite-scenes data-limit="10" data-sort="release_date" data-order="desc">
-            <div class="swiper-wrapper four-items">
-                <!-- Skeleton slides -->
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
-            </div>
-        </div>
-    </div>
-</div>    
+    </div>  
+</section>  
 </main>
 
 <load src="src/layouts/_layout-bottom.html" />

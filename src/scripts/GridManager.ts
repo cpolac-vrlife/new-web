@@ -193,6 +193,24 @@ export const initGrids = () => {
       return;
     }
 
+    // Verificar si es external-videos
+    const isExternalVideos = grid.getAttribute('data-external-videos') === 'true';
+    if (isExternalVideos) {
+      // Añadir clase external-videos
+      grid.classList.add('external-videos');
+      
+      // Limitar elementos a 5
+      const cards = Array.from(grid.querySelectorAll<HTMLElement>('.card'));
+      cards.forEach((card, index) => {
+        if (index >= 5) {
+          card.style.display = 'none';
+        }
+      });
+      
+      // No inicializar paginación para grids external-videos
+      return;
+    }
+
     // Inicializar paginación si está habilitada
     const paginationEnabled = grid.getAttribute('data-pagination');
     if (paginationEnabled === 'true') {

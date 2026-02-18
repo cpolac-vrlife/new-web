@@ -16,6 +16,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
+  overflow-x: hidden;
 }
 
 /* 4. Hacer que las imágenes sean responsivas y se comporten como bloques */

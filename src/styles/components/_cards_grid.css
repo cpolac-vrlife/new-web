@@ -7,9 +7,22 @@
   padding: 20px 0;
   
   & .card:not(.card--skeleton) {
-    & .badges-wrapper {
-      animation: slideInLeft 0.5s ease-out forwards;
-      animation-delay: 0.5s;
+    & .badges-wrapper .badge-item {
+      animation: slideInLeftSkewed 0.5s ease-out forwards;
+      opacity: 0;
+      
+      &:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+      &:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+      &:nth-child(4) {
+        animation-delay: 0.6s;
+      }
     }
     
     & .data-video {
@@ -67,25 +80,14 @@
   }
 }
 
-/* Animación complementaria */
-@keyframes fadeInUp {
+@keyframes slideInLeftSkewed {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(30px) skewX(-10deg);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes slideInTop {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0) skewX(-10deg);
   }
 }
 
@@ -125,6 +127,30 @@
   }
   
   & .card:nth-child(5) .card-link {
+    opacity: 0.4;
+  }
+}
+
+/* External Videos - Deshabilita enlaces y aplica opacidad uniforme */
+.cards-grid.external-videos {
+  & .card-link {
+    pointer-events: none;
+    cursor: default;
+  }
+  
+  /* Mostrar release-date y ocultar rate/favorite en external-videos */
+  & .card .data-video {
+    .release-date {
+      display: flex;
+    }
+    .rate,
+    .favorite {
+      display: none;
+    }
+  }
+  
+  /* Opacidad uniforme del 0.4 para todos los elementos */
+  & .card .card-link {
     opacity: 0.4;
   }
 }

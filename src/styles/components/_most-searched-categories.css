@@ -65,9 +65,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 10px 20px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 1);
   border-radius: 4px;
   color: #fff;
   font-family: var(--font-base);
@@ -83,17 +83,17 @@
   }
 
   @media (min-width: 769px) {
-    padding: 14px 28px;
+    padding: 10px 20px;
     font-size: 15px;
   }
 }
 
 .most-searched-categories__item--all {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background:#333;
+  border-color:#333;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: #444;
+    border-color: #444
   }
 }

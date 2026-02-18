@@ -1,12 +1,144 @@
-.btn-custom {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: var(--radius);
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.8;
+.btn-container{
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  /* Cuando contiene offer-inline, cambiar a space-between */
+  &:has(.offer-inline) {
+    justify-content: flex-start;
+    
+    /* Border top con gradiente */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(-50vw + 50%);
+      width: 100vw;
+      height: 2px;
+      background: linear-gradient(to right, 
+        rgba(255, 255, 255, .5) 0%, 
+        rgba(255, 255, 255, 0) 30%);
+    }
+    
+    /* Border bottom con gradiente */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: calc(-50vw + 50%);
+      width: 100vw;
+      height: 2px;
+      background: linear-gradient(to right, 
+        rgba(255, 255, 255, .5) 0%, 
+        rgba(255, 255, 255, 0) 30%);
+    }
+  } 
+  .offer-inline{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    .hero-banner__offer .material-symbols-outlined {
+      font-size: 18px;
+      color: #fff;
+    } 
+  }
+  .btn-custom {
+    background: var(--primary);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    transition: background 0.2s, color 0.2s, transform 0.2s, scale 0.2s;
+    text-transform: uppercase;
+    &.trans{
+      background:#fff;
+      color: #000;
+      span{
+        color: var(--trans-color);
+        
+      }
+      &:hover{
+        background:var(--trans-color);
+        color: #fff;
+        span{
+          color:#fff;
+        }
+      }
+    }
+    &.gay{
+      background:#fff;
+      color: #000;
+      span{
+        color: var(--gay-color);
+        
+      }
+      &:hover{
+        background:var(--gay-color);
+        color: #fff;
+        span{
+          color:#fff;
+        }
+      }
+    }
+    &.passion{
+      background:#fff;
+      color: #000;
+      span{
+        color: var(--passion-color);
+        
+      }
+      &:hover{
+        background:var(--passion-color);
+        color: #fff;
+        span{
+          color:#fff;
+        }
+      }
+    }
+    &.japan{
+      background:#fff;
+      color: #000;
+      span{
+        color: var(--jap-color);
+        
+      }
+      &:hover{
+        background:var(--jap-color);
+        color: #fff;
+        span{
+          color:#fff;
+        }
+      }
+    }
+    &.povgay{
+      background:#fff;
+      color: #000;
+      span{
+        color: var(--povgay-color);
+        
+      }
+      &:hover{
+        background:var(--povgay-color);
+        color: #fff;
+        span{
+          color:#fff;
+        }
+      }
+    }
+    &:hover {
+      background:#fff;
+      color: #000;
+      transform: translateY(-5px) scale(1.05);
+    }
   }
 }

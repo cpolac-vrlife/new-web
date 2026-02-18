@@ -134,13 +134,26 @@
     /* Lógica de Animación cuando entra en el viewport */
     &.is-visible {
       .card:not(.card--skeleton) {
-        .badges-wrapper {
-          animation: slideInLeft 0.5s ease-out forwards;
-          animation-delay: 0.3s;
+        .badges-wrapper .badge-item {
+          animation: slideInLeftSkewed 0.5s ease-out forwards;
+          opacity: 0;
+          
+          &:nth-child(1) {
+            animation-delay: 0.2s;
+          }
+          &:nth-child(2) {
+            animation-delay: 0.3s;
+          }
+          &:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+          &:nth-child(4) {
+            animation-delay: 0.5s;
+          }
         }
         .data-video {
           animation: slideInTop 0.5s ease-out forwards;
-          animation-delay: 0.5s;
+          animation-delay: 0.6s;
         }
       }
     }    
@@ -220,6 +233,17 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeftSkewed {
+  from {
+    opacity: 0;
+    transform: translateX(30px) skewX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(-10deg);
   }
 }
 
