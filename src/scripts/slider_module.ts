@@ -58,6 +58,21 @@ export class CustomSlider {
   }
 
   private initObserver(): void {
+    // Primero esperamos a que el contenedor del slider sea visible en el viewport
+    const viewportObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          viewportObserver.unobserve(entry.target);
+          // El slider ya es visible: ahora observamos los slides internos
+          this.observeSlides();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    viewportObserver.observe(this.container);
+  }
+
+  private observeSlides(): void {
     const options = {
       root: this.container, // El contenedor limita qué se considera "visible"
       threshold: 0.2 // Se activa cuando el 20% del slide asoma

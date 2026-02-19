@@ -123,7 +123,12 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endC
   flex-direction: column;
   max-width: 650px;
   color: #fff;
-  animation: heroContentFadeIn 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-banner__content.is-visible {
+  animation: heroContentFadeIn 0.8s ease-out forwards;
 }
 
 @keyframes heroContentFadeIn {

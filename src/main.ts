@@ -6,6 +6,7 @@ import { initHeroBanner } from './scripts/HeroBannerModule';
 import { initDynamicContent } from './scripts/ContentRenderer';
 import { initFilters } from './scripts/FilterManager';
 import { initSearch } from './scripts/SearchModule';
+import { initScrollAnimations } from './scripts/ScrollAnimations';
 
 /**
  * Inicializa componentes críticos above-the-fold (LCP)
@@ -38,6 +39,9 @@ const initDeferred = async () => {
 
   // Inicializar filtros de la página /videos
   await initFilters();
+
+  // Re-escanear para observar cards cargadas dinámicamente
+  initScrollAnimations();
 
   // Luego configuramos los grids (estructura y paginación)
   initGrids();
@@ -84,7 +88,10 @@ const initApp = () => {
   // 1. Inicializar lo crítico inmediatamente
   initCritical();
 
-  // 2. Diferir lo no crítico usando requestIdleCallback (o fallback)
+  // 2. Scroll animations (se activan al hacer scroll)
+  initScrollAnimations();
+
+  // 3. Diferir lo no crítico usando requestIdleCallback (o fallback)
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => initDeferred(), { timeout: 2000 });
   } else {

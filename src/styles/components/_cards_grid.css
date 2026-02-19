@@ -8,26 +8,32 @@
   
   & .card:not(.card--skeleton) {
     & .badges-wrapper .badge-item {
-      animation: slideInLeftSkewed 0.5s ease-out forwards;
       opacity: 0;
-      
-      &:nth-child(1) {
-        animation-delay: 0.3s;
-      }
-      &:nth-child(2) {
-        animation-delay: 0.4s;
-      }
-      &:nth-child(3) {
-        animation-delay: 0.5s;
-      }
-      &:nth-child(4) {
-        animation-delay: 0.6s;
-      }
     }
-    
-    & .data-video {
-      animation: slideInTop 0.5s ease-out forwards;
-      animation-delay: 0.7s;
+
+    /* Animaciones solo cuando la card es visible en el viewport */
+    &.is-visible {
+      & .badges-wrapper .badge-item {
+        animation: slideInLeftSkewed 0.5s ease-out forwards;
+        
+        &:nth-child(1) {
+          animation-delay: 0.3s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.4s;
+        }
+        &:nth-child(3) {
+          animation-delay: 0.5s;
+        }
+        &:nth-child(4) {
+          animation-delay: 0.6s;
+        }
+      }
+      
+      & .data-video {
+        animation: slideInTop 0.5s ease-out forwards;
+        animation-delay: 0.7s;
+      }
     }
   }
 }

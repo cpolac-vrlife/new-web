@@ -17,9 +17,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 0.2s;
+    opacity: 1;
     border-radius: 10px;
     overflow: hidden;
     
@@ -34,13 +32,11 @@
   .card-series__pornstar {
     position: absolute;
     bottom: 0;
-    right: 50px;
+    right: 30px;
     height: 100%;
     width: auto;
     opacity: 0;
     transform: translateX(-30px);
-    animation: slideInLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.4s forwards;
-    animation-delay: 0.4s;
     
     img {
       height: 100%;
@@ -53,12 +49,10 @@
   .card-series__logo {
     position: absolute;
     bottom:0;
-    left: -50px;
+    left:0;
     transform: translateY(30px);
     opacity: 0;
     width: 100%;
-    animation: slideInTop 0.8s ease-out forwards;
-    animation-delay: 0.6s;
     
     img {
       width: 100%;
@@ -92,13 +86,11 @@
     filter: drop-shadow(3px 5px 10px rgba(0, 0, 0, 0.5));
     opacity: 0;
     transform: translateX(-30px);
-    animation: logoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.3s forwards;
   }
 
   .badge-series__heart {
     transform-origin: center;
     transform: scale(0.9);
-    animation: heartSlideLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
   }
 
   .badge-series__label {
@@ -115,7 +107,6 @@
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
     z-index: 1;
     opacity: 0;
-    animation: labelSlideIn2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
     
     span {
       display: inline-block;
@@ -127,21 +118,40 @@
   .data-video {
     opacity: 0;
     transform: translateY(20px);
+  }
+}
+
+/* Animaciones solo cuando el slide es visible */
+.swiper-slide.is-visible .card-series {
+  .card-series__pornstar {
+    animation: slideInLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.4s;
+  }
+
+  .card-series__logo {
+    animation: slideInTop 0.8s ease-out forwards;
+    animation-delay: 0.6s;
+  }
+
+  .badge-series__logo {
+    animation: logoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.3s forwards;
+  }
+
+  .badge-series__heart {
+    animation: heartSlideLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
+  }
+
+  .badge-series__label {
+    animation: labelSlideIn2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
+  }
+
+  .data-video {
     animation: slideInTop 0.5s ease-out forwards;
     animation-delay: 1s;
   }
 }
 
 /* Keyframes para las animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes slideInLeft {
   from {
     opacity: 0;
