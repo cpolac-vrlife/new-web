@@ -236,27 +236,7 @@
   }
 }
 
-@keyframes slideInLeftSkewed {
-  from {
-    opacity: 0;
-    transform: translateX(30px) skewX(-10deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) skewX(-10deg);
-  }
-}
-
-@keyframes slideInTop {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* slideInLeftSkewed y slideInTop definidos en _cards_grid.css */
 
 /* Coming Soon Slider - Mostrar release-date, ocultar rate/favorite */
 .swiper[data-coming-soon] {

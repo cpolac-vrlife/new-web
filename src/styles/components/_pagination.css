@@ -85,17 +85,7 @@
   user-select: none;
 }
 
-/* Animación para las cards al cambiar de página */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* fadeInUp definido en _cards_grid.css */
 
 /* Tablet y superiores (min-width: 481px) */
 @media (min-width: 481px) {

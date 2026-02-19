@@ -163,16 +163,7 @@
   }
 }
 
-@keyframes slideInTop {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* slideInTop definido en _cards_grid.css */
 
 /* Animaciones del badge de series */
 @keyframes logoFadeIn {
