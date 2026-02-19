@@ -15,6 +15,12 @@ class HeroBanner {
   private config: HeroBannerConfig;
   private thumbnailsTrack: HTMLElement | null;
   private prevPositions: Map<number, number> = new Map();
+  private prevNameEl: HTMLElement | null;
+  private nextNameEl: HTMLElement | null;
+  private slideNames: string[];
+  private progressBar: HTMLElement | null;
+  private progressRAF: number | null = null;
+  private progressStart: number = 0;
 
   constructor(config: Partial<HeroBannerConfig> = {}) {
     this.banner = document.querySelector('.hero-banner');
@@ -22,6 +28,17 @@ class HeroBanner {
     this.thumbnails = Array.from(document.querySelectorAll('.hero-banner__thumbnail'));
     this.dots = Array.from(document.querySelectorAll('.hero-banner__dot'));
     this.thumbnailsTrack = document.querySelector('.hero-banner__thumbnails-track');
+    this.prevNameEl = document.getElementById('hero-prev-name');
+    this.nextNameEl = document.getElementById('hero-next-name');
+    this.progressBar = document.getElementById('hero-progress-bar');
+
+    // Extract slide names from titles or thumbnail alt text
+    this.slideNames = this.slides.map((slide, i) => {
+      const title = slide.querySelector('.hero-banner__title');
+      if (title) return title.textContent?.trim() || '';
+      const thumb = this.thumbnails[i]?.querySelector('img');
+      return thumb?.alt || `Slide ${i + 1}`;
+    });
 
     this.config = {
       autoPlayInterval: 6000,
@@ -46,6 +63,7 @@ class HeroBanner {
     
     // Center the active thumbnail on init
     this.centerActiveThumbnail(0);
+    this.updateMobileNavNames();
     
     if (this.config.autoPlay) {
       this.startAutoPlay();
@@ -94,6 +112,18 @@ class HeroBanner {
         if (this.config.autoPlay) {
           this.startAutoPlay();
         }
+      });
+
+      // Mobile prev/next buttons
+      const prevBtn = this.banner.querySelector('.hero-banner__mobile-nav-btn--prev');
+      const nextBtn = this.banner.querySelector('.hero-banner__mobile-nav-btn--next');
+      prevBtn?.addEventListener('click', () => {
+        this.previousSlide();
+        this.resetAutoPlay();
+      });
+      nextBtn?.addEventListener('click', () => {
+        this.nextSlide();
+        this.resetAutoPlay();
       });
     }
 
@@ -184,6 +214,24 @@ class HeroBanner {
 
     // Scroll thumbnail into view
     this.centerActiveThumbnail(index);
+    this.updateMobileNavNames();
+
+    // Restart progress bar for the new slide
+    this.startProgress();
+  }
+
+  /** Update the prev/next labels with adjacent slide names */
+  private updateMobileNavNames() {
+    const total = this.slides.length;
+    const prevIndex = (this.currentSlide - 1 + total) % total;
+    const nextIndex = (this.currentSlide + 1) % total;
+
+    if (this.prevNameEl) {
+      this.prevNameEl.textContent = this.slideNames[prevIndex] || '';
+    }
+    if (this.nextNameEl) {
+      this.nextNameEl.textContent = this.slideNames[nextIndex] || '';
+    }
   }
 
   private centerActiveThumbnail(index: number) {
@@ -263,6 +311,7 @@ class HeroBanner {
       this.nextSlide();
     }, this.config.autoPlayInterval);
 
+    this.startProgress();
   }
 
   private stopAutoPlay() {
@@ -270,11 +319,43 @@ class HeroBanner {
       clearInterval(this.autoPlayTimer);
       this.autoPlayTimer = null;
     }
+    this.stopProgress();
   }
 
   private resetAutoPlay() {
     if (this.config.autoPlay) {
       this.startAutoPlay();
+    }
+  }
+
+  /** Animate the mobile progress bar from 0% to 100% over the autoPlay interval */
+  private startProgress() {
+    this.stopProgress();
+    if (!this.progressBar) return;
+
+    this.progressBar.style.transition = 'none';
+    this.progressBar.style.width = '0%';
+    this.progressStart = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - this.progressStart;
+      const pct = Math.min((elapsed / this.config.autoPlayInterval) * 100, 100);
+      if (this.progressBar) this.progressBar.style.width = `${pct}%`;
+      if (pct < 100) {
+        this.progressRAF = requestAnimationFrame(tick);
+      }
+    };
+
+    this.progressRAF = requestAnimationFrame(tick);
+  }
+
+  private stopProgress() {
+    if (this.progressRAF) {
+      cancelAnimationFrame(this.progressRAF);
+      this.progressRAF = null;
+    }
+    if (this.progressBar) {
+      this.progressBar.style.width = '0%';
     }
   }
 

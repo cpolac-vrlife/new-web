@@ -159,7 +159,7 @@
     }    
   }
 
-  /* Botones de navegación - Mobile First */
+  /* Botones de navegación - Solo desktop */
   .swiper-button-next,
   .swiper-button-prev {
     position: absolute;
@@ -167,19 +167,19 @@
     transform: translateY(-50%);
     z-index: 10;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: var(--primary, #000);
     color: #fff;
     border-radius: 50%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 
     .material-symbols-outlined {
-      font-size: 24px;
+      font-size: 32px;
       transition: transform 0.2s ease;
     }
 
@@ -196,31 +196,17 @@
       }
     }
 
-    /* Tablet y Desktop: Botones más grandes */
-    @media (min-width: 769px) {
-      width: 50px;
-      height: 50px;
-
-      .material-symbols-outlined {
-        font-size: 32px;
-      }
+    @media (min-width: 1025px) {
+      display: flex;
     }
   }
 
   .swiper-button-next { 
-    right: 10px;
-    
-    @media (min-width: 769px) {
-      right: 15px;
-    }
+    right: 15px;
   }
   
   .swiper-button-prev { 
-    left: 10px;
-    
-    @media (min-width: 769px) {
-      left: 15px;
-    }
+    left: 15px;
   }
 }
 

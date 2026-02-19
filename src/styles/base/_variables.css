@@ -1,6 +1,7 @@
 :root {
   --bg-color:#000;
   --primary: #e4003a;
+  --primary-rgb: 228, 0, 58; /* Valores RGB separados */
   --secondary: #64748b;
   --terciary:#f2b03c;
   --orange:#ff7815;

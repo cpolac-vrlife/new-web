@@ -1,26 +1,29 @@
 /* Hero Banner Component - Mobile First */
 .hero-banner {
   position: relative;
-  width: 100%;
-  aspect-ratio: 9 / 16; /* Mobile: vertical */
-  max-height: 100vh;
+  width: 100%;   
   overflow: hidden;
-  /*margin-top: calc(-1 * (var(--header-height, 80px)));*/
   contain: layout style paint;
-
   /* Tablet y superiores: formato horizontal */
   @media (min-width: 768px) {
     aspect-ratio: 16 / 9;
+    max-height: 100vh;
   }
 }
 
 /* Slides */
 .hero-banner__slides {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  aspect-ratio: 32 / 45; /* Mobile: vertical */
+  /* Tablet y superiores: formato horizontal */
+  @media (min-width: 768px) {
+    aspect-ratio: 16 / 9;
+    max-height: 100vh;
+  }
 }
 
 .hero-banner__slide {
@@ -32,7 +35,8 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-  z-index: 1;
+  z-index: 1;  
+  
 }
 
 .hero-banner__slide--active {
@@ -66,17 +70,22 @@
 
 .hero-banner__overlay {
   position: absolute;
-  bottom: 240px;
-  top:-240px;
+  bottom: 0px;  
   left: 0;
   width: 100%;
   height: calc(100% + 50px);
   /* Mobile: gradiente lineal vertical */
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 40%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 50%);
   z-index: 2;
 
   /* Desktop: gradiente radial */
   @media (min-width: 768px) {
+    position: absolute;
+    bottom: 240px;
+    top:-240px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 50px);
     background: radial-gradient(
       ellipse at center,
       rgba(0, 0, 0, 0) 0%,
@@ -88,25 +97,30 @@
 }
 
 .hero-banner__slide .hero-banner__img-banner .hero-banner__overlay {
-   position: absolute;
-  bottom: 240px;
-  top:-240px;
-  left: 0;
-  width: 100%;
-  height: calc(100% + 50px);
-background: #000000;
-background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 20%);
-background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 20%);
-background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 20%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#000000", GradientType=0);
-  z-index: 2;
+   display: none;
+  @media (min-width: 768px) {
+    display: block;
+    position: absolute;
+    bottom: 240px;
+    top:-240px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 50px);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.95) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
 }
 
 
 /* Content - Mobile First */
 .hero-banner .container {
   position: absolute;
-  bottom: 170px; /* Mobile */
+  bottom: 20px; /* Mobile */
   left: 0;
   right: 0;
   z-index: 3;
@@ -315,18 +329,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endC
    Pagination Dots (above thumbnails)
    ======================================== */
 .hero-banner__dots {
-  position: absolute;
-  bottom: 120px; /* Mobile */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-  z-index: 12;
-
-  /* Desktop */
-  @media (min-width: 768px) {
-    bottom: 175px;
-  }
+  display: none;
 }
 
 .hero-banner__dot {
@@ -361,11 +364,13 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endC
   margin: 0 auto;
   width: 100%;
   z-index: 10;
-  padding: 0 1rem 1rem; /* Mobile */
   box-sizing: border-box;
 
-  /* Desktop */
+  /* Hidden on mobile, visible on desktop */
+  display: none;
+
   @media (min-width: 768px) {
+    display: block;
     padding: 0 15px 50px;
   }
 }
@@ -425,6 +430,101 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endC
 .hero-banner__thumbnail--active {
   z-index: 5;
   transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ========================================
+   Mobile Prev/Next Navigation
+   ======================================== */
+.hero-banner__mobile-nav {
+ /* position: absolute;*/
+ /*bottom: 0px;
+  left: 0;
+  right: 0;*/
+  z-index: 12;
+  display: flex;
+  padding: 10px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.hero-banner__mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding: 10px 16px;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.2s ease;
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.hero-banner__mobile-nav-btn--prev {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-banner__mobile-nav-btn--next {
+  align-items: flex-end;
+  text-align: right;
+  animation: heroBtnPulse 2s ease-in-out infinite;
+}
+
+@keyframes heroBtnPulse {
+  0%, 100% { background: transparent; }
+  50% { background: rgba(255, 255, 255, 0.08); }
+}
+
+.hero-banner__mobile-nav-label {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero-banner__mobile-nav-name {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  display: block;
+}
+
+/* ========================================
+   Mobile Progress Bar
+   ======================================== */
+.hero-banner__progress {    
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  z-index: 12;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.hero-banner__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 0;
+  transition: width 0.1s linear;
 }
 
 /* ========================================

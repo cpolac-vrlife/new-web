@@ -34,7 +34,7 @@
 .card-model__image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.4s ease;
 
   .card-model:hover & {
@@ -88,6 +88,11 @@
   flex-direction: column;
   gap: 4px;
   padding: 0 4px;
+  min-height: 52px;
+
+  @media (min-width: 769px) {
+    min-height: 56px;
+  }
 }
 
 .card-model__name {
@@ -96,9 +101,12 @@
   color: #fff;
   margin: 0;
   line-height: 1.3;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-word;
 
   @media (min-width: 769px) {
     font-size: 16px;

@@ -2,16 +2,13 @@
 
 class Header {
   private header: HTMLElement | null;
-  private mobileToggle: HTMLButtonElement | null;
-  private nav: HTMLElement | null;
-  private isMenuOpen: boolean = false;
   private hasHeroBanner: boolean = false;
+  private joinBtn: HTMLElement | null;
 
   constructor() {
     this.header = document.querySelector('.header');
-    this.mobileToggle = document.querySelector('.header__mobile-toggle');
-    this.nav = document.querySelector('.header__nav');
     this.hasHeroBanner = document.querySelector('.hero-banner') !== null;
+    this.joinBtn = document.querySelector('.mobile-join-btn');
 
     this.init();
   }
@@ -19,52 +16,64 @@ class Header {
   private init() {
     this.attachEventListeners();
     this.handleScroll();
+    this.highlightActiveNavItem();
+    this.observeHeroForJoinBtn();
     
     // Si hay hero banner, activar modo transparente
     if (this.hasHeroBanner && this.header) {
       this.header.classList.add('header--transparent');
     }
+
+    // Si no hay hero banner, mostrar JOIN directamente
+    if (!this.hasHeroBanner && this.joinBtn) {
+      this.joinBtn.classList.add('is-visible');
+    }
   }
 
   private attachEventListeners() {
-    // Mobile menu toggle
-    if (this.mobileToggle) {
-      this.mobileToggle.addEventListener('click', () => this.toggleMobileMenu());
-    }
-
     // Scroll behavior
     window.addEventListener('scroll', () => this.handleScroll());
 
-    // Close mobile menu on window resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024 && this.isMenuOpen) {
-        this.toggleMobileMenu();
+    // Mobile search button in bottom nav → triggers the same search overlay
+    const mobileSearchBtn = document.getElementById('mobile-search-toggle');
+    if (mobileSearchBtn) {
+      mobileSearchBtn.addEventListener('click', () => {
+        const searchToggle = document.getElementById('search-toggle');
+        if (searchToggle) searchToggle.click();
+      });
+    }
+  }
+
+  /** Highlight the active bottom nav item based on the current URL */
+  private highlightActiveNavItem() {
+    const path = window.location.pathname;
+    const navItems = document.querySelectorAll<HTMLElement>('.mobile-nav__item');
+    
+    navItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (href && path.includes(href.replace('.html', ''))) {
+        item.classList.add('active');
       }
     });
   }
 
-  private toggleMobileMenu() {
-    if (!this.nav) return;
+  /** Show/hide the mobile JOIN button based on hero banner visibility */
+  private observeHeroForJoinBtn() {
+    const hero = document.querySelector('.hero-banner');
+    if (!hero || !this.joinBtn) return;
 
-    this.isMenuOpen = !this.isMenuOpen;
-    
-    if (this.isMenuOpen) {
-      this.nav.style.display = 'block';
-      this.nav.classList.add('header__nav--open');
-      if (this.mobileToggle) {
-        const icon = this.mobileToggle.querySelector('.material-symbols-outlined');
-        if (icon) icon.textContent = 'close';
-      }
-    } else {
-      this.nav.classList.remove('header__nav--open');
-      setTimeout(() => {
-        if (this.nav) this.nav.style.display = '';
-      }, 300);
-      if (this.mobileToggle) {
-        const icon = this.mobileToggle.querySelector('.material-symbols-outlined');
-        if (icon) icon.textContent = 'menu';
-      }
-    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          this.joinBtn!.classList.remove('is-visible');
+        } else {
+          this.joinBtn!.classList.add('is-visible');
+        }
+      },
+      { threshold: 0 }
+    );
+
+    obs.observe(hero);
   }
 
   private handleScroll() {

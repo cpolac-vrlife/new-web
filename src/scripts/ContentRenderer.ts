@@ -293,10 +293,13 @@ export function parseDataAttributes(element: HTMLElement): QueryOptions {
 export async function initDynamicContent(): Promise<void> {
   console.log('[ContentRenderer] Initializing dynamic content...');
 
-  // Grids dinámicos
-  const dynamicGrids = document.querySelectorAll<HTMLElement>('.cards-grid[data-source="api"]');
+  // Grids dinámicos (excluir los gestionados por FilterManager)
+  const allGrids = document.querySelectorAll<HTMLElement>('.cards-grid[data-source="api"]');
+  const dynamicGrids = Array.from(allGrids).filter(grid =>
+    !grid.closest('.page-videos') && !grid.closest('.page-category-detail')
+  );
   console.log('[ContentRenderer] Found', dynamicGrids.length, 'dynamic grids');
-  const gridPromises = Array.from(dynamicGrids).map(grid => {
+  const gridPromises = dynamicGrids.map(grid => {
     const options = parseDataAttributes(grid);
     console.log('[ContentRenderer] Grid options:', options);
     return renderGrid(grid, options);
