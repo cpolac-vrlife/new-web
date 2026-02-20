@@ -11,7 +11,7 @@
       left: 0%;
       transform: translate(-50%, -50%);
       font-size: clamp(4rem, 15vw, 4.5rem);
-      font-weight: 900;
+      font-weight: 700;
       color: #fff;
       z-index: 0;
       pointer-events: none;

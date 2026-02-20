@@ -5,20 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%- title %> - Proyecto 2026</title>
 
+  <!-- Critical CSS se inyecta automáticamente aquí por vite-plugin-critical-css -->
+
   <!-- Preconnect: DNS + TCP + TLS anticipado -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- CSS principal - inline crítico -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="/src/styles/main.css">
 
-  <!-- Cargar fuentes de forma asíncrona con display=swap -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <!-- Cargar fuentes de forma asíncrona -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
   </noscript>
 </head>
-<body style="background:#000;margin:0">
+<body>
+  <script>document.fonts.ready.then(()=>document.body.classList.add('fonts-loaded'))</script>
   <load src="src/partials/_header.html" />

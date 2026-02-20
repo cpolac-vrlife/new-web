@@ -125,16 +125,51 @@ export class CustomSlider {
   }
 
   private dragEnd(): void {
+    if (!this.isDragging) return;
     this.isDragging = false;
     this.wrapper.style.cursor = 'grab';
     this.wrapper.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
 
     const maxScroll = this.getMaxScroll();
 
+    // Clamp to bounds first
     if (this.currentTranslate > 0) {
       this.currentTranslate = 0;
     } else if (this.currentTranslate < -maxScroll) {
       this.currentTranslate = -maxScroll;
+    }
+
+    // --- Snap to nearest slide ---
+    const slides = Array.from(this.wrapper.children) as HTMLElement[];
+    if (slides.length > 0) {
+      const slideWidth = slides[0].offsetWidth + this.gap;
+      const dragDistance = this.currentTranslate - this.prevTranslate;
+      const threshold = slideWidth * 0.2; // 20% del ancho = mínimo para avanzar
+
+      // Calcular el índice del slide más cercano al offset actual
+      let snapIndex = Math.round(-this.currentTranslate / slideWidth);
+
+      // Si el usuario arrastró suficiente, forzar avance de al menos 1 slide
+      if (Math.abs(dragDistance) > threshold) {
+        const prevIndex = Math.round(-this.prevTranslate / slideWidth);
+        if (dragDistance < 0) {
+          // Swipe izquierda → avanzar
+          snapIndex = Math.max(snapIndex, prevIndex + 1);
+        } else {
+          // Swipe derecha → retroceder
+          snapIndex = Math.min(snapIndex, prevIndex - 1);
+        }
+      }
+
+      // Clamp index
+      const maxIndex = Math.max(0, Math.ceil(maxScroll / slideWidth));
+      snapIndex = Math.max(0, Math.min(snapIndex, maxIndex));
+
+      this.currentTranslate = -(snapIndex * slideWidth);
+
+      // Re-clamp after snap
+      if (this.currentTranslate > 0) this.currentTranslate = 0;
+      if (this.currentTranslate < -maxScroll) this.currentTranslate = -maxScroll;
     }
 
     this.prevTranslate = this.currentTranslate;
@@ -177,7 +212,10 @@ export class CustomSlider {
     }
     
     this.currentTranslate = newTranslate;
-    this.dragEnd();
+    this.prevTranslate = this.currentTranslate;
+    this.wrapper.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+    this.applyTransform();
+    this.updateButtons();
   }
 
   private getMaxScroll(): number {

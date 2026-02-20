@@ -21,6 +21,8 @@ class HeroBanner {
   private progressBar: HTMLElement | null;
   private progressRAF: number | null = null;
   private progressStart: number = 0;
+  private contentHideTimer: number | null = null;
+  private readonly contentHideDelay: number = 3000;
 
   constructor(config: Partial<HeroBannerConfig> = {}) {
     this.banner = document.querySelector('.hero-banner');
@@ -68,6 +70,10 @@ class HeroBanner {
     if (this.config.autoPlay) {
       this.startAutoPlay();
     }
+
+    // Start content auto-hide timer for the first slide
+    this.startContentHideTimer();
+    this.attachInteractionListeners();
   }
 
   private attachEventListeners() {
@@ -218,6 +224,10 @@ class HeroBanner {
 
     // Restart progress bar for the new slide
     this.startProgress();
+
+    // Reset content hide timer for new slide
+    this.showContent();
+    this.startContentHideTimer();
   }
 
   /** Update the prev/next labels with adjacent slide names */
@@ -362,6 +372,7 @@ class HeroBanner {
   // Public methods
   public destroy() {
     this.stopAutoPlay();
+    this.clearContentHideTimer();
   }
 
   public pause() {
@@ -381,6 +392,47 @@ class HeroBanner {
     } else {
       this.stopAutoPlay();
     }
+  }
+
+  /* ── Content auto-hide after delay ── */
+  private startContentHideTimer() {
+    this.clearContentHideTimer();
+    this.contentHideTimer = window.setTimeout(() => {
+      this.hideContent();
+    }, this.contentHideDelay);
+  }
+
+  private clearContentHideTimer() {
+    if (this.contentHideTimer) {
+      clearTimeout(this.contentHideTimer);
+      this.contentHideTimer = null;
+    }
+  }
+
+  private hideContent() {
+    this.banner?.classList.add('hero-banner--content-hidden');
+  }
+
+  private showContent() {
+    this.banner?.classList.remove('hero-banner--content-hidden');
+  }
+
+  /** Listen for user interaction to reveal hidden content */
+  private attachInteractionListeners() {
+    if (!this.banner) return;
+
+    const reveal = () => {
+      this.showContent();
+      this.startContentHideTimer();
+    };
+
+    // Touch & pointer events on the banner
+    this.banner.addEventListener('touchstart', reveal, { passive: true });
+    this.banner.addEventListener('mousedown', reveal);
+    this.banner.addEventListener('mousemove', reveal, { passive: true });
+
+    // Scroll anywhere on the page also reveals content
+    window.addEventListener('scroll', reveal, { passive: true });
   }
 }
 

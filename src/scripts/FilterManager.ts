@@ -11,6 +11,7 @@ import {
   type SortOptions,
 } from './ApiService';
 import { renderCard } from './ContentRenderer';
+import { initScrollAnimations } from './ScrollAnimations';
 
 /**
  * Estado interno del sistema de filtros
@@ -817,6 +818,9 @@ export class FilterManager {
         card.style.transform = 'translateY(0)';
       }, i * 40);
     });
+
+    // Re-observar las nuevas cards para activar animaciones de badges y data-video
+    initScrollAnimations();
   }
 
   /* ====================================

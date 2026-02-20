@@ -5,6 +5,7 @@
   column-gap: 16px; 
   row-gap: 35px;
   padding: 20px 0;
+  overflow: clip; /* Evita que las animaciones de badges (translateX) desborden */
   
   & .card:not(.card--skeleton) {
     & .badges-wrapper .badge-item {
@@ -38,23 +39,18 @@
   }
 }
 
-/* Tablet (min-width: 601px) */
-@media (min-width: 601px) {
+/* Tablet (min-width: 768px) */
+@media (min-width: 768px) {
   .cards-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
   }
 }
 
-/* Tablet landscape / Small desktop (min-width: 1024px) */
+/* Tablet landscape / Desktop (min-width: 1024px) */
 @media (min-width: 1024px) {
   .cards-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-  }
-}
-
-/* Desktop (min-width: 1025px) */
-@media (min-width: 1025px) {
-  .cards-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas por defecto */
+    
     /* Las clases específicas sobrescriben el grid por defecto */
     &.grid-cols-3 {
       grid-template-columns: repeat(3, 1fr);
@@ -71,17 +67,6 @@
 }
 
 /* Animaciones */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes slideInTop {
   from {
     opacity: 0;

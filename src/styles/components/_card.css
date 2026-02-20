@@ -41,8 +41,6 @@
       object-fit: cover;
       display: block;
       animation: fadeIn 0.6s ease-out forwards;
-      /* content-visibility para imágenes fuera del viewport */
-      content-visibility: auto;
     }
   }
 
@@ -61,7 +59,7 @@
 
     .badge-item {
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 700;
       padding: 2px 6px;
       margin-left: 5px;
       transform: skewX(-10deg);
@@ -113,9 +111,6 @@
     }
     .data-right{
       display: flex; align-items: center; justify-content: flex-end;
-      *{
-       display: flex; align-items: center; justify-content: flex-end; 
-      }
     }
     h3 {
       font-size: 15px;

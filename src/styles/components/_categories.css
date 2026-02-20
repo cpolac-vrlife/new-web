@@ -7,7 +7,7 @@
   gap: 20px 12px;
   margin-bottom: 40px;
 
-  @media (min-width: 576px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px 14px;
   }
@@ -58,7 +58,7 @@
   background: #1a1a1a;
   margin-bottom: 8px;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     margin-bottom: 10px;
   }
 
@@ -88,7 +88,7 @@
   text-align: left;
   flex: 1;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     font-size: 15px;
   }
 
@@ -106,7 +106,7 @@
   line-height: 1.2;
   white-space: nowrap;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     font-size: 12px;
   }
 
@@ -124,7 +124,7 @@
   .category-card__name {
     font-size: 15px;
 
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       font-size: 16px;
     }
 

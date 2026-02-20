@@ -1,3 +1,9 @@
+/* Icon font placeholder – pulsing circle until Material Symbols loads */
+@keyframes icon-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.6; }
+}
+
 /* Header Component */
 .header {
   position: sticky;
@@ -157,22 +163,127 @@
   }
 }
 
+/* =============================================
+   MOBILE KEBAB MENU (3 dots)
+   ============================================= */
+.header__kebab {
+  position: relative;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.header__kebab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 26px;
+  }
+
+  &:hover,
+  &:active {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.header__kebab-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: rgba(20, 20, 20, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  padding: 6px 0;
+  z-index: 1001;
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.95);
+  transform-origin: top right;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.header__kebab-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.15s ease;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+
+    .material-symbols-outlined {
+      color: var(--primary);
+    }
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.header__kebab-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 12px;
+}
+
 /* Buttons */
 .header__btn {
-  padding: 0.6rem 1.5rem;
   border-radius: 25px;
-  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   border: none;
   white-space: nowrap;
-  min-width: 90px;
   /* Hidden on mobile */
   display: none;
 
   @media (min-width: 1024px) {
     display: inline-flex;
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    min-width: 70px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 0.6rem 1.5rem;
+    font-size: 14px;
+    min-width: 90px;
   }
 }
 
@@ -221,12 +332,6 @@
   .header__menu a {
     font-size: 12px;
   }
-
-  .header__btn {
-    padding: 0.5rem 1rem;
-    font-size: 12px;
-    min-width: 70px;
-  }
 }
 
 /* Large Desktop - 1280px */
@@ -246,12 +351,6 @@
   .header__menu a {
     font-size: 14px;
   }
-
-  .header__btn {
-    padding: 0.6rem 1.5rem;
-    font-size: 14px;
-    min-width: 90px;
-  }
 }
 
 /* =============================================
@@ -270,8 +369,9 @@
   border:1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);  
   padding: 6px 5px max(6px, env(safe-area-inset-bottom));
-  height: auto;
+  min-height: 56px;
   border-radius: 9999px;
+  contain: layout style;
 
   @media (min-width: 1024px) {
     display: none;
@@ -298,6 +398,35 @@
   .material-symbols-outlined {
     font-size: 24px;
     line-height: 1;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    color: transparent;
+
+    /* Pulsing circle placeholder */
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      animation: icon-pulse 1.4s ease-in-out infinite;
+    }
+  }
+
+  /* When font is loaded, show icon and remove placeholder */
+  .fonts-loaded & .material-symbols-outlined {
+    color: inherit;
+
+    &::before {
+      display: none;
+    }
   }
 
   &:hover,
@@ -317,6 +446,39 @@
   letter-spacing: 0.3px;
   line-height: 1;
   color:#fff;
+  min-height: 11px;
+}
+
+/* Also hide header search icon text until font loads */
+.header__search-btn .material-symbols-outlined,
+.header__user-btn .material-symbols-outlined {
+  position: relative;
+  color: transparent;
+  overflow: hidden;
+}
+
+.header__search-btn .material-symbols-outlined::before,
+.header__user-btn .material-symbols-outlined::before,
+.header__kebab-btn .material-symbols-outlined::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  animation: icon-pulse 1.4s ease-in-out infinite;
+}
+
+.fonts-loaded .header__search-btn .material-symbols-outlined,
+.fonts-loaded .header__user-btn .material-symbols-outlined,
+.fonts-loaded .header__kebab-btn .material-symbols-outlined {
+  color: inherit;
+}
+
+.fonts-loaded .header__search-btn .material-symbols-outlined::before,
+.fonts-loaded .header__user-btn .material-symbols-outlined::before,
+.fonts-loaded .header__kebab-btn .material-symbols-outlined::before {
+  display: none;
 }
 
 /* =============================================
@@ -369,8 +531,12 @@
 /* =============================================
    BODY PADDING for mobile bottom nav
    ============================================= */
-@media (max-width: 1023px) {
+body {
+  padding-bottom: calc(70px + 42px + 20px + max(6px, env(safe-area-inset-bottom)));
+}
+
+@media (min-width: 1024px) {
   body {
-    padding-bottom: calc(70px + 42px + 20px + max(6px, env(safe-area-inset-bottom)));
+    padding-bottom: 0;
   }
 }

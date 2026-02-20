@@ -13,7 +13,7 @@
   position: relative;
 
   /* Tablet y superiores: más padding */
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     padding-top: 20px;
   }
 
@@ -52,8 +52,8 @@
       }
     }
 
-    /* Tablet (min-width: 601px) - 2 slides visibles */
-    @media (min-width: 601px) {
+    /* Tablet (min-width: 768px) - 2 slides visibles */
+    @media (min-width: 768px) {
       gap: var(--slider-gap);
       
       .swiper-slide {
@@ -62,8 +62,8 @@
       }
     }
 
-    /* Laptop (min-width: 769px) - Configuración intermedia según clase */
-    @media (min-width: 769px) {
+    /* Laptop (min-width: 768px) - Configuración intermedia según clase */
+    @media (min-width: 768px) {
       &.three-items {
         .swiper-slide {
           flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - var(--slider-gap)) / 2);
@@ -92,8 +92,8 @@
       }
     }
 
-    /* Desktop (min-width: 1025px) - Aplicar configuración según clase */
-    @media (min-width: 1025px) {
+    /* Desktop (min-width: 1024px) - Aplicar configuración según clase */
+    @media (min-width: 1024px) {
       &.three-items {
         .swiper-slide {
           flex: 0 0 calc((var(--slider-content-width) - (2 * var(--slider-gap))) / 3);
@@ -127,7 +127,7 @@
     position: relative;
 
     /* Tablet y superiores: más margen */
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       margin-bottom: 26px;
     }
 
@@ -196,7 +196,7 @@
       }
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 1024px) {
       display: flex;
     }
   }
@@ -207,18 +207,6 @@
   
   .swiper-button-prev { 
     left: 15px;
-  }
-}
-
-/* Keyframes (Fuera del anidamiento para evitar errores de scope) */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 

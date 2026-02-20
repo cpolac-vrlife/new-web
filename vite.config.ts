@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite';
 import injectHTML from 'vite-plugin-html-inject';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { inlineCriticalCSS } from './vite-plugin-critical-css';
 import nesting from 'postcss-nesting'; 
 import autoprefixer from 'autoprefixer';
 import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
+    inlineCriticalCSS(),
     injectHTML({
       sourceAttr: 'src',
     }),
@@ -25,6 +27,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,
     port: 3000,
     open: true,
     proxy: {

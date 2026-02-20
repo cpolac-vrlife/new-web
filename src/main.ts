@@ -22,7 +22,7 @@ const initCritical = () => {
   if (document.querySelector('.hero-banner')) {
     initHeroBanner({
       autoPlay: true,
-      autoPlayInterval: 6000
+      autoPlayInterval: 14900
     });
   }
 };

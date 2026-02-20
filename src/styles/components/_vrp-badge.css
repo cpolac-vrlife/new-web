@@ -2,12 +2,13 @@
 .hero-banner__badge-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Mobile */
+  gap: 0.8rem; /* Mobile */
   margin-bottom: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
   /* Desktop */
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     gap: 0.75rem;
   }
 }
@@ -34,25 +35,15 @@
   animation: logoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-@keyframes logoFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* @keyframes logoFadeIn → definido en _card-series.css */
 
 .hero-banner__badge-label {
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 700;
     padding: 2px 6px;
     margin-left: 5px;
     transform: skewX(-10deg) translateX(40px);
     background: var(--terciary);
-    color:#000;
     border-radius: 3px;
     display: flex;
     align-items: center;
@@ -90,15 +81,18 @@
 }
 
 .hero-banner__badge-subtitle {
-  font-size: 0.75rem; /* Mobile */
+  display: none; /* Oculto en mobile */
+  font-size: 0.8rem;
+  line-height: 1.2;
   color: rgba(255, 255, 255, 0.85);
-  font-weight: 400;
+  font-weight: 600;
   opacity: 0;
   transform: translateX(40px);
   transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  /* Desktop */
-  @media (min-width: 769px) {
+  /* Desktop: visible */
+  @media (min-width: 768px) {
+    display: block;
     font-size: 0.85rem;
   }
 }

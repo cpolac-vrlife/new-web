@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;   
   overflow: hidden;
-  contain: layout style paint;
+  contain: layout paint;
   /* Tablet y superiores: formato horizontal */
   @media (min-width: 768px) {
     aspect-ratio: 16 / 9;
@@ -74,18 +74,27 @@
   left: 0;
   width: 100%;
   height: calc(100% + 50px);
-  /* Mobile: gradiente lineal vertical */
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 50%);
   z-index: 2;
+  pointer-events: none;
+
+  @media (min-width: 768px) {
+    bottom: 240px;
+    top: -240px;
+  }
+}
+
+/* ::before = gradiente activo (lineal en mobile, radial en desktop) */
+.hero-banner__overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Mobile: gradiente lineal */
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 50%);
+  opacity: 1;
+  transition: opacity 0.6s ease; /* Aparece inmediatamente al volver: radial primero */
 
   /* Desktop: gradiente radial */
   @media (min-width: 768px) {
-    position: absolute;
-    bottom: 240px;
-    top:-240px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 50px);
     background: radial-gradient(
       ellipse at center,
       rgba(0, 0, 0, 0) 0%,
@@ -96,23 +105,29 @@
   }
 }
 
+/* ::after = gradiente lineal destino para cross-fade en desktop */
+.hero-banner__overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0) 30%);
+  opacity: 0;
+  transition: opacity 0.6s ease 0.5s; /* Desaparece con delay al volver: espera al radial */
+  pointer-events: none;
+}
+
+/* Overlay en slides con img-banner: oculto en móvil, visible en desktop */
 .hero-banner__slide .hero-banner__img-banner .hero-banner__overlay {
-   display: none;
+  display: none;
+
   @media (min-width: 768px) {
     display: block;
-    position: absolute;
-    bottom: 240px;
-    top:-240px;
-    left: 0;
-    width: 100%;
+    /* Mismo gradiente lineal que en móvil, sin radial */
+    top: unset;
+    bottom: 100px;
     height: calc(100% + 50px);
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 30%,
-      rgba(0, 0, 0, 0.95) 60%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    background: #000;
+    background: linear-gradient(0deg,rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 30%);
   }
 }
 
@@ -127,7 +142,7 @@
 
   /* Desktop */
   @media (min-width: 768px) {
-    bottom: 260px;
+    bottom: 270px;
   }
 }
 
@@ -167,21 +182,15 @@
   animation: heartSlideLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
 }
 
-@keyframes heartSlideLeft {
-  from {
-    transform: scale(0.9) translateX(0);
-  }
-  to {
-    transform: scale(0.9) translateX(-15px);
-  }
-}
+/* @keyframes heartSlideLeft → definido en _card-series.css */
 
 /* Title - Mobile First */
 .hero-banner__title {
   font-size: 2rem; /* Mobile: 32px */
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 
   /* Tablet */
   @media (min-width: 768px) {
@@ -199,8 +208,9 @@
   }
 }
 
-/* Description - hidden by default, visible on hover */
+/* Description - hidden on mobile, visible on hover (desktop) */
 .hero-banner__description {
+  display: none; /* Oculto en mobile */
   font-size: 13px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
@@ -211,6 +221,10 @@
   opacity: 0;
   overflow: hidden;
   transition: max-height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 }
 
 .hero-banner__slide:hover .hero-banner__description {
@@ -228,6 +242,44 @@
   letter-spacing: 0.5px;
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Auto-hide: models, title, badge-row, description after delay */
+.hero-banner--content-hidden .hero-banner__models,
+.hero-banner--content-hidden .hero-banner__title,
+.hero-banner--content-hidden .hero-banner__badge-row,
+.hero-banner--content-hidden .hero-banner__description {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* When content is hidden, cross-fade radial→linear on video slides (desktop only) */
+@media (min-width: 768px) {
+  /* Radial desaparece con delay: espera a que el lineal ya sea visible */
+  .hero-banner--content-hidden .hero-banner__slide:not(:has(.hero-banner__img-banner)) .hero-banner__overlay::before {
+    opacity: 0;
+    transition: opacity 0.6s ease 0.5s; /* empieza a desaparecer 0.5s después */
+  }
+
+  /* Lineal aparece inmediatamente, sin delay */
+  .hero-banner--content-hidden .hero-banner__slide:not(:has(.hero-banner__img-banner)) .hero-banner__overlay::after {
+    opacity: 1;
+    transition: opacity 0.6s ease; /* sin delay */
+  }
+}
+
+/* img-banner: overlay stays fully visible always */
+.hero-banner--content-hidden .hero-banner__img-banner .hero-banner__overlay::before {
+  opacity: 1;
+}
+
+/* When content is hidden, override hover reveal of description */
+.hero-banner--content-hidden .hero-banner__slide:hover .hero-banner__description {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
 }
 
 /* Actions - CTA - Mobile First */
@@ -239,10 +291,12 @@
 .hero-banner__cta {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%; /* Full-width en mobile */
   background:#fff;
-  border-radius: 12px;
-  padding: 0.5rem 1rem; /* Mobile */
+  border-radius: 10px;
+  padding: 0.65rem 1.25rem; /* Mobile */
   text-decoration: none;
   color: #000;
   transition: all 0.3s ease;
@@ -250,6 +304,8 @@
 
   /* Desktop */
   @media (min-width: 768px) {
+    width: auto;
+    justify-content: flex-start;
     padding: 0.65rem 1.25rem;
   }
 }
@@ -260,8 +316,8 @@
 }
 
 .hero-banner__cta-logo {
-  width: 28px; /* Mobile */
-  height: 28px;
+  width: 32px; /* Mobile */
+  height: 32px;
   object-fit: contain;
   flex-shrink: 0;
 
@@ -279,7 +335,7 @@
 }
 
 .hero-banner__cta-line1 {
-  font-size: 0.75rem; /* Mobile */
+  font-size: 0.85rem; /* Mobile */
   font-weight: 400;
   line-height: 1.2;
 
@@ -290,7 +346,7 @@
 }
 
 .hero-banner__cta-line2 {
-  font-size: 0.85rem; /* Mobile */
+  font-size: 0.95rem; /* Mobile */
   line-height: 1.2;
   font-weight: 400;
 
@@ -301,7 +357,7 @@
 }
 
 .hero-banner__cta-line2 b {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Offer line */
@@ -309,7 +365,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
@@ -370,6 +426,7 @@
   display: none;
 
   @media (min-width: 768px) {
+    bottom: 20px;
     display: block;
     padding: 0 15px 50px;
   }

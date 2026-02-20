@@ -4,11 +4,15 @@ class Header {
   private header: HTMLElement | null;
   private hasHeroBanner: boolean = false;
   private joinBtn: HTMLElement | null;
+  private kebabToggle: HTMLElement | null;
+  private kebabMenu: HTMLElement | null;
 
   constructor() {
     this.header = document.querySelector('.header');
     this.hasHeroBanner = document.querySelector('.hero-banner') !== null;
     this.joinBtn = document.querySelector('.mobile-join-btn');
+    this.kebabToggle = document.getElementById('kebab-toggle');
+    this.kebabMenu = document.getElementById('kebab-menu');
 
     this.init();
   }
@@ -40,6 +44,35 @@ class Header {
       mobileSearchBtn.addEventListener('click', () => {
         const searchToggle = document.getElementById('search-toggle');
         if (searchToggle) searchToggle.click();
+      });
+    }
+
+    // Kebab menu toggle
+    if (this.kebabToggle && this.kebabMenu) {
+      this.kebabToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = this.kebabMenu!.classList.toggle('is-open');
+        this.kebabToggle!.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Close kebab on outside click
+      document.addEventListener('click', (e) => {
+        if (
+          this.kebabMenu!.classList.contains('is-open') &&
+          !this.kebabMenu!.contains(e.target as Node) &&
+          !this.kebabToggle!.contains(e.target as Node)
+        ) {
+          this.kebabMenu!.classList.remove('is-open');
+          this.kebabToggle!.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close kebab on ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.kebabMenu!.classList.remove('is-open');
+          this.kebabToggle!.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   }

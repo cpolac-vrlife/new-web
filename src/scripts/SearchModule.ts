@@ -48,7 +48,7 @@ class SearchOverlay {
       <div class="search-overlay__top">
         <div class="search-overlay__input-wrapper">
           <span class="material-symbols-outlined">search</span>
-          <input type="text" class="search-overlay__input" placeholder="Search videos, performers..." autocomplete="off" />
+          <input type="search" class="search-overlay__input" placeholder="Search videos, performers..." autocomplete="off" enterkeyhint="search" />
         </div>
         <button class="search-overlay__close">
           <span class="material-symbols-outlined">close</span>
@@ -98,6 +98,16 @@ class SearchOverlay {
       this.debounceTimer = setTimeout(() => {
         this.handleSearch();
       }, 250);
+    });
+
+    // Enter key triggers search immediately (same as magnifying glass)
+    this.input?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (this.debounceTimer) clearTimeout(this.debounceTimer);
+        this.input?.blur(); // Cierra el teclado del móvil
+        this.handleSearch();
+      }
     });
   }
 

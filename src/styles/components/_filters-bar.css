@@ -12,7 +12,12 @@
   padding: 10px;
   border-radius: 5px;
 
-  @media (min-width: 769px) {
+  /* Cuando un dropdown está abierto, elevar por encima de header/nav */
+  &:has(.is-open) {
+    z-index: 2002;
+  }
+
+  @media (min-width: 768px) {
     gap: 12px;
     padding: 15px;
     align-items: flex-start;
@@ -27,7 +32,7 @@
   flex: 0 0 auto;
   align-items: center;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     flex: 1 1 auto;
     flex-wrap: wrap;
     gap: 12px;
@@ -43,7 +48,7 @@
   gap: 12px;
   align-items: center;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     width: auto;
   }
 }
@@ -53,7 +58,7 @@
   position: static;
   flex: 0 0 auto;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     flex: 0 1 auto;
   }
 }
@@ -62,7 +67,7 @@
   position: relative;
   flex: 0 0 auto;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     flex: 0 1 auto;
   }
 }
@@ -90,7 +95,7 @@
     color: #fff;
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     width: 100%;
     height: auto;
     padding: 9px 14px;
@@ -103,7 +108,7 @@
   font-size: 20px;
   color: rgba(255, 255, 255, 0.5);
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     font-size: 18px;
   }
 }
@@ -113,7 +118,7 @@
   flex: 1;
   text-align: left;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: block;
   }
 }
@@ -123,7 +128,7 @@
   font-size: 20px;
   transition: transform 0.25s ease;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: block !important;
   }
 }
@@ -156,7 +161,7 @@
     display: flex;
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: none !important;
   }
 }
@@ -197,18 +202,18 @@
 .filters-bar__dropdown {
   display: none;
   position: fixed;
-  top: 95px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  z-index: 1001;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2001;
   background: #141414;
   border-radius: 12px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
   overflow: hidden;
   flex-direction: column;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     position: absolute;
     top: calc(100% - 1px);
     left: 0;
@@ -237,7 +242,7 @@
   background: #141414;
   z-index: 10;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: none;
   }
 }
@@ -279,13 +284,13 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .filters-bar__backdrop.is-visible {
   display: block;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: none;
   }
 }
@@ -294,7 +299,7 @@
 .filters-bar__dropdown--combo {
   padding: 0;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     left: 0;
     right: 0;
     width: auto;
@@ -311,11 +316,7 @@
   -webkit-overflow-scrolling: touch;
   padding: 12px;
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     padding: 14px;
     grid-template-columns: repeat(4, 1fr);
     gap: 4px;
@@ -323,7 +324,7 @@
     flex: none;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -448,7 +449,7 @@
 .filters-bar__dropdown--pornstar {
   padding: 0;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     left: 0;
     right: 0;
     width: auto;
@@ -457,7 +458,17 @@
 
 /* Search wrapper - fixed in pornstar modal */
 .filters-bar__search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   flex-shrink: 0;
+
+  .material-symbols-outlined {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.35);
+  }
 }
 
 /* Featured actresses */
@@ -481,11 +492,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -562,7 +569,7 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     max-height: 280px;
     flex: none;
   }
@@ -585,32 +592,18 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
+  overflow: hidden; /* Evita scroll horizontal en móvil */
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-.filters-bar__search-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-  .material-symbols-outlined {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.35);
-  }
-}
+/* search-wrapper consolidado arriba */
 
 .filters-bar__search-input {
   width: 100%;
@@ -637,6 +630,8 @@
   transition: background 0.15s ease;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.75);
+  min-width: 0; /* Permite que el item se encoja dentro del grid */
+  overflow: hidden;
 
   &:hover:not(.is-selected) {
     background: rgba(255, 255, 255, 0.04);
@@ -719,7 +714,7 @@
   padding: 0;
   order: 10; /* Aparece después de combo y pornstar */
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: flex;
   }
 }
@@ -793,7 +788,7 @@
     font-weight: 500;
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     display: block;
   }
 }

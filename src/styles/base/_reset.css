@@ -10,13 +10,19 @@ body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
   margin: 0;
 }
 
-/* 3. Configurar el cuerpo para una altura completa y mejor renderizado de texto */
+/* 3. Prevenir scroll horizontal en toda la página */
+html {
+  overflow-x: clip;
+}
+
+/* 4. Configurar el cuerpo para una altura completa y mejor renderizado de texto */
 body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
-  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* 4. Hacer que las imágenes sean responsivas y se comporten como bloques */

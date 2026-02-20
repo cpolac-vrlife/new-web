@@ -24,14 +24,17 @@
   padding: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     padding: 20px 40px;
   }
 }
 
 .search-overlay__input-wrapper {
   flex: 1;
+  min-width: 0; /* Evita desbordamiento en flexbox */
   display: flex;
   align-items: center;
   gap: 10px;
@@ -55,6 +58,7 @@
 
 .search-overlay__input {
   flex: 1;
+  min-width: 0; /* Evita que el input se expanda más allá del contenedor */
   background: transparent;
   border: none;
   outline: none;
@@ -67,7 +71,7 @@
     color: rgba(255, 255, 255, 0.35);
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     font-size: 18px;
   }
 }
@@ -102,7 +106,7 @@
   -webkit-overflow-scrolling: touch;
   padding: 20px 16px;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     padding: 24px 40px;
   }
 }
@@ -151,15 +155,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -230,15 +230,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -293,7 +289,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     font-size: 13px;
   }
 }

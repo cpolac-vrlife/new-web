@@ -43,7 +43,7 @@
     }
 
     /* Tablet y superiores */
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       top: 5px;
       right: 5px;
       width: 170px;
@@ -76,7 +76,7 @@
     }
 
     /* Tablet y superiores */
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       width: 60px;
       height: 60px;
 
@@ -100,7 +100,7 @@
     }
 
     /* Tablet y superiores */
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
       flex-direction: row;
       align-items: center;
       gap:5px;
@@ -119,7 +119,7 @@
     font-weight: 600;
     white-space: nowrap;
 
-    @media (min-width: 769px) {      
+    @media (min-width: 768px) {      
       font-size: 16px;
     }
   }
