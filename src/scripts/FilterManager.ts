@@ -826,6 +826,46 @@ export class FilterManager {
   /* ====================================
      PAGINATION
      ==================================== */
+
+  /**
+   * Generates the array of page numbers and '...' dots to display.
+   * Mobile: 1 sibling around current. Desktop: 2 siblings.
+   * Always shows first and last page.
+   */
+  private generatePageNumbers(currentPage: number, totalPages: number): (number | '...')[] {
+    const isMobile = window.innerWidth < 768;
+    const siblings = isMobile ? 1 : 2;
+    const pages: (number | '...')[] = [];
+
+    const rangeStart = Math.max(2, currentPage - siblings);
+    const rangeEnd = Math.min(totalPages - 1, currentPage + siblings);
+
+    // Always page 1
+    pages.push(1);
+
+    // Dots before range
+    if (rangeStart > 2) {
+      pages.push('...');
+    }
+
+    // Central range
+    for (let i = rangeStart; i <= rangeEnd; i++) {
+      pages.push(i);
+    }
+
+    // Dots after range
+    if (rangeEnd < totalPages - 1) {
+      pages.push('...');
+    }
+
+    // Always last page (if more than 1)
+    if (totalPages > 1) {
+      pages.push(totalPages);
+    }
+
+    return pages;
+  }
+
   private renderPagination(): void {
     // Remove existing pagination
     const existing = document.querySelector(`${this.options.pageSelector} .pagination-controls`);
@@ -834,62 +874,28 @@ export class FilterManager {
     const totalPages = Math.ceil(this.filteredVideos.length / this.state.itemsPerPage);
     if (totalPages <= 1) return;
 
-    const container = document.createElement('div');
+    const container = document.createElement('nav');
     container.className = 'pagination-controls';
-
-    // Prev button
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'pagination-btn prev';
-    prevBtn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
-    prevBtn.disabled = this.state.currentPage === 1;
-    prevBtn.addEventListener('click', () => this.goToPage(this.state.currentPage - 1));
+    container.setAttribute('aria-label', 'Paginación de vídeos');
 
     // Pages container
     const pagesContainer = document.createElement('div');
     pagesContainer.className = 'pagination-pages';
 
-    // Page numbers
-    const maxVisible = 5;
-    let startPage = Math.max(1, this.state.currentPage - Math.floor(maxVisible / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-    if (endPage - startPage < maxVisible - 1) {
-      startPage = Math.max(1, endPage - maxVisible + 1);
-    }
+    const pageNumbers = this.generatePageNumbers(this.state.currentPage, totalPages);
 
-    if (startPage > 1) {
-      pagesContainer.appendChild(this.createPageBtn(1, totalPages));
-      if (startPage > 2) {
+    for (const item of pageNumbers) {
+      if (item === '...') {
         const dots = document.createElement('span');
         dots.className = 'pagination-dots';
-        dots.textContent = '...';
+        dots.textContent = '···';
         pagesContainer.appendChild(dots);
+      } else {
+        pagesContainer.appendChild(this.createPageBtn(item, totalPages));
       }
     }
 
-    for (let i = startPage; i <= endPage; i++) {
-      pagesContainer.appendChild(this.createPageBtn(i, totalPages));
-    }
-
-    if (endPage < totalPages) {
-      if (endPage < totalPages - 1) {
-        const dots = document.createElement('span');
-        dots.className = 'pagination-dots';
-        dots.textContent = '...';
-        pagesContainer.appendChild(dots);
-      }
-      pagesContainer.appendChild(this.createPageBtn(totalPages, totalPages));
-    }
-
-    // Next button
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'pagination-btn next';
-    nextBtn.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
-    nextBtn.disabled = this.state.currentPage === totalPages;
-    nextBtn.addEventListener('click', () => this.goToPage(this.state.currentPage + 1));
-
-    container.appendChild(prevBtn);
     container.appendChild(pagesContainer);
-    container.appendChild(nextBtn);
 
     // Insert after grid
     this.gridContainer?.parentElement?.appendChild(container);
@@ -899,7 +905,11 @@ export class FilterManager {
     const btn = document.createElement('button');
     btn.className = 'pagination-page';
     btn.textContent = String(page);
-    if (page === this.state.currentPage) btn.classList.add('active');
+    btn.setAttribute('aria-label', `Página ${page}`);
+    if (page === this.state.currentPage) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-current', 'page');
+    }
     btn.addEventListener('click', () => this.goToPage(page));
     return btn;
   }

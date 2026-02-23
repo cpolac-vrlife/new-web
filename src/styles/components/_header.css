@@ -47,6 +47,10 @@
   @media (min-width: 1024px) {
     gap: 2rem;
   }
+
+  @media (min-width: 1280px) {
+    gap: 3rem;
+  }
 }
 
 /* Left Section */
@@ -55,28 +59,40 @@
   align-items: center;
   gap: 3rem;
   flex: 1;
+
+  @media (min-width: 1024px) {
+    gap: 2rem;
+  }
+
+  @media (min-width: 1280px) {
+    gap: 4rem;
+  }
 }
 
 .header__logo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-}
 
-.header__logo img {
-  height: 28px;
-  width: auto;
-  object-fit: contain;
+  img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
 
-  @media (min-width: 1024px) {
-    height: 40px;
-    width: 150px;
+    @media (min-width: 1024px) {
+      height: 40px;
+      width: 150px;
+    }
   }
 }
 
 /* Navigation */
 .header__nav {
   display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
 }
 
 .header__menu {
@@ -85,21 +101,37 @@
   margin: 0;
   padding: 0;
   gap: 2rem;
-}
 
-.header__menu a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  display: inline-block;
-}
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    display: inline-block;
 
-.header__menu a:hover {
-  color: var(--primary);
+    &:hover {
+      color: var(--primary);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 12px;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    gap: 1rem;
+  }
+
+  @media (min-width: 1280px) {
+    gap: 1.5rem;
+  }
 }
 
 /* Right Section */
@@ -126,14 +158,14 @@
   border-radius: 50%;
   transition: color 0.2s ease, background 0.2s ease;
 
+  &:hover {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
   @media (min-width: 1024px) {
     display: flex;
   }
-}
-
-.header__search-btn:hover {
-  color: var(--primary);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Mobile user icon */
@@ -262,96 +294,14 @@
   margin: 4px 12px;
 }
 
-/* Buttons */
-.header__btn {
-  border-radius: 25px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: none;
-  white-space: nowrap;
-  /* Hidden on mobile */
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: inline-flex;
-    padding: 0.5rem 1rem;
-    font-size: 12px;
-    min-width: 70px;
-  }
-
-  @media (min-width: 1280px) {
-    padding: 0.6rem 1.5rem;
-    font-size: 14px;
-    min-width: 90px;
-  }
-}
-
-.header__btn--login {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.header__btn--login:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
-}
-
-.header__btn--join {
-  background: var(--primary);
-  color: #fff;
-  border: 1px solid var(--primary);
-}
-
-.header__btn--join:hover {
-  background: #c70030;
-  border-color: #c70030;
-  box-shadow: 0 4px 12px rgba(228, 0, 58, 0.4);
-}
+/* Buttons → movidos a _button.css */
 
 /* Mobile Toggle - removed, replaced by bottom nav */
 .header__mobile-toggle {
   display: none;
 }
 
-/* Desktop - 1024px */
-@media (min-width: 1024px) {
-  .header__nav {
-    display: block;
-  }
 
-  .header__left {
-    gap: 2rem;
-  }
-
-  .header__menu {
-    gap: 1rem;
-  }
-
-  .header__menu a {
-    font-size: 12px;
-  }
-}
-
-/* Large Desktop - 1280px */
-@media (min-width: 1280px) {
-  .header__wrapper {
-    gap: 3rem;
-  }
-
-  .header__left {
-    gap: 4rem;
-  }
-
-  .header__menu {
-    gap: 1.5rem;
-  }
-
-  .header__menu a {
-    font-size: 14px;
-  }
-}
 
 /* =============================================
    MOBILE BOTTOM NAVIGATION
@@ -481,62 +431,15 @@
   display: none;
 }
 
-/* =============================================
-   MOBILE FLOATING JOIN BUTTON
-   ============================================= */
-.mobile-join-btn {
-  position: fixed;
-  bottom: calc(70px + max(6px, env(safe-area-inset-bottom)));
-  right: 10px;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: auto;
-  padding: 0 30px;
-  background: var(--primary);
-  color: #fff;
-  font-size: 17px;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 1px;
-  border-radius: 30px;
-  box-shadow: 0 4px 20px rgba(228, 0, 58, 0.45);
-  -webkit-tap-highlight-color: transparent;
-
-  /* Hidden by default, slides in from right when hero exits viewport */
-  opacity: 0;
-  transform: translateX(100%);
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease, box-shadow 0.2s ease;
-
-  &.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  &:hover {
-    background: #c70030;
-    box-shadow: 0 6px 24px rgba(228, 0, 58, 0.55);
-  }
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
-}
+/* Mobile Join Button → movido a _button.css */
 
 /* =============================================
    BODY PADDING for mobile bottom nav
    ============================================= */
 body {
   padding-bottom: calc(70px + 42px + 20px + max(6px, env(safe-area-inset-bottom)));
-}
 
-@media (min-width: 1024px) {
-  body {
+  @media (min-width: 1024px) {
     padding-bottom: 0;
   }
 }

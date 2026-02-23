@@ -37,28 +37,15 @@ class GridPagination {
   }
 
   private createPaginationControls() {
-    const container = document.createElement('div');
+    const container = document.createElement('nav');
     container.className = 'pagination-controls';
-    
-    // Botón anterior
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'pagination-btn prev';
-    prevBtn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
-    prevBtn.addEventListener('click', () => this.goToPage(this.config.currentPage - 1));
+    container.setAttribute('aria-label', 'Paginación');
 
     // Contenedor de números de página
     const pagesContainer = document.createElement('div');
     pagesContainer.className = 'pagination-pages';
 
-    // Botón siguiente
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'pagination-btn next';
-    nextBtn.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
-    nextBtn.addEventListener('click', () => this.goToPage(this.config.currentPage + 1));
-
-    container.appendChild(prevBtn);
     container.appendChild(pagesContainer);
-    container.appendChild(nextBtn);
 
     // Insertar después del grid
     this.grid.parentElement?.appendChild(container);
@@ -67,55 +54,55 @@ class GridPagination {
     this.updatePaginationControls();
   }
 
+  private generatePageNumbers(currentPage: number, totalPages: number): (number | '...')[] {
+    const isMobile = window.innerWidth < 768;
+    const siblings = isMobile ? 1 : 2;
+    const pages: (number | '...')[] = [];
+
+    const rangeStart = Math.max(2, currentPage - siblings);
+    const rangeEnd = Math.min(totalPages - 1, currentPage + siblings);
+
+    pages.push(1);
+
+    if (rangeStart > 2) {
+      pages.push('...');
+    }
+
+    for (let i = rangeStart; i <= rangeEnd; i++) {
+      pages.push(i);
+    }
+
+    if (rangeEnd < totalPages - 1) {
+      pages.push('...');
+    }
+
+    if (totalPages > 1) {
+      pages.push(totalPages);
+    }
+
+    return pages;
+  }
+
   private updatePaginationControls() {
     if (!this.paginationContainer) return;
 
-    const prevBtn = this.paginationContainer.querySelector('.prev') as HTMLButtonElement;
-    const nextBtn = this.paginationContainer.querySelector('.next') as HTMLButtonElement;
     const pagesContainer = this.paginationContainer.querySelector('.pagination-pages');
-
-    // Actualizar estado de botones
-    prevBtn.disabled = this.config.currentPage === 1;
-    nextBtn.disabled = this.config.currentPage === this.config.totalPages;
 
     // Generar números de página
     if (pagesContainer) {
       pagesContainer.innerHTML = '';
-      
-      const maxVisiblePages = 5;
-      let startPage = Math.max(1, this.config.currentPage - Math.floor(maxVisiblePages / 2));
-      let endPage = Math.min(this.config.totalPages, startPage + maxVisiblePages - 1);
 
-      // Ajustar si estamos cerca del final
-      if (endPage - startPage < maxVisiblePages - 1) {
-        startPage = Math.max(1, endPage - maxVisiblePages + 1);
-      }
+      const pageNumbers = this.generatePageNumbers(this.config.currentPage, this.config.totalPages);
 
-      // Primera página
-      if (startPage > 1) {
-        this.createPageButton(pagesContainer, 1);
-        if (startPage > 2) {
+      for (const item of pageNumbers) {
+        if (item === '...') {
           const dots = document.createElement('span');
           dots.className = 'pagination-dots';
-          dots.textContent = '...';
+          dots.textContent = '···';
           pagesContainer.appendChild(dots);
+        } else {
+          this.createPageButton(pagesContainer, item);
         }
-      }
-
-      // Páginas visibles
-      for (let i = startPage; i <= endPage; i++) {
-        this.createPageButton(pagesContainer, i);
-      }
-
-      // Última página
-      if (endPage < this.config.totalPages) {
-        if (endPage < this.config.totalPages - 1) {
-          const dots = document.createElement('span');
-          dots.className = 'pagination-dots';
-          dots.textContent = '...';
-          pagesContainer.appendChild(dots);
-        }
-        this.createPageButton(pagesContainer, this.config.totalPages);
       }
     }
   }

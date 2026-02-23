@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="cards-grid grid-cols-4" data-source="api" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="12" data-limit="24" data-sort="release_date" data-order="desc">
+        <div class="cards-grid grid-cols-4" data-source="api" data-grid-type="grid-cols-4" data-pagination="true" data-items-per-page="12" data-limit="" data-sort="release_date" data-order="desc">
             <!-- Skeleton placeholders -->
             <load src="src/partials/_card-skeleton.html" />
             <load src="src/partials/_card-skeleton.html" />
@@ -88,13 +88,17 @@
             </div>
         </div>
     </div>
-    <div class="cards-grid grid-cols-5" data-source="api" data-grid-type="grid-cols-5" data-coming-soon="true" data-limit="5" data-sort="release_date" data-order="desc">
-        <!-- Skeleton placeholders -->
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
+    <div class="slider-wrapper" data-slider-items="5">
+        <div class="swiper swiper--inline" data-source="api" data-coming-soon data-limit="5" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper five-items">
+                <!-- Skeleton slides -->
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+            </div>
+        </div>
     </div> 
 </div>
 </section>
@@ -116,13 +120,17 @@
             </div>
         </div>
     </div>
-    <div class="cards-grid grid-cols-5" data-source="api" data-grid-type="grid-cols-5" data-external-videos="true" data-tags="Latina" data-limit="5" data-sort="release_date" data-order="desc">
-        <!-- Skeleton placeholders -->
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
-        <load src="src/partials/_card-skeleton.html" />
+    <div class="slider-wrapper" data-slider-items="5">
+        <div class="swiper swiper--inline" data-source="api" data-external-videos data-tags="Latina" data-limit="5" data-sort="release_date" data-order="desc">
+            <div class="swiper-wrapper five-items">
+                <!-- Skeleton slides -->
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+                <div class="swiper-slide"><load src="src/partials/_card-skeleton.html" /></div>
+            </div>
+        </div>
     </div> 
     <div class="btn-container">
         <div class="offer-inline"><span class="material-symbols-outlined">auto_awesome</span> Let's Real from €13.99/month <span class="hero-banner__offer-separator">|</span> Cancel Anytime</div>

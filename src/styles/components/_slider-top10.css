@@ -3,6 +3,7 @@
 .swiper.slider-top10 {
   .swiper-slide {
     position: relative;
+    margin-bottom:0;
     
     /* Número de ranking detrás de la card */
     .rank-number {

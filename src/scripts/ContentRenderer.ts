@@ -161,7 +161,12 @@ export async function renderSlider(
     }
 
     const slidesHTML = videos.map((v, index) => renderSlide(v, isFavourite, isTop10 ? index + 1 : undefined)).join('');
-    const moreLink = `<div class="swiper-slide"><a class="more-videos" href="">more videos</a></div>`;
+    
+    // Only add "more videos" link if data-more-video-link is present
+    const hasMoreLink = swiperContainer.hasAttribute('data-more-video-link');
+    const moreLink = hasMoreLink
+      ? `<div class="swiper-slide"><a class="more-videos" href="">more videos</a></div>`
+      : '';
 
     // Remove skeleton placeholders
     const skeleton = swiperContainer.querySelector('[data-skeleton]');

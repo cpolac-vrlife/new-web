@@ -21,6 +21,10 @@ class HeroBanner {
   private progressBar: HTMLElement | null;
   private progressRAF: number | null = null;
   private progressStart: number = 0;
+  private touchStartX: number = 0;
+  private touchStartY: number = 0;
+  private isSwiping: boolean = false;
+  private readonly swipeThreshold: number = 50;
   private contentHideTimer: number | null = null;
   private readonly contentHideDelay: number = 3000;
 
@@ -131,6 +135,9 @@ class HeroBanner {
         this.nextSlide();
         this.resetAutoPlay();
       });
+
+      // Touch swipe navigation
+      this.attachSwipeListeners();
     }
 
     // Handle visibility change (pause when tab is not active)
@@ -302,6 +309,46 @@ class HeroBanner {
 
       this.prevPositions.set(domIndex, leftPct);
     });
+  }
+
+  private attachSwipeListeners() {
+    if (!this.banner) return;
+
+    const slidesContainer = this.banner.querySelector('.hero-banner__slides') as HTMLElement;
+    if (!slidesContainer) return;
+
+    slidesContainer.addEventListener('touchstart', (e: TouchEvent) => {
+      this.touchStartX = e.touches[0].clientX;
+      this.touchStartY = e.touches[0].clientY;
+      this.isSwiping = true;
+    }, { passive: true });
+
+    slidesContainer.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!this.isSwiping) return;
+      // Prevent vertical scroll while swiping horizontally
+      const dx = Math.abs(e.touches[0].clientX - this.touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - this.touchStartY);
+      if (dx > dy && dx > 10) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    slidesContainer.addEventListener('touchend', (e: TouchEvent) => {
+      if (!this.isSwiping) return;
+      this.isSwiping = false;
+
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffX = this.touchStartX - touchEndX;
+
+      if (Math.abs(diffX) >= this.swipeThreshold) {
+        if (diffX > 0) {
+          this.nextSlide();
+        } else {
+          this.previousSlide();
+        }
+        this.resetAutoPlay();
+      }
+    }, { passive: true });
   }
 
   private nextSlide() {

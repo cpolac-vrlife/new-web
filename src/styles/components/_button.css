@@ -1,9 +1,10 @@
 .btn-container{
-  padding: 20px 0;
+  padding: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-wrap: wrap;
   
   /* Cuando contiene offer-inline, cambiar a space-between */
   &:has(.offer-inline) {
@@ -17,9 +18,12 @@
       left: calc(-50vw + 50%);
       width: 100vw;
       height: 2px;
+      background: rgba(255,255,255,0.15);
+      @media (min-width: 768px) {
       background: linear-gradient(to right, 
         rgba(255, 255, 255, .5) 0%, 
         rgba(255, 255, 255, 0) 30%);
+      }
     }
     
     /* Border bottom con gradiente */
@@ -30,23 +34,35 @@
       left: calc(-50vw + 50%);
       width: 100vw;
       height: 2px;
+      background: rgba(255,255,255,0.15);
+      @media (min-width: 768px) {
       background: linear-gradient(to right, 
         rgba(255, 255, 255, .5) 0%, 
         rgba(255, 255, 255, 0) 30%);
+      }
     }
   } 
   .offer-inline{
     display: flex;
     align-items: center;
-    margin-right: 20px;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    /*margin-right: 20px;*/
+    line-height: 1.2;
+    gap: 0.1rem;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    flex-wrap: wrap;
     .hero-banner__offer .material-symbols-outlined {
-      font-size: 18px;
+      font-size: 15px;
       color: #fff;
+      @media (min-width: 768px) {
+        font-size: 18px;      
+      } 
+    }
+    @media (min-width: 768px) {
+      font-size: 0.9rem;
+      margin-right: 20px     
     } 
   }
   .btn-custom {
@@ -56,6 +72,7 @@
     font-weight: 600;
     display: inline-block;
     border: none;
+    margin:10px 0;
     padding: 10px 20px;
     border-radius: var(--radius);
     transition: background 0.2s, color 0.2s, transform 0.2s, scale 0.2s;
@@ -141,4 +158,178 @@
       transform: translateY(-5px) scale(1.05);
     }
   }
+}
+
+/* =============================================
+   HEADER BUTTONS
+   ============================================= */
+.header__btn {
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  /* Hidden on mobile */
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    min-width: 70px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 0.6rem 1.5rem;
+    font-size: 14px;
+    min-width: 90px;
+  }
+}
+
+.header__btn--login {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.header__btn--login:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.header__btn--join {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+}
+
+.header__btn--join:hover {
+  background: #c70030;
+  border-color: #c70030;
+  box-shadow: 0 4px 12px rgba(228, 0, 58, 0.4);
+}
+
+/* =============================================
+   MOBILE FLOATING JOIN BUTTON
+   ============================================= */
+.mobile-join-btn {
+  position: fixed;
+  bottom: calc(75px + max(6px, env(safe-area-inset-bottom)));
+  right: 10px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*height: 60px;*/
+  width: auto;
+  padding: 0.65rem 1.25rem;
+  /*background: var(--primary);
+  color: #fff;*/
+  background: #fff;
+  color:#000;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  min-height: 60px;
+  border-radius: 10px;
+  /*box-shadow: 0 4px 20px rgba(228, 0, 58, 0.45);*/
+  -webkit-tap-highlight-color: transparent;
+
+  /* Hidden by default, slides in from right when hero exits viewport */
+  opacity: 0;
+  transform: translateX(100%);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease, box-shadow 0.2s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  &:hover {
+    background: #c70030;
+    box-shadow: 0 6px 24px rgba(228, 0, 58, 0.55);
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+/* =============================================
+   HERO BANNER CTA BUTTON
+   ============================================= */
+.hero-banner__cta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%; /* Full-width en mobile */
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.65rem 1.25rem; /* Mobile */
+  text-decoration: none;
+  color: #000;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    width: auto;
+    justify-content: flex-start;
+    padding: 0.65rem 1.25rem;
+  }
+}
+
+.hero-banner__cta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.hero-banner__cta-logo {
+  width: 32px; /* Mobile */
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.hero-banner__cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.hero-banner__cta-line1 {
+  font-size: 0.85rem; /* Mobile */
+  font-weight: 400;
+  line-height: 1.2;
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.hero-banner__cta-line2 {
+  font-size: 0.95rem; /* Mobile */
+  line-height: 1.2;
+  font-weight: 400;
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.hero-banner__cta-line2 b {
+  font-weight: 700;
 }

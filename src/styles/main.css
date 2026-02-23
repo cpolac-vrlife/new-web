@@ -42,6 +42,14 @@ section{
   margin-right: auto;
   margin-left: auto;
 }
+.most-searched-categories{
+  .container{
+    padding:0;  
+    @media (min-width: 768px) {
+      padding:0 15px;
+    }
+  }
+}
 
 /* ============================================
    CORE WEB VITALS - Optimizaciones globales

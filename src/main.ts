@@ -70,12 +70,18 @@ const initDeferred = async () => {
       }
     }
     
-    // Pasamos el gap o configuración necesaria
-    new CustomSlider(container, 16);
-    
-    requestAnimationFrame(() => {
-      container.classList.add('swiper-initialized');
-    });
+    // En móvil, el slider de modelos usa scroll nativo libre
+    const isMobile = window.innerWidth < 768;
+    const isModelsSlider = container.classList.contains('models-slider');
+
+    if (isMobile && isModelsSlider) {
+      container.classList.add('swiper-initialized', 'swiper--free-scroll');
+    } else {
+      new CustomSlider(container, 16);
+      requestAnimationFrame(() => {
+        container.classList.add('swiper-initialized');
+      });
+    }
   });
 };
 

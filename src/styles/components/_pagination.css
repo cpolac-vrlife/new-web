@@ -3,47 +3,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   margin-top: 40px;
   padding: 20px 0;
-}
 
-.pagination-btn {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255, 0.1);
-  color: #fff;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-
-  .material-symbols-outlined {
-    font-size: 24px;
-    transition: transform 0.2s ease;
+  @media (min-width: 768px) {
+    gap: 8px;
   }
 
-  &:hover:not(:disabled) {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    
-    .material-symbols-outlined {
-      transform: scale(1.1);
-    }
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    border-color: var(--color-text-muted, #94a3b8);
-    color: var(--color-text-muted, #94a3b8);
+  @media (min-width: 1024px) {
+    gap: 10px;
   }
 }
 
@@ -51,75 +20,54 @@
   display: flex;
   align-items: center;
   gap: 4px;
+
+  @media (min-width: 768px) {
+    gap: 6px;
+  }
 }
 
 .pagination-page {
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   background: rgba(255,255,255, 0.1);
+  border: none;
   color: #fff;
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 
   &:hover {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(99, 102, 241, 0.15);
     color: var(--primary);
   }
 
   &.active {
     background: var(--primary);
     color: white;
-    border-color: var(--primary);
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
   }
 }
 
 .pagination-dots {
   color: var(--color-text-muted, #94a3b8);
-  padding: 0 4px;
+  padding: 0 2px;
   user-select: none;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 /* fadeInUp definido en _cards_grid.css */
 
-/* Tablet y superiores (min-width: 768px) */
-@media (min-width: 768px) {
-  .pagination-btn {
-    font-size: 13px;
-    padding: 8px 16px;
-  }
-
-  .pagination-page {
-    width: 50px;
-    height: 50px;
-    font-size: 13px;
-  }
-
-  .pagination-pages {
-    gap: 6px;
-  }
-}
-
-/* Desktop (min-width: 1024px) */
-@media (min-width: 1024px) {
-  .pagination-controls {
-    gap: 12px;
-  }
-
-  .pagination-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-
-  .pagination-page {
-    width: 50px;
-    height: 50px;
-    font-size: 14px;
-  }
-}

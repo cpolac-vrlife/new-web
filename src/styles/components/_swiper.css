@@ -52,43 +52,13 @@
       }
     }
 
-    /* Tablet (min-width: 768px) - 2 slides visibles */
+    /* Tablet (min-width: 768px) - Todos los sliders: 2.5 slides visibles */
     @media (min-width: 768px) {
       gap: var(--slider-gap);
       
       .swiper-slide {
-        flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - var(--slider-gap)) / 2);
+        flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (2 * var(--slider-gap))) / 2.5);
         max-width: none;
-      }
-    }
-
-    /* Laptop (min-width: 768px) - Configuración intermedia según clase */
-    @media (min-width: 768px) {
-      &.three-items {
-        .swiper-slide {
-          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - var(--slider-gap)) / 2);
-        }
-      }
-
-      &.four-items {
-        .swiper-slide {
-          /* 2.5 slides visibles: 2 completos + medio */
-          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (2 * var(--slider-gap))) / 2.5);
-        }
-      }
-
-      &.five-items {
-        .swiper-slide {
-          /* 3.5 slides visibles: 3 completos + medio */
-          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (3 * var(--slider-gap))) / 3.5);
-        }
-      }
-
-      &.eight-items {
-        .swiper-slide {
-          /* 4 slides visibles en tablet */
-          flex: 0 0 calc((100vw - (2 * var(--slider-padding)) - (3 * var(--slider-gap))) / 4);
-        }
       }
     }
 
@@ -210,10 +180,44 @@
   }
 }
 
+/* Slider dentro de un container (sin padding-inline extra) */
+.swiper.swiper--inline {
+  .swiper-wrapper {
+    padding-inline: 0;
+  }
+}
+
+/* Free scroll mode (e.g. models slider on mobile) */
+.swiper.swiper--free-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .swiper-wrapper {
+    transform: none !important;
+    cursor: default;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+
 /* slideInLeftSkewed y slideInTop definidos en _cards_grid.css */
 
-/* Coming Soon Slider - Mostrar release-date, ocultar rate/favorite */
+/* Coming Soon Slider - Deshabilita enlaces, opacidad progresiva, mostrar release-date */
 .swiper[data-coming-soon] {
+  .card-link {
+    pointer-events: none;
+    cursor: default;
+  }
+
   .card .data-video {
     .release-date {
       display: flex;
@@ -222,5 +226,45 @@
     .favorite {
       display: none;
     }
+  }
+
+  /* Opacidad progresiva en slides */
+  .swiper-slide:nth-child(1) .card-link {
+    opacity: 1;
+  }
+  .swiper-slide:nth-child(2) .card-link {
+    opacity: 0.7;
+  }
+  .swiper-slide:nth-child(3) .card-link {
+    opacity: 0.6;
+  }
+  .swiper-slide:nth-child(4) .card-link {
+    opacity: 0.5;
+  }
+  .swiper-slide:nth-child(5) .card-link {
+    opacity: 0.4;
+  }
+}
+
+/* External Videos Slider - Deshabilita enlaces, opacidad uniforme, mostrar release-date */
+.swiper[data-external-videos] {
+  .card-link {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .card .data-video {
+    .release-date {
+      display: flex;
+    }
+    .rate,
+    .favorite {
+      display: none;
+    }
+  }
+
+  /* Opacidad uniforme */
+  .card .card-link {
+    opacity: 0.4;
   }
 }
