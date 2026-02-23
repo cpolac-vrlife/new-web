@@ -371,7 +371,7 @@
   }
 
   /* When font is loaded, show icon and remove placeholder */
-  .fonts-loaded & .material-symbols-outlined {
+  .icons-loaded & .material-symbols-outlined {
     color: inherit;
 
     &::before {
@@ -419,15 +419,15 @@
   animation: icon-pulse 1.4s ease-in-out infinite;
 }
 
-.fonts-loaded .header__search-btn .material-symbols-outlined,
-.fonts-loaded .header__user-btn .material-symbols-outlined,
-.fonts-loaded .header__kebab-btn .material-symbols-outlined {
+.icons-loaded .header__search-btn .material-symbols-outlined,
+.icons-loaded .header__user-btn .material-symbols-outlined,
+.icons-loaded .header__kebab-btn .material-symbols-outlined {
   color: inherit;
 }
 
-.fonts-loaded .header__search-btn .material-symbols-outlined::before,
-.fonts-loaded .header__user-btn .material-symbols-outlined::before,
-.fonts-loaded .header__kebab-btn .material-symbols-outlined::before {
+.icons-loaded .header__search-btn .material-symbols-outlined::before,
+.icons-loaded .header__user-btn .material-symbols-outlined::before,
+.icons-loaded .header__kebab-btn .material-symbols-outlined::before {
   display: none;
 }
 

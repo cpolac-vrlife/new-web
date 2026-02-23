@@ -11,17 +11,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="/src/styles/main.css">
+  <!-- CSS principal: async para no bloquear render (critical CSS inline cubre above-the-fold) -->
+  <link rel="preload" href="/src/styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/src/styles/main.css"></noscript>
 
-  <!-- Cargar fuentes de forma asíncrona -->
+  <!-- Poppins: asíncrona -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
-  </noscript>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <!-- Material Symbols: async con display=block (texto invisible durante descarga) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block"></noscript>
 </head>
 <body>
-  <script>document.fonts.ready.then(()=>document.body.classList.add('fonts-loaded'))</script>
+  <script>
+    // Poppins: añadir clase cuando cargue (layout/tipografía)
+    document.fonts.ready.then(function(){document.body.classList.add('fonts-loaded');});
+    // Material Symbols: detectar específicamente cuando los iconos están listos
+    (function(){
+      function check(){
+        document.fonts.load("24px 'Material Symbols Outlined'").then(function(f){
+          if(f.length>0){document.body.classList.add('icons-loaded');}
+          else{setTimeout(check,100);}
+        });
+      }
+      check();
+      setTimeout(function(){document.body.classList.add('icons-loaded');},3000);
+    })();
+  </script>
   <load src="src/partials/_header.html" />
