@@ -39,12 +39,40 @@
   }
 
   /* Tablet (min-width: 768px) */
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     grid-template-columns: repeat(2, 1fr);
+    &.grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-cols-5 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   /* Desktop (min-width: 1024px) */
   @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Las clases específicas sobrescriben el grid por defecto */
+    &.grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-cols-4 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.grid-cols-5 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  /* Desktop (min-width: 1024px) */
+  @media (min-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
 
     /* Las clases específicas sobrescriben el grid por defecto */

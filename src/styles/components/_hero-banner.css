@@ -53,6 +53,16 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+
+  /* Tablet+ */
+  @media (min-width: 600px) {
+    height: 75%;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    height: 100%;
+  }
 }
 
 .hero-banner__bg-image {
@@ -60,6 +70,16 @@
   height: 100%;
   object-fit: contain;
   object-position: top;
+  
+  /* Tablet+ */
+  @media (min-width: 600px) {
+    object-fit: cover;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    object-fit: contain;
+  }
 }
 
 /* Slides sin overlay (solo imagen) */
@@ -76,10 +96,28 @@
   height: calc(100% + 50px);
   z-index: 2;
   pointer-events: none;
+  
+  /* Tablet */
+  @media (min-width: 600px) {
+    height: calc(100% + 250px);
+   /* bottom: 85px;
+    top: -200px;*/
+  }
+  
+  /* Desktop */
+  @media (min-width: 1024px) {
+    height: calc(100% + 250px);
+  }
 
-  @media (min-width: 768px) {
-    bottom: 240px;
-    top: -240px;
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    height: calc(100% + 50px);    
+    top: -34%;
+  }
+  /* Large Desktop */
+  @media (min-width: 1600px) {
+    height: calc(100% + 50px);
+    top: -24%;
   }
 }
 
@@ -140,10 +178,21 @@
   right: 0;
   z-index: 3;
 
-  /* Desktop */
-  @media (min-width: 768px) {
-    bottom: 270px;
+  /* Tablet */
+  @media (min-width: 600px) {
+    bottom: 135px;
   }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    bottom: 175px;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    bottom: 280px;
+  }
+  
 }
 
 .hero-banner__content {
@@ -193,13 +242,13 @@
   transition: opacity 0.6s ease, transform 0.6s ease;
 
   /* Tablet */
-  @media (min-width: 768px) {
-    font-size: 36px;
+  @media (min-width: 600px) {
+    font-size: 32px;
   }
 
   /* Desktop */
   @media (min-width: 1024px) {
-    font-size: 42px;
+    font-size: 40px;
   }
 
   /* Large Desktop */
@@ -231,6 +280,14 @@
   max-height: 200px;
   opacity: 1;
   margin-bottom: 1.25rem;
+  /* Tablet */
+  @media (min-width: 600px) {
+    margin-bottom: 1rem;
+  }
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    margin-bottom: 1.25rem;
+  }
 }
 
 /* Models / Cast */
@@ -243,6 +300,15 @@
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   transition: opacity 0.6s ease, transform 0.6s ease;
+
+  /* Tablet */
+  @media (min-width: 600px) {
+    margin-bottom: 1rem;
+  }
+  /* Large Desktop */
+  @media (min-width: 1280px) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* Auto-hide: models, title, badge-row, description after delay */
@@ -353,13 +419,21 @@
   width: 100%;
   z-index: 10;
   box-sizing: border-box;
-
   /* Hidden on mobile, visible on desktop */
   display: none;
-
+   /* Tablet */
   @media (min-width: 768px) {
-    bottom: 20px;
+    bottom: 0px;
     display: block;
+    padding: 0 15px;
+  }
+  /* Desktop */
+  @media (min-width: 1024px) {
+    bottom: 20px;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
     padding: 0 15px 50px;
   }
 }
@@ -425,16 +499,8 @@
    Mobile Prev/Next Navigation
    ======================================== */
 .hero-banner__mobile-nav {
- /* position: absolute;*/
- /*bottom: 0px;
-  left: 0;
-  right: 0;*/
   z-index: 12;
   display: none;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
 }
 
 .hero-banner__mobile-nav-btn {

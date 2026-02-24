@@ -74,13 +74,13 @@
 
   /* Title */
   .title {
-    font-size: 28px;
+    font-size: 24px;
     color: #fff;
     line-height: 32px;
     font-weight: 600;
     margin-bottom: 8px;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1280px) {
       font-size: 36px;
       line-height: 42px;
       margin-bottom: 10px;
@@ -99,7 +99,7 @@
 
   /* Text */
   .text {
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
     line-height: 20px;
     font-weight: 300;
@@ -108,7 +108,7 @@
       font-weight: 600;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1280px) {
       font-size: 20px;
       line-height: 22px;
     }

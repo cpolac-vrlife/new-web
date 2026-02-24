@@ -38,7 +38,7 @@
       }
       
       /* Ajustar el hover para compensar el scale */
-      .card:hover {
+      &:hover {
         transform: scale(1.15);
       }
     }

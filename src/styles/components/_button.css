@@ -321,8 +321,18 @@
   font-weight: 400;
   line-height: 1.2;
 
-  /* Desktop */
+  /* Tablet */
   @media (min-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
     font-size: 1rem;
   }
 }
@@ -332,8 +342,18 @@
   line-height: 1.2;
   font-weight: 400;
 
-  /* Desktop */
+  /* Tablet */
   @media (min-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1280px) {
     font-size: 1rem;
   }
 }

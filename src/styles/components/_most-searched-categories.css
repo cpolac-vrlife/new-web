@@ -17,22 +17,21 @@
   padding: 0 16px;
 
   @media (min-width: 768px) {
-    margin-bottom: 50px;
-    padding: 0;
+    margin-bottom: 50px;  
   }
 }
 
 .most-searched-categories__title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #fff;
-  margin: 0 0 16px 0;
+  margin: 0 0 5px 0;
   line-height: 1.2;
   letter-spacing: -0.5px;
 
-  @media (min-width: 768px) {
-    font-size: 42px;
-    margin: 0 0 20px 0;
+  @media (min-width: 1280px) {
+    font-size: 36px;
+    margin: 0 0 15px 0;
   }
 }
 
@@ -43,8 +42,8 @@
   margin: 0;
   line-height: 1.5;
 
-  @media (min-width: 768px) {
-    font-size: 17px;
+  @media (min-width: 1280px) {
+    font-size: 20px;
   }
 }
 
@@ -61,7 +60,7 @@
     display: none;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1440px) {
     flex-wrap: wrap;
     overflow-x: visible;
     justify-content: center;
@@ -104,5 +103,16 @@
   &:hover {
     background: #444;
     border-color: #444
+  }
+}
+
+/* Padding override para el container interior */
+.most-searched-categories {
+  .container {
+    padding: 0;
+
+    @media (min-width: 1440px) {
+      padding: 0 15px;
+    }
   }
 }

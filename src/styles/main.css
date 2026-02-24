@@ -37,18 +37,8 @@ section{
 .container{
   width:100%;
   max-width: 1765px;
-  box-sizing: border-box;
   padding:0 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.most-searched-categories{
-  .container{
-    padding:0;  
-    @media (min-width: 768px) {
-      padding:0 15px;
-    }
-  }
+  margin: 0 auto;
 }
 
 /* ============================================

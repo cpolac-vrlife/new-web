@@ -1,7 +1,9 @@
 /* Card Favourite Styles - Mobile First */
 .card-favourite {
   position: relative;
-
+  .data-left{
+    max-width: 100%!important;
+  }
   /* Image Wrapper */
   .img-wrapper {
     position: relative;
