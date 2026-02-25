@@ -36,11 +36,6 @@
       @media (min-width: 1024px) {
         transform: scale(0.90);
       }
-      
-      /* Ajustar el hover para compensar el scale */
-      &:hover {
-        transform: scale(1.15);
-      }
     }
   }
 }

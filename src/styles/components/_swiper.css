@@ -87,6 +87,12 @@
           flex: 0 0 calc((var(--slider-content-width) - (7 * var(--slider-gap))) / 8);
         }
       }
+
+      &.two-point-five-items {
+        .swiper-slide {
+          flex: 0 0 calc((var(--slider-content-width) - (1.5 * var(--slider-gap))) / 2.5);
+        }
+      }
     }
   }
 

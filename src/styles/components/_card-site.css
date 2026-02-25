@@ -1,0 +1,245 @@
+/* Card Site - External sites slider */
+
+.card-site {
+  display: flex;
+  flex-direction: row;
+  background: var(--card-bg, #1a1a1a);
+  border-radius: var(--radius, 10px);
+  overflow: hidden;
+  height: 100%;
+  min-height: 130px;
+  transition: transform 0.3s ease;
+
+  /* ── Left panel ─────────────────────────────── */
+  .card-site__left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    flex: 0 0 50%;   /* Mobile: 50% para sumar 100% con el panel derecho */
+    max-width: 50%;
+
+    @media (min-width: 769px) {
+      flex: 0 0 40%;  /* Desktop: restaurar proporción original */
+      max-width: 40%;
+    }
+
+    .card-site__logo {
+        img {
+        width: 150px;
+        height: auto;
+        display: block;
+        }
+    }
+    .card-site__desc {
+        font-size: 0.75rem;
+        font-weight: 300;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.75);
+        margin: 0;
+        /* Clamp to 2 lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    /* Button inherits .btn .btn-custom styles 
+    .btn.btn-custom {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius:3px;
+        align-self: flex-start;
+        white-space: nowrap;
+        background: var(--primary);
+    }*/
+
+    /* ── Botones invertidos dentro de card-site ── */
+    .btn.btn-custom {
+        width:max-content;
+
+      &.trans {
+        background: var(--trans-color);
+        color: #fff;
+        span { color: #fff; }
+        &:hover {
+          background: #fff;
+          color: #000;
+          span { color: var(--trans-color); }
+        }
+      }
+      &.gay {
+        background: var(--gay-color);
+        color: #fff;
+        span { color: #fff; }
+        &:hover {
+          background: #fff;
+          color: #000;
+          span { color: var(--gay-color); }
+        }
+      }
+      &.passion {
+        background: var(--passion-color);
+        color: #fff;
+        span { color: #fff; }
+        &:hover {
+          background: #fff;
+          color: #000;
+          span { color: var(--passion-color); }
+        }
+      }
+      &.japan {
+        background: var(--jap-color);
+        color: #fff;
+        span { color: #fff; }
+        &:hover {
+          background: #fff;
+          color: #000;
+          span { color: var(--jap-color); }
+        }
+      }
+    }
+  }
+
+  /* ── Right panel ─────────────────────────────── */
+  .card-site__right {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 video */
+    gap: 8px;
+    padding: 10px;
+    width: 50%;      /* Mobile: ocupa el 50% del card */
+    max-width: 70%;  /* Desktop: límite original */
+    align-items: stretch;
+
+    /* Ocultar el segundo video en móvil */
+    .card-site__video:nth-child(2) {
+      display: none;
+    }
+
+    /* Desktop: 2 videos en grid */
+    @media (min-width: 769px) {
+      grid-template-columns: repeat(2, 1fr);
+      width: auto; /* Restaurar anchura automática */
+
+      .card-site__video:nth-child(2) {
+        display: flex;
+      }
+    }
+
+    .card-site__video {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+        min-width: 0;
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.2s;
+        position: relative; /* anchor for badge */
+
+        &:hover {
+        opacity: 0.85;
+        }
+
+        /* Badge sits on .card-site__video, outside overflow:hidden thumb */
+        .badge-item {
+          position: absolute;
+          top: -5px;
+          right: 6px;
+          z-index: 3;
+          font-size: 13px;
+          font-weight: 700;
+          padding: 2px 6px;
+          transform: skewX(-10deg);
+          border-radius: 3px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+          line-height: 1;
+          white-space: nowrap;
+          text-transform: uppercase;
+
+          span {
+            display: inline-block;
+            transform: skewX(10deg);
+            line-height: 1;
+          }
+
+          &.new-video {
+            background: #1a6fd4;
+            color: #fff;
+          }
+
+          &.exclusive {
+            background: var(--terciary);
+            color: #000;
+          }
+        }
+
+        .card-site__video-thumb {
+            position: relative;
+            border-radius: calc(var(--radius, 10px) - 4px);
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            background: rgba(255, 255, 255, 0.05);
+
+            img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            }
+        }
+    }
+  }
+
+  /* ── Individual video item ───────────────────── */
+  
+
+  
+
+  &__video-info {
+    padding: 0 2px;
+
+    h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 2px;
+      line-height: 1.3;
+      /* 1 line truncation */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+/* ── External Sites Slider ──────────────────────── */
+.slider-section--sites {
+  .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .swiper-slide {
+    height: auto;
+    margin-bottom: 15px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -4,10 +4,50 @@ import type { VideoItem, QueryOptions, FilterCriteria } from './ApiService';
 import { queryVideos } from './ApiService';
 import cardTemplateRaw from '../partials/_card.html?raw';
 import cardFavouriteTemplateRaw from '../partials/_card-favourite.html?raw';
+import cardSiteTemplateRaw from '../partials/_card-site.html?raw';
 
 // Cache del template HTML de la card
 const cardTemplate: string = cardTemplateRaw;
 const cardFavouriteTemplate: string = cardFavouriteTemplateRaw;
+const cardSiteTemplate: string = cardSiteTemplateRaw;
+
+// ─── External Sites Config ────────────────────────────────────────────────────
+
+export interface SiteConfig {
+  name: string;
+  logo: string;
+  description: string;
+  siteUrl: string;
+  btnClass: string;
+  btnSpan: string;
+}
+
+export const EXTERNAL_SITES: SiteConfig[] = [
+  {
+    name: 'Virtual Real Passion',
+    logo: '/images/core/logos/logo_vrpassion.svg',
+    description: 'Romantic and passionate VR experiences in stunning 8K quality.',
+    siteUrl: 'https://www.virtualrealtrans.com',
+    btnClass: 'passion',
+    btnSpan: '',
+  },
+  {
+    name: 'Virtual Real Gay',
+    logo: '/images/core/logos/logo_vrgay.svg',
+    description: 'Immersive gay VR scenes with the hottest male performers.',
+    siteUrl: 'https://www.virtualrealgay.com',
+    btnClass: 'gay',
+    btnSpan: '',
+  },
+  {
+    name: 'Virtual Real Japan',
+    logo: '/images/core/logos/logo_vrjapan.svg',
+    description: 'The true JAV porn experience. Top quality 8K scenes',
+    siteUrl: 'https://www.virtualrealporn.com',
+    btnClass: 'japan',
+    btnSpan: '',
+  },
+];
 
 /**
  * Formatea la duración de segundos a MM:SS o HH:MM:SS
@@ -291,6 +331,88 @@ export function parseDataAttributes(element: HTMLElement): QueryOptions {
   return options;
 }
 
+// ─── Site Card Renderer ───────────────────────────────────────────────────────
+
+/**
+ * Genera el HTML del badge de video según su índice en el slider
+ * (el primero recibe "NEW VIDEO", el segundo "EXCLUSIVE")
+ */
+function getSiteBadge(index: 0 | 1): string {
+  if (index === 0) {
+    return `<div class="badge-item new-video"><span>New Video</span></div>`;
+  }
+  return `<div class="badge-item exclusive"><span>Exclusive</span></div>`;
+}
+
+/**
+ * Genera el HTML de una slide de site card con dos videos
+ */
+export function renderSiteCard(site: SiteConfig, video1: VideoItem, video2: VideoItem): string {
+  const v1Performers = formatPerformers(video1.performers_names, 2);
+  const v2Performers = formatPerformers(video2.performers_names, 2);
+
+  return cardSiteTemplate
+    .replace(/\{\{siteName\}\}/g, site.name)
+    .replace(/\{\{siteLogo\}\}/g, site.logo)
+    .replace(/\{\{siteDescription\}\}/g, site.description)
+    .replace(/\{\{siteUrl\}\}/g, site.siteUrl)
+    .replace(/\{\{siteBtnClass\}\}/g, site.btnClass)
+    .replace(/\{\{siteBtnSpan\}\}/g, site.btnSpan)
+    .replace(/\{\{video1Url\}\}/g, video1.url)
+    .replace(/\{\{video1Badge\}\}/g, getSiteBadge(0))
+    .replace(/\{\{video1Poster\}\}/g, video1.poster)
+    .replace(/\{\{video1Title\}\}/g, video1.title)
+    .replace(/\{\{video1Performers\}\}/g, v1Performers)
+    .replace(/\{\{video2Url\}\}/g, video2.url)
+    .replace(/\{\{video2Badge\}\}/g, getSiteBadge(1))
+    .replace(/\{\{video2Poster\}\}/g, video2.poster)
+    .replace(/\{\{video2Title\}\}/g, video2.title)
+    .replace(/\{\{video2Performers\}\}/g, v2Performers);
+}
+
+/**
+ * Renderiza el slider de external sites.
+ * Requiere al menos 2 videos de la API; cada site obtiene los 2 más recientes.
+ */
+export async function renderSitesSlider(swiperContainer: HTMLElement): Promise<void> {
+  const wrapper = swiperContainer.querySelector('.swiper-wrapper');
+  if (!wrapper) {
+    console.warn('[ContentRenderer] No .swiper-wrapper found in sites slider');
+    return;
+  }
+
+  try {
+    swiperContainer.classList.add('loading');
+
+    // Fetch 2 latest videos once (shared across all site cards)
+    const videos = await queryVideos({
+      limit: 2,
+      sort: { field: 'release_date', order: 'desc' },
+    });
+
+    if (videos.length < 2) {
+      console.warn('[ContentRenderer] Not enough videos to render site cards');
+      swiperContainer.classList.remove('loading');
+      return;
+    }
+
+    const [video1, video2] = videos;
+
+    const slidesHTML = EXTERNAL_SITES.map(site => {
+      const cardHtml = renderSiteCard(site, video1, video2);
+      return `<div class="swiper-slide">${cardHtml}</div>`;
+    }).join('');
+
+    // Remove skeleton placeholders
+    wrapper.querySelectorAll('.card-skeleton').forEach(el => el.remove());
+    wrapper.innerHTML = slidesHTML;
+    swiperContainer.classList.remove('loading');
+  } catch (error) {
+    console.error('[ContentRenderer] Error rendering sites slider:', error);
+    swiperContainer.classList.remove('loading');
+  }
+}
+
 /**
  * Inicializa todos los contenedores dinámicos de la página.
  * Busca elementos con data-source="api" y los rellena automáticamente.
@@ -321,5 +443,12 @@ export async function initDynamicContent(): Promise<void> {
   });
 
   await Promise.all([...gridPromises, ...sliderPromises]);
+
+  // External sites sliders
+  const sitesSliders = document.querySelectorAll<HTMLElement>('.swiper[data-external-sites]');
+  console.log('[ContentRenderer] Found', sitesSliders.length, 'sites sliders');
+  const sitesPromises = Array.from(sitesSliders).map(slider => renderSitesSlider(slider));
+  await Promise.all(sitesPromises);
+
   console.log('[ContentRenderer] Dynamic content loaded.');
 }

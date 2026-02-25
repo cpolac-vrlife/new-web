@@ -4,8 +4,8 @@
   grid-template-columns: 1fr; /* 1 columna en móviles por defecto */
   column-gap: 16px; 
   row-gap: 35px;
-  padding: 20px 0;
-  overflow: clip; /* Evita que las animaciones de badges (translateX) desborden */
+  padding: 20px 8px; /* padding lateral absorbe el scale(1.05) en items de los extremos */
+  /* overflow gestionado por la section padre (overflow-x: clip en main.css) */
   
   & .card:not(.card--skeleton) {
     & .badges-wrapper .badge-item {

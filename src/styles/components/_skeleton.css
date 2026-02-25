@@ -132,6 +132,79 @@
   }
 }
 
+/* Card-Site skeleton */
+.card-site--skeleton {
+  pointer-events: none;
+
+  .card-site__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .skeleton-logo {
+    width: 120px;
+    height: 28px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #252525 0%, #303030 50%, #252525 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .skeleton-line {
+    height: 12px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #1a1a1a 0%, #252525 50%, #1a1a1a 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    &--long  { width: 90%; }
+    &--short { width: 65%; }
+  }
+
+  .skeleton-btn {
+    width: 90px;
+    height: 30px;
+    border-radius: var(--radius, 8px);
+    background: linear-gradient(90deg, #252525 0%, #303030 50%, #252525 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .card-site__right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .card-site__video {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 0; /* no badge space needed */
+  }
+
+  .card-site__video-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: calc(var(--radius, 10px) - 4px);
+    overflow: hidden;
+  }
+
+  .skeleton-title {
+    width: 85%;
+    height: 13px;
+    margin-bottom: 0;
+  }
+
+  .skeleton-cast {
+    width: 60%;
+    height: 11px;
+  }
+}
+
 .skeletons-hidden {
   display: none !important;
 }

@@ -61,7 +61,8 @@ const initDeferred = async () => {
       const classMap: { [key: string]: string } = {
         '3': 'three-items',
         '4': 'four-items',
-        '5': 'five-items'
+        '5': 'five-items',
+        '2.5': 'two-point-five-items'
       };
       
       const className = classMap[itemsCount];
