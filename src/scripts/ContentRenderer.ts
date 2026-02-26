@@ -25,7 +25,7 @@ export interface SiteConfig {
 export const EXTERNAL_SITES: SiteConfig[] = [
   {
     name: 'Virtual Real Passion',
-    logo: '/images/core/logos/logo_vrpassion.svg',
+    logo: '/images/core/logos/sites/logo_vrpassion.svg',
     description: 'Romantic and passionate VR experiences in stunning 8K quality.',
     siteUrl: 'https://www.virtualrealtrans.com',
     btnClass: 'passion',
@@ -33,7 +33,7 @@ export const EXTERNAL_SITES: SiteConfig[] = [
   },
   {
     name: 'Virtual Real Gay',
-    logo: '/images/core/logos/logo_vrgay.svg',
+    logo: '/images/core/logos/sites/logo_vrgay.svg',
     description: 'Immersive gay VR scenes with the hottest male performers.',
     siteUrl: 'https://www.virtualrealgay.com',
     btnClass: 'gay',
@@ -41,7 +41,7 @@ export const EXTERNAL_SITES: SiteConfig[] = [
   },
   {
     name: 'Virtual Real Japan',
-    logo: '/images/core/logos/logo_vrjapan.svg',
+    logo: '/images/core/logos/sites/logo_vrjapan.svg',
     description: 'The true JAV porn experience. Top quality 8K scenes',
     siteUrl: 'https://www.virtualrealporn.com',
     btnClass: 'japan',

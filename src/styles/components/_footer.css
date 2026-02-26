@@ -246,23 +246,35 @@
 
 .footer__newsletter-input-row {
   display: flex;
-  gap: 0;
+  flex-direction: column;
+  gap: 0.75rem;
   width: 100%;
   min-width: 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 0;
+  }
 }
 
 .footer__newsletter-input {
   flex: 1;
+  width: 100%;
   padding: 12px 16px;
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-right: none;
-  border-radius: var(--radius) 0 0 var(--radius);
+  border-radius: var(--radius);
   color: #fff;
   font-size: 14px;
   font-family: var(--font-base);
   outline: none;
   transition: border-color 0.2s;
+
+  @media (min-width: 768px) {
+    width: auto;
+    border-right: none;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.35);
@@ -274,10 +286,11 @@
 }
 
 .footer__newsletter-btn {
-  padding: 10px;
+  padding: 10px 15px;
+  width: 100%;
   background: var(--primary);
   border: none;
-  border-radius: 0 var(--radius) var(--radius) 0;
+  border-radius: var(--radius);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -286,6 +299,11 @@
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s;
+
+  @media (min-width: 768px) {
+    width: auto;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
 
   &:hover {
     background: #c10030;
