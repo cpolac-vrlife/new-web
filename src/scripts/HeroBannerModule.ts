@@ -27,6 +27,7 @@ class HeroBanner {
   private readonly swipeThreshold: number = 50;
   private contentHideTimer: number | null = null;
   private readonly contentHideDelay: number = 3000;
+  private mobileQuery: MediaQueryList;
 
   constructor(config: Partial<HeroBannerConfig> = {}) {
     this.banner = document.querySelector('.hero-banner');
@@ -52,6 +53,9 @@ class HeroBanner {
       ...config
     };
 
+    // Media query for mobile/desktop video source selection
+    this.mobileQuery = window.matchMedia('(max-width: 767px)');
+
     this.init();
   }
 
@@ -59,6 +63,12 @@ class HeroBanner {
     if (!this.banner || this.slides.length === 0) return;
 
     this.attachEventListeners();
+
+    // Set correct video sources for all slides based on viewport
+    this.updateAllVideoSources();
+
+    // Re-evaluate video sources when viewport crosses the mobile/desktop threshold
+    this.mobileQuery.addEventListener('change', () => this.updateAllVideoSources());
     
     // Play video in first slide if exists
     const firstSlide = this.slides[0];
@@ -221,6 +231,7 @@ class HeroBanner {
     // Play video in new slide if exists
     const newVideo = newSlide?.querySelector('video');
     if (newVideo) {
+      this.setVideoSource(newVideo);
       newVideo.currentTime = 0; // Reset to start
       newVideo.play().catch(err => console.log('Video autoplay prevented:', err));
     }
@@ -414,6 +425,38 @@ class HeroBanner {
     if (this.progressBar) {
       this.progressBar.style.width = '0%';
     }
+  }
+
+  /**
+   * Set the correct video source (mobile or desktop) based on viewport.
+   * Uses data-src-mobile / data-src-desktop attributes on the <video> element.
+   * Only reloads if the source actually changed.
+   */
+  private setVideoSource(video: HTMLVideoElement) {
+    const isMobile = this.mobileQuery.matches;
+    const desiredSrc = isMobile
+      ? video.dataset.srcMobile
+      : video.dataset.srcDesktop;
+
+    if (!desiredSrc) return;
+
+    // Only reload if the source is different from what's already set
+    if (video.src && video.src.endsWith(desiredSrc)) return;
+
+    video.src = desiredSrc;
+    video.load();
+  }
+
+  /**
+   * Update all video sources across every slide to match the current viewport.
+   */
+  private updateAllVideoSources() {
+    this.slides.forEach((slide) => {
+      const video = slide.querySelector('video') as HTMLVideoElement | null;
+      if (video) {
+        this.setVideoSource(video);
+      }
+    });
   }
 
   // Public methods
