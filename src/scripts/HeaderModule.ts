@@ -9,7 +9,7 @@ class Header {
 
   constructor() {
     this.header = document.querySelector('.header');
-    this.hasHeroBanner = document.querySelector('.hero-banner') !== null;
+    this.hasHeroBanner = document.querySelector('.hero-banner, .vd-hero:not(.vd-hero--img)') !== null;
     this.joinBtn = document.querySelector('.mobile-join-btn');
     this.kebabToggle = document.getElementById('kebab-toggle');
     this.kebabMenu = document.getElementById('kebab-menu');
@@ -92,7 +92,7 @@ class Header {
 
   /** Show/hide the mobile JOIN button based on hero banner visibility */
   private observeHeroForJoinBtn() {
-    const hero = document.querySelector('.hero-banner');
+    const hero = document.querySelector('.hero-banner, .vd-hero');
     if (!hero || !this.joinBtn) return;
 
     const obs = new IntersectionObserver(

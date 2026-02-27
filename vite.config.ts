@@ -57,6 +57,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         videos: resolve(__dirname, 'videos.html'),
+        'video-detail-vid': resolve(__dirname, 'video-detail-vid.html'),
+        'video-detail-img': resolve(__dirname, 'video-detail-img.html'),
         categories: resolve(__dirname, 'categories.html'),
         'categories-big-tits': resolve(__dirname, 'categories/big-tits.html'),
         models: resolve(__dirname, 'models.html'),

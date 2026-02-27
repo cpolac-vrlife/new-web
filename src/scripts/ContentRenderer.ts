@@ -101,7 +101,7 @@ export function renderCard(video: VideoItem): string {
     : '';
 
   // Reemplazar placeholders
-  return cardTemplate
+  let html = cardTemplate
     .replace(/\{\{videoId\}\}/g, video.id.toString())
     .replace(/\{\{videoUrl\}\}/g, video.url)
     .replace(/\{\{qualityBadge\}\}/g, qualityBadge)
@@ -110,6 +110,13 @@ export function renderCard(video: VideoItem): string {
     .replace(/\{\{performers\}\}/g, performers)
     .replace(/\{\{duration\}\}/g, duration)
     .replace(/\{\{dataTags\}\}/g, JSON.stringify(video.video_tags));
+
+  // Local URLs: remove target="_blank" so they open in the same tab
+  if (video.url.startsWith('/')) {
+    html = html.replace(' target="_blank" rel="noopener"', '');
+  }
+
+  return html;
 }
 
 /**
@@ -198,6 +205,12 @@ export async function renderSlider(
     const isTop10 = swiperContainer.hasAttribute('data-top10');
     if (isTop10) {
       swiperContainer.classList.add('slider-top10');
+    }
+
+    // DEV: Override first two Top 10 video URLs to local detail pages
+    if (isTop10) {
+      if (videos.length > 0) videos[0].url = '/video-detail-vid.html';
+      if (videos.length > 1) videos[1].url = '/video-detail-img.html';
     }
 
     const slidesHTML = videos.map((v, index) => renderSlide(v, isFavourite, isTop10 ? index + 1 : undefined)).join('');
@@ -413,6 +426,54 @@ export async function renderSitesSlider(swiperContainer: HTMLElement): Promise<v
   }
 }
 
+// ─── Related Videos (sidebar) ─────────────────────────────────────────────────
+
+/**
+ * Genera el HTML de una related-card a partir de un VideoItem
+ */
+export function renderRelatedCard(video: VideoItem): string {
+  const performers = formatPerformers(video.performers_names, 2);
+  const quality = getQualityBadge(video.max_image_quality);
+  const qualityLabel = quality || 'HD';
+
+  return `<a href="${video.url}" class="vd-related-card">
+  <div class="vd-related-card__thumb">
+    <img src="${video.poster}" alt="${video.title}" loading="lazy" decoding="async">
+    <span class="vd-related-card__badge vd-related-card__badge--exclusive">EXCLUSIVE</span>
+  </div>
+  <div class="vd-related-card__info">
+    <h4 class="vd-related-card__title">${video.title}</h4>
+    <span class="vd-related-card__cast">${performers}</span>
+    <div class="vd-related-card__meta">
+      <span class="vd-related-card__rating">
+        <span class="material-symbols-outlined">thumb_up</span> 100%
+      </span>
+      <span class="vd-related-card__views">
+        <span class="material-symbols-outlined">visibility</span> ${qualityLabel}
+      </span>
+    </div>
+  </div>
+</a>`;
+}
+
+/**
+ * Renderiza las related-cards en un contenedor .vd-sidebar__related-list[data-source="api"]
+ */
+export async function renderRelatedVideos(container: HTMLElement): Promise<void> {
+  try {
+    const limit = parseInt(container.getAttribute('data-limit') || '6', 10);
+    const videos = await queryVideos({
+      limit,
+      sort: { field: 'release_date', order: 'desc' },
+    });
+
+    container.innerHTML = videos.map(v => renderRelatedCard(v)).join('');
+  } catch (error) {
+    console.error('[ContentRenderer] Error rendering related videos:', error);
+    container.innerHTML = '<p style="color:var(--color-text-secondary);padding:1rem;">Error loading related videos</p>';
+  }
+}
+
 /**
  * Inicializa todos los contenedores dinámicos de la página.
  * Busca elementos con data-source="api" y los rellena automáticamente.
@@ -449,6 +510,12 @@ export async function initDynamicContent(): Promise<void> {
   console.log('[ContentRenderer] Found', sitesSliders.length, 'sites sliders');
   const sitesPromises = Array.from(sitesSliders).map(slider => renderSitesSlider(slider));
   await Promise.all(sitesPromises);
+
+  // Related videos sidebar
+  const relatedLists = document.querySelectorAll<HTMLElement>('.vd-sidebar__related-list[data-source="api"]');
+  console.log('[ContentRenderer] Found', relatedLists.length, 'related video lists');
+  const relatedPromises = Array.from(relatedLists).map(list => renderRelatedVideos(list));
+  await Promise.all(relatedPromises);
 
   console.log('[ContentRenderer] Dynamic content loaded.');
 }
