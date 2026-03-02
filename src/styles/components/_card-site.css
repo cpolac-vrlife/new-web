@@ -149,34 +149,6 @@
           top: -5px;
           right: 6px;
           z-index: 3;
-          font-size: 13px;
-          font-weight: 700;
-          padding: 2px 6px;
-          transform: skewX(-10deg);
-          border-radius: 3px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
-          line-height: 1;
-          white-space: nowrap;
-          text-transform: uppercase;
-
-          span {
-            display: inline-block;
-            transform: skewX(10deg);
-            line-height: 1;
-          }
-
-          &.new-video {
-            background: #1a6fd4;
-            color: #fff;
-          }
-
-          &.exclusive {
-            background: var(--terciary);
-            color: #000;
-          }
         }
 
         .card-site__video-thumb {

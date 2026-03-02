@@ -7,6 +7,7 @@ import { initDynamicContent } from './scripts/ContentRenderer';
 import { initFilters } from './scripts/FilterManager';
 import { initSearch } from './scripts/SearchModule';
 import { initScrollAnimations } from './scripts/ScrollAnimations';
+import { initVideoDetailHero } from './scripts/VideoDetailHero';
 
 /**
  * Inicializa componentes críticos above-the-fold (LCP)
@@ -25,6 +26,9 @@ const initCritical = () => {
       autoPlayInterval: 14900
     });
   }
+
+  // Video detail hero – overlay auto-hide (same UX as hero-banner)
+  initVideoDetailHero();
 };
 
 /**

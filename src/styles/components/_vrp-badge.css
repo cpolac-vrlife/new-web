@@ -1,3 +1,65 @@
+/* ══════════════════════════════════════════════
+   Badge Item — estilos visuales (fuente de verdad)
+   ══════════════════════════════════════════════ */
+.badge-item {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 2px 6px;
+  transform: skewX(-10deg);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  line-height: 1;
+  white-space: nowrap;
+  max-width: max-content;
+
+  &.exclusive {
+    background: var(--terciary);
+    color: #000;
+    text-transform: uppercase;
+  }
+  &.interactive {
+    background: var(--primary);
+    img {
+      width: 17px;
+      height: 15px;
+    }
+  }
+  &.quality {
+    background: #fff;
+    color: #000;
+  }
+  &.top {
+    background: var(--orange);
+  }
+  &.new-video {
+    background: #1a6fd4;
+  }
+
+  span {
+    display: inline-block;
+    transform: skewX(10deg);
+    line-height: 1;
+  }
+}
+
+/* ── Badge container (agrupa varios badges) ───── */
+.badges-wrapper {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+
+  .badge-item {
+    margin-left: 0;
+  }
+}
+
+
 /* Badge Row - Logo + EXCLUSIVE/SERIES + subtitle - Mobile First */
 .hero-banner__badge-row {
   display: flex;
@@ -50,6 +112,34 @@
 }
 
 /* @keyframes logoFadeIn → definido en _card-series.css */
+
+/* ── Badge triggers fuera del hero-banner (vdi-bar, etc.) ── */
+.vdi-bar .hero-banner__badge-logo {
+  animation: logoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+.vdi-bar .hero-banner__heart {
+  animation: heartSlideLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+
+.vdi-bar .hero-banner__badge-label {
+  animation: labelSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.vdi-bar .vd-infobar__text {
+  animation: subtitleSlideInBar 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+
+@keyframes subtitleSlideInBar {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 .hero-banner__badge-label {
     font-size: 15px;

@@ -439,9 +439,9 @@ export function renderRelatedCard(video: VideoItem): string {
   return `<a href="${video.url}" class="vd-related-card">
   <div class="vd-related-card__thumb">
     <img src="${video.poster}" alt="${video.title}" loading="lazy" decoding="async">
-    <span class="vd-related-card__badge vd-related-card__badge--exclusive">EXCLUSIVE</span>
   </div>
   <div class="vd-related-card__info">
+    <span class="badge-item exclusive"><span>EXCLUSIVE</span></span>
     <h4 class="vd-related-card__title">${video.title}</h4>
     <span class="vd-related-card__cast">${performers}</span>
     <div class="vd-related-card__meta">

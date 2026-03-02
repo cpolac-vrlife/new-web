@@ -44,56 +44,15 @@
     }
   }
 
-  /* Badges (Etiquetas) */
+  /* Badges — posicionamiento específico de card */
   .badges-wrapper {
     position: absolute;
-    z-index: 2; /* Subido para asegurar visibilidad */
     right: 10px;
     top: -10px;
-    display: flex;
-    align-items: center;
-    height: 20px;
-    width: max-content;
-    opacity: 1;
-    /* No ponemos la transición aquí si vamos a usar keyframes en el padre */
 
     .badge-item {
-      font-size: 15px;
-      font-weight: 700;
-      padding: 2px 6px;
+      opacity: 0; /* Estado inicial para animación scroll */
       margin-left: 5px;
-      transform: skewX(-10deg);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
-      color: #fff; /* Aseguramos color por defecto */
-      line-height: 1;
-      opacity: 0; /* Estado inicial para animación */
-      &.exclusive { 
-        background: var(--terciary); 
-        color:#000;
-        text-transform: uppercase;
-      }
-      &.interactive { 
-        background: var(--primary); 
-        img {
-          width: 17px;
-          height: 15px;
-        }
-      }
-      &.quality { 
-        background: #fff; color: #000; 
-      }
-      &.top { 
-        background: var(--orange); 
-      }
-      span {
-        display: inline-block;
-        transform: skewX(10deg); /* Compensa el skew del padre */
-        line-height: 1;
-      }
     }
   }
 
