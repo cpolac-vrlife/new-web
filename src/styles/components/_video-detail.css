@@ -291,6 +291,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0.6rem;
+  min-height: 60px;
   flex: 1 1 auto;
   min-width: 0;
   background: #fff;
@@ -470,7 +471,7 @@
    Info Bar (below hero)
    ══════════════════════════════════════════════ */
 .vd-infobar {
-  background: #111;
+  background: #080808;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.75rem 0;
 }
@@ -581,7 +582,7 @@
   width: 100%;
   overflow: hidden;
   border-radius: 12px;
-  background: #111;
+  background: #080808;
 }
 
 .vdi-cover__media {
@@ -744,9 +745,9 @@
    VR Pornstars
    ══════════════════════════════════════════════ */
 .vd-pornstars {
-  background:#1a1a1a;
+  background:#101010;
   border-radius: 20px;
-  padding:0;
+  padding:0 0 10px 0;
   margin-bottom: 1.5rem;
   overflow: hidden;
 }
@@ -754,7 +755,7 @@
 .vd-pornstars__heading {
   display: flex;
   align-items: center;
-  background: #111;
+  background: #080808;
   gap: 6px;
   border-radius: 20px 20px 0 0;
   color: #fff;
@@ -769,49 +770,76 @@
 }
 
 .vd-pornstars__star {
-  color: var(--gold);
+  color: var(--gold)!important;
   font-size: 20px;
 }
 
 .vd-pornstars__list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
-  padding: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  position: relative;
 
   @media (min-width: 768px) {
     gap: 1.5rem;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+    padding-bottom: 20px;
+  }  
+}
+.vd-pornstars__list {
+  --sb-track-color: var(--cool-grey);
+  --sb-thumb-color: var(--primary);
+  --sb-size: 8px;
+}
+
+.vd-pornstars__list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.vd-pornstars__list::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 4px;
+  margin: 0 1.25rem;
+
+  @media (min-width: 768px) {
+    margin: 0 1.5rem;
   }
 }
 
+.vd-pornstars__list::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 4px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .vd-pornstars__list {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
 .vd-pornstar {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
   transition: opacity 0.2s;
-  min-width: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
 
   @media (min-width: 768px) {
     gap: 0.75rem;
-  }
-
-  &:hover {
-    opacity: 0.8;
   }
 }
 
 .vd-pornstar__avatar-wrap {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width:60px;
+  height: 60px;
   flex-shrink: 0;
-
-  @media (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
 }
 
 .vd-pornstar__avatar {
@@ -824,35 +852,35 @@
 
 .vd-pornstar__fav {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 20px;
-  height: 20px;
+  top: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.6);
+  background:#fff;
   backdrop-filter: blur(4px);
   border-radius: 50%;
   border: 2px solid transparent;
   transition: background 0.2s ease;
 
   svg {
-    width: 10px;
-    height: 10px;
-    fill: #fff;
+    width: 16px;
+    height: 16px;
+    fill: #777;
     transition: fill 0.2s;
   }
 
   @media (min-width: 768px) {
-    top: -5px;
-    right: -5px;
-    width: 24px;
-    height: 24px;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
 
     svg {
-      width: 14px;
-      height: 14px;
+      width: 18px;
+      height: 18px;
     }
   }
 }
@@ -862,6 +890,24 @@
 
   svg {
     fill: var(--primary);
+    animation: vd-beat 0.25s infinite alternate;
+  }
+}
+
+/* Estado favorito marcado */
+.vd-pornstar.favorite-checked .vd-pornstar__fav {
+  background: var(--primary);
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.vd-pornstar.favorite-checked:hover .vd-pornstar__fav {
+  background: var(--primary);
+
+  svg {
+    fill: #fff;
     animation: vd-beat 0.25s infinite alternate;
   }
 }
@@ -941,51 +987,42 @@
    Download Options
    ══════════════════════════════════════════════ */
 .vd-downloads {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1rem;
+  background: #101010;
+  border-radius: 20px;
   margin-bottom: 2rem;
+  padding:0;
   min-width: 0;
   overflow: hidden;
-
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-  }
 }
+
 
 .vd-downloads__heading {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  background: #080808;
+  gap: 6px;
+  border-radius: 20px 20px 0 0;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
-  margin: 0 0 1.25rem;
-  min-width: 0;
-  word-break: break-word;
-
-  .material-symbols-outlined {
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.5);
-  }
+  padding: 0.75rem 1rem;
 
   @media (min-width: 768px) {
     font-size: 15px;
+    padding: 1rem;
   }
-}
-
-.vd-downloads__title-text {
-  color: var(--primary);
+  .material-symbols-outlined{
+    color: var(--gold)!important;
+    font-size: 20px;
+  }
 }
 
 /* Resolution tabs */
 .vd-downloads__tabs {
   display: flex;
   flex-wrap: wrap;
+  padding:1.5rem 0.7rem;
   gap: 0.4rem;
-  margin-bottom: 1.25rem;
 
   @media (min-width: 768px) {
     gap: 0.5rem;
@@ -996,59 +1033,63 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 11px;
+  padding: 3px;
+  background:#333;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s;
+  width: 100%;
 
   .material-symbols-outlined {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   @media (min-width: 768px) {
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 12px;
+    gap: 10px;
+    padding:3px;
+    border-radius: 3px;
+    font-size: 15px;
+    width: auto;
 
     .material-symbols-outlined {
-      font-size: 16px;
+      font-size: 20px;
     }
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--primary);
     color: #fff;
+    .vd-downloads__tab-label{
+      background:rgba(0, 0, 0, 0.6); 
+    }
   }
 }
 
-.vd-downloads__tab--active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
-
-  &:hover {
-    background: #c10030;
-  }
-}
 
 .vd-downloads__tab-label {
   font-weight: 700;
+  font-style: italic;
+  background:rgba(0, 0, 0, 1);  
+  padding: 2px 8px 2px 6px;
+  min-width:80px;
+  margin-right: auto;
+
+  @media (min-width: 768px) {
+    min-width: max-content;
+    margin-right: 0;
+  }
+  
 }
 
 .vd-downloads__tab-size {
-  font-weight: 400;
-  opacity: 0.85;
+  font-weight: 700;
 }
 
 /* Extra downloads */
 .vd-downloads__extra {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1rem;
+  padding:0 0.5rem 1.5rem;
 }
 
 .vd-downloads__extra-row {
@@ -1060,7 +1101,7 @@
 }
 
 .vd-downloads__extra-label {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 1);
   font-size: 12px;
   font-weight: 500;
 }
@@ -1094,11 +1135,10 @@
   align-items: center;
   gap: 4px;
   padding: 5px 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 10px;
+  background:#333;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
   text-decoration: none;
   transition: all 0.2s;
   word-break: break-word;
@@ -1114,7 +1154,7 @@
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background:var(--primary);
     color: #fff;
   }
 }
@@ -1146,7 +1186,7 @@
   border-radius: 6px;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  background: #1a1a1a;
+  background: #101010;
 
   img {
     width: 100%;
@@ -1176,7 +1216,7 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  background: #111;
+  background: #080808;
 
   img {
     width: 100%;
@@ -1263,7 +1303,7 @@
   aspect-ratio: 16 / 9;
   border-radius: 8px;
   overflow: hidden;
-  background: #1a1a1a;
+  background: #101010;
 
   img {
     width: 100%;
