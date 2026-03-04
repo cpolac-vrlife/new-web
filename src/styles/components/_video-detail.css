@@ -739,6 +739,9 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background:#101010;
+  padding: 1.5rem;
+  border-radius:20px;
 }
 
 /* ══════════════════════════════════════════════
@@ -1206,9 +1209,10 @@
    ══════════════════════════════════════════════ */
 .vd-sidebar__heading {
   color: #fff;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   margin: 0 0 1rem;
+  border-bottom: 2px solid var(--gold);
 }
 
 /* Live Models block */
@@ -1226,7 +1230,13 @@
 }
 
 .vd-sidebar__live-info {
-  padding: 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  @media (min-width: 728px) {
+    flex-direction: row;
+  }
 }
 
 .vd-sidebar__live-badge {
@@ -1244,13 +1254,13 @@
 
 .vd-sidebar__live-title {
   color: #fff;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 500;
   margin: 0 0 0.25rem;
 }
 
 .vd-sidebar__live-text {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 1);
   font-size: 12px;
   line-height: 1.4;
   margin: 0 0 1rem;
@@ -1258,27 +1268,31 @@
 
 .vd-sidebar__live-cta {
   display: block;
-  width: 100%;
-  padding: 10px 0;
-  background: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: max-content;
+  padding: 15px 20px;
+  background: #fff;
   border-radius: 8px;
-  color: #fff;
-  font-size: 13px;
+  color: #000;
+  font-size: 16px;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
-  letter-spacing: 0.5px;
   transition: background 0.2s, border-color 0.2s;
-  margin: 0 1rem 1rem;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    color:#fff;
   }
 }
 
 /* Related Videos */
+.vd-sidebar__related {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .vd-sidebar__related-list {
   display: flex;
   flex-direction: column;
@@ -1312,9 +1326,89 @@
   }
 }
 
+/* Badges row en related cards */
+.vd-related-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 /* Tamaño reducido para badge en sidebar de vídeos relacionados */
 .vd-related-card__info .badge-item {
-  font-size: 12px;
+  font-size: 10px;
+  padding: 2px 5px;
+}
+
+.vd-related-card__info .badge-item.interactive {
+  padding: 2px 4px;
+}
+
+.vd-related-card__info .badge-item.interactive img {
+  width: 12px;
+  height: 12px;
+}
+
+/* Favourite heart on related card thumbnail */
+.vd-related-card__favourite {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  backdrop-filter: blur(4px);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 2;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: #777;
+    transition: fill 0.2s;
+  }
+
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.vd-related-card:hover .vd-related-card__favourite {
+  background: rgba(255, 255, 255, 1);
+
+  svg {
+    fill: var(--primary);
+    animation: vd-beat 0.25s infinite alternate;
+  }
+}
+
+/* Estado favorito marcado */
+.vd-related-card.favorite-checked .vd-related-card__favourite {
+  background: var(--primary);
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.vd-related-card.favorite-checked:hover .vd-related-card__favourite {
+  background: var(--primary);
+
+  svg {
+    fill: #fff;
+    animation: vd-beat 0.25s infinite alternate;
+  }
 }
 
 .vd-related-card__info {

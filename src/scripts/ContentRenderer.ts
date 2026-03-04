@@ -439,9 +439,15 @@ export function renderRelatedCard(video: VideoItem): string {
   return `<a href="${video.url}" class="vd-related-card">
   <div class="vd-related-card__thumb">
     <img src="${video.poster}" alt="${video.title}" loading="lazy" decoding="async">
+    <button class="vd-related-card__favourite" aria-label="Add to favorites">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#fff"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg>
+    </button>
   </div>
   <div class="vd-related-card__info">
-    <span class="badge-item exclusive"><span>EXCLUSIVE</span></span>
+    <div class="vd-related-card__badges">
+      <span class="badge-item exclusive"><span>EXCLUSIVE</span></span>
+      <span class="badge-item interactive"><span><img src="/images/icons/white/vibrate.svg" alt="Interactive"></span></span>
+    </div>
     <h4 class="vd-related-card__title">${video.title}</h4>
     <span class="vd-related-card__cast">${performers}</span>
     <div class="vd-related-card__meta">
@@ -458,16 +464,95 @@ export function renderRelatedCard(video: VideoItem): string {
 
 /**
  * Renderiza las related-cards en un contenedor .vd-sidebar__related-list[data-source="api"]
+ * Usa medición real del DOM: renderiza 1 card, la mide, calcula cuántas caben y renderiza el total exacto.
  */
 export async function renderRelatedVideos(container: HTMLElement): Promise<void> {
   try {
-    const limit = parseInt(container.getAttribute('data-limit') || '6', 10);
+    const DEFAULT_LIMIT = 6;
+    const MIN_LIMIT = 3;
+    const MAX_LIMIT = 30;
+
+    // En móvil no calculamos, usamos data-limit
+    if (window.innerWidth < 1024) {
+      const limit = parseInt(container.getAttribute('data-limit') || String(DEFAULT_LIMIT), 10);
+      const videos = await queryVideos({ limit, sort: { field: 'release_date', order: 'desc' } });
+      container.innerHTML = videos.map(v => renderRelatedCard(v)).join('');
+      return;
+    }
+
+    // Pedir un lote grande de videos (max posible)
     const videos = await queryVideos({
-      limit,
+      limit: MAX_LIMIT,
       sort: { field: 'release_date', order: 'desc' },
     });
 
-    container.innerHTML = videos.map(v => renderRelatedCard(v)).join('');
+    if (videos.length === 0) return;
+
+    // 1) Renderizar 1 sola card para medirla
+    container.innerHTML = renderRelatedCard(videos[0]);
+    // Forzar layout
+    container.offsetHeight;
+
+    const firstCard = container.querySelector('.vd-related-card') as HTMLElement;
+    if (!firstCard) {
+      container.innerHTML = videos.slice(0, DEFAULT_LIMIT).map(v => renderRelatedCard(v)).join('');
+      return;
+    }
+
+    // 2) Medir la card real y el gap real del contenedor
+    const cardHeight = firstCard.getBoundingClientRect().height;
+    const listStyle = getComputedStyle(container);
+    const listGap = parseFloat(listStyle.gap) || parseFloat(listStyle.rowGap) || 16;
+
+    // 3) Medir la altura del heading "Related Videos"
+    const relatedBlock = container.closest('.vd-sidebar__related') as HTMLElement | null;
+    const heading = relatedBlock?.querySelector('.vd-sidebar__heading') as HTMLElement | null;
+    const headingHeight = heading ? heading.getBoundingClientRect().height : 0;
+    const headingStyle = heading ? getComputedStyle(heading) : null;
+    const headingMargin = headingStyle
+      ? (parseFloat(headingStyle.marginTop) || 0) + (parseFloat(headingStyle.marginBottom) || 0)
+      : 0;
+    const totalHeadingHeight = headingHeight + headingMargin;
+
+    // 4) Medir el sidebar y la columna principal
+    const sidebar = container.closest('.vd-layout__sidebar') as HTMLElement | null;
+    if (!sidebar || !relatedBlock) {
+      container.innerHTML = videos.slice(0, DEFAULT_LIMIT).map(v => renderRelatedCard(v)).join('');
+      return;
+    }
+
+    const gridLayout = sidebar.closest('.vd-layout, .vdi-layout') as HTMLElement | null;
+    const mainColumn = gridLayout?.querySelector('.vd-layout__main, .vdi-layout__main') as HTMLElement | null;
+    const totalHeight = mainColumn
+      ? mainColumn.getBoundingClientRect().height
+      : sidebar.getBoundingClientRect().height;
+
+    // 5) Sumar altura de bloques hermanos (Live Models, etc.)
+    let siblingsHeight = 0;
+    for (const child of Array.from(sidebar.children)) {
+      if (child !== relatedBlock) {
+        siblingsHeight += (child as HTMLElement).getBoundingClientRect().height;
+      }
+    }
+
+    // Padding y gaps del sidebar
+    const sidebarStyle = getComputedStyle(sidebar);
+    const sidebarPadding = (parseFloat(sidebarStyle.paddingTop) || 0) + (parseFloat(sidebarStyle.paddingBottom) || 0);
+    const sidebarGap = parseFloat(sidebarStyle.gap) || 0;
+    const sidebarGapCount = sidebar.children.length - 1;
+    siblingsHeight += sidebarPadding + sidebarGap * sidebarGapCount;
+
+    // 6) Calcular espacio disponible para las cards
+    const availableForCards = totalHeight - siblingsHeight - totalHeadingHeight;
+
+    // Cada card ocupa cardHeight, y entre ellas hay listGap (la última no tiene gap después)
+    // N cards = cardHeight * N + listGap * (N - 1) <= available
+    // N <= (available + listGap) / (cardHeight + listGap)
+    const count = Math.floor((availableForCards + listGap) / (cardHeight + listGap));
+    const finalCount = Math.max(MIN_LIMIT, Math.min(count, Math.min(MAX_LIMIT, videos.length)));
+
+    // 7) Renderizar el número exacto
+    container.innerHTML = videos.slice(0, finalCount).map(v => renderRelatedCard(v)).join('');
   } catch (error) {
     console.error('[ContentRenderer] Error rendering related videos:', error);
     container.innerHTML = '<p style="color:var(--color-text-secondary);padding:1rem;">Error loading related videos</p>';
