@@ -9,7 +9,7 @@ class Header {
 
   constructor() {
     this.header = document.querySelector('.header');
-    this.hasHeroBanner = document.querySelector('.hero-banner, .vd-hero:not(.vd-hero--img)') !== null;
+    this.hasHeroBanner = document.querySelector('.hero-banner, .vd-hero') !== null;
     this.joinBtn = document.querySelector('.mobile-join-btn');
     this.kebabToggle = document.getElementById('kebab-toggle');
     this.kebabMenu = document.getElementById('kebab-menu');
@@ -21,16 +21,10 @@ class Header {
     this.attachEventListeners();
     this.handleScroll();
     this.highlightActiveNavItem();
-    this.observeHeroForJoinBtn();
     
     // Si hay hero banner, activar modo transparente
     if (this.hasHeroBanner && this.header) {
       this.header.classList.add('header--transparent');
-    }
-
-    // Si no hay hero banner, mostrar JOIN directamente
-    if (!this.hasHeroBanner && this.joinBtn) {
-      this.joinBtn.classList.add('is-visible');
     }
   }
 
@@ -90,25 +84,6 @@ class Header {
     });
   }
 
-  /** Show/hide the mobile JOIN button based on hero banner visibility */
-  private observeHeroForJoinBtn() {
-    const hero = document.querySelector('.hero-banner, .vd-hero');
-    if (!hero || !this.joinBtn) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.joinBtn!.classList.remove('is-visible');
-        } else {
-          this.joinBtn!.classList.add('is-visible');
-        }
-      },
-      { threshold: 0 }
-    );
-
-    obs.observe(hero);
-  }
-
   private handleScroll() {
     if (!this.header) return;
 
@@ -125,6 +100,15 @@ class Header {
         this.header.classList.add('header--scrolled');
       } else {
         this.header.classList.remove('header--scrolled');
+      }
+    }
+
+    // Mobile JOIN button: mostrar tras 600px de scroll
+    if (this.joinBtn) {
+      if (window.scrollY >= 600) {
+        this.joinBtn.classList.add('is-visible');
+      } else {
+        this.joinBtn.classList.remove('is-visible');
       }
     }
   }

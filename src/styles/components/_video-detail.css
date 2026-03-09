@@ -7,6 +7,16 @@
   max-width: 100vw;
 }
 
+.page-video-detail--img{
+  .container{
+    .vdi-layout{
+      padding-top: 0;
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+  }
+}
+
 /* ══════════════════════════════════════════════
    VD Hero – Standalone video background hero
    No dependency on hero-banner / slider styles.
@@ -126,6 +136,15 @@
   }
   @media (min-width: 1280px) {
     margin-bottom: 1rem;
+  }
+}
+
+/* Exclusive badge inside badges-wrapper: mobile only (image template) */
+.page-video-detail--img .badge-item.exclusive {
+  display: inline-flex;
+
+  @media (min-width: 768px) {
+    display: none;
   }
 }
 
@@ -258,8 +277,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
   flex-shrink: 0;
   border-radius: 50%;
  /* border: 2px solid rgba(255, 255, 255, 0.3);*/
@@ -270,13 +289,8 @@
 
   .material-symbols-outlined {
     font-size: 24px;
-  }
 
-  @media (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-
-    .material-symbols-outlined {
+    @media (min-width: 768px) {
       font-size: 32px;
     }
   }
@@ -318,7 +332,10 @@
 .play__cta {
   background: var(--primary);
   color: #fff;
-  gap:0.5rem;
+  gap:0.5rem;  
+  padding: 0.5rem 1.25rem 0.5rem 0.75rem;
+  width: max-content;
+  max-width: max-content;  
   .vd-hero__cta-line1{
     font-size:1.2rem;
     font-weight: 600;
@@ -344,7 +361,7 @@
 }
 
 .vd-hero__cta-line1 {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.2;
 
@@ -353,7 +370,7 @@
 }
 
 .vd-hero__cta-line2 {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   line-height: 1.2;
   font-weight: 400;
 
@@ -399,18 +416,21 @@
   }
 }
 
-
-
 /* Hero action buttons (right side, desktop only) */
 .vd-hero-actions {
-  display: none;
+  /*display: none;*/
+  display: flex;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  width: 100%;
+  justify-content: space-between;
 
   @media (min-width: 768px) {
-    display: flex;
-    align-items: flex-end;
+    width: auto;
+    justify-content: flex-start;
+    align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    margin-left: auto;
   }
 }
 
@@ -424,18 +444,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
-
   .material-symbols-outlined {
-    font-size: 20px;
+    font-size: 16px;
   }
+  @media (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
+
+  
 
   &:hover {
     background: rgba(255, 255, 255, 0.18);
@@ -477,6 +505,15 @@
   }
 }
 
+/* Actions myrealvr: visible on mobile, hidden on desktop */
+.vd-hero-actions > .vd-hero-actions__myrealvr {
+  display: inline-flex;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 /* ══════════════════════════════════════════════
    Info Bar (below hero)
    ══════════════════════════════════════════════ */
@@ -494,10 +531,14 @@
 }
 
 .vd-infobar__left {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .vd-infobar__text {
@@ -513,41 +554,6 @@
   gap: 0.75rem;
   margin-left: auto;
   flex-shrink: 0;
-}
-
-.vd-infobar__rating {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.vd-infobar__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.vd-infobar__action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: color 0.2s, background 0.2s;
-
-  .material-symbols-outlined {
-    font-size: 18px;
-  }
-
-  &:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
-  }
 }
 
 /* ══════════════════════════════════════════════
@@ -591,7 +597,6 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-radius: 12px;
   background: #080808;
 }
 
@@ -635,15 +640,19 @@
     justify-content: space-between;
     padding: 1.25rem 1.5rem;
   }
+
+  /* Cover myrealvr: hidden on mobile, visible on desktop */
+  > .vd-hero-actions__myrealvr {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: inline-flex;
+    }
+  }
 }
 
 .vdi-cover__bottom {
   align-self: stretch;
-}
-
-
-
-.vdi-cover__bottom {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -677,15 +686,23 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0.75rem 0;
+  padding: 0.5rem 1.25rem 1.25rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   min-width: 0;
+  @media (min-width: 768px) {
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+  }
 }
 
 /* ── Video info (title, meta, description) ── */
 .vdi-info {
-  padding-bottom: 1.25rem;
+  padding: 1.25rem;
+  @media (min-width: 768px) {
+    padding:0;
+    padding-bottom: 1.25rem;
+  }
 }
 
 .vdi-info__title {
@@ -731,14 +748,21 @@
 .vd-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  overflow: hidden;
-
+  gap: 0;
+  padding: 0.5rem 0;
+  /*overflow: hidden;*/
+  margin-left: -15px;
+  margin-right: -15px;
+  @media (min-width: 768px) {
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
   @media (min-width: 1024px) {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 3rem;
-    padding: 2.5rem 0;
+    padding: 2.5rem 0;    
+    margin-left: 0;
+    margin-right: 0;
   }
 
   @media (min-width: 1400px) {
@@ -757,8 +781,11 @@
   flex-direction: column;
   gap: 2rem;
   background:#101010;
-  padding: 1.5rem;
-  border-radius:20px;
+  padding: 1.25rem;
+  border-radius:0;
+  @media (min-width: 768px) {
+    border-radius: 20px;
+  }
 }
 
 /* ══════════════════════════════════════════════
@@ -766,10 +793,14 @@
    ══════════════════════════════════════════════ */
 .vd-pornstars {
   background:#101010;
-  border-radius: 20px;
+  border-radius: 0px;
   padding:0 0 10px 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   overflow: hidden;
+  @media (min-width: 768px) {
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .vd-pornstars__star {
@@ -781,21 +812,19 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  padding: 1.25rem;
   overflow-x: auto;
   padding-bottom: 20px;
   position: relative;
+  --sb-track-color: var(--cool-grey);
+  --sb-thumb-color: var(--primary);
+  --sb-size: 8px;
 
   @media (min-width: 768px) {
     gap: 1.5rem;
     padding: 1rem 1.5rem;
     padding-bottom: 20px;
   }  
-}
-.vd-pornstars__list {
-  --sb-track-color: var(--cool-grey);
-  --sb-thumb-color: var(--primary);
-  --sb-size: 8px;
 }
 
 .vd-pornstars__list::-webkit-scrollbar {
@@ -960,7 +989,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  padding:1.25rem;
+  margin-bottom: 0;
+  @media (min-width: 768px) {
+    padding:0;    
+    margin-bottom: 2rem;
+  }
 }
 
 .vd-tags__tag {
@@ -991,11 +1025,15 @@
    ══════════════════════════════════════════════ */
 .vd-downloads {
   background: #101010;
-  border-radius: 20px;
-  margin-bottom: 2rem;
+  border-radius: 0;
+  margin-bottom: 0;
   padding:0;
   min-width: 0;
   overflow: hidden;
+  @media (min-width: 768px) {
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
 }
 
 
@@ -1004,7 +1042,7 @@
   align-items: center;
   background: #080808;
   gap: 6px;
-  border-radius: 20px 20px 0 0;
+  border-radius:0;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -1013,6 +1051,7 @@
   @media (min-width: 768px) {
     font-size: 20px;
     padding: 1rem;
+    border-radius: 20px 20px 0 0;
   }
   .material-symbols-outlined{
     color: var(--gold)!important;
@@ -1024,7 +1063,7 @@
 .vd-downloads__tabs {
   display: flex;
   flex-wrap: wrap;
-  padding:1.5rem;
+  padding:1.25rem;
   gap: 0.4rem;
 
   @media (min-width: 768px) {
@@ -1051,14 +1090,7 @@
 
   @media (min-width: 768px) {
     gap: 10px;
-    padding:3px;
-    border-radius: 3px;
-    font-size: 15px;
     width: auto;
-
-    .material-symbols-outlined {
-      font-size: 20px;
-    }
   }
 
   &:hover {
@@ -1092,9 +1124,10 @@
 
 /* Extra downloads */
 .vd-downloads__extra {
-  padding:0 1.5rem 1.5rem;  
+  padding:0 1.25rem 1.25rem;  
   @media (min-width: 768px) {
     display: flex;
+    padding:0 1.5rem 1.5rem; 
     gap:0.75rem;
     align-items: flex-start;
   }
@@ -1168,7 +1201,12 @@
    Screenshots Gallery
    ══════════════════════════════════════════════ */
 .vd-screenshots {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  padding: 1.25rem;
+  @media (min-width: 768px) {
+   padding: 0;
+   margin-bottom: 2rem;
+  }
 }
 
 .vd-screenshots__grid {
@@ -1380,15 +1418,6 @@
     transition: fill 0.2s;
   }
 
-  @media (min-width: 768px) {
-    width: 32px;
-    height: 32px;
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
 }
 
 .vd-related-card__favourite:hover {
@@ -1469,6 +1498,18 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.5rem;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 1.25rem;
+
+    /* Spacers to keep first/last card inset from screen edges */
+    &::before,
+    &::after {
+      content: '';
+      flex: 0 0 calc(1.25rem - 1rem); /* 1.25rem offset minus gap */
+    }
 
     /* Hide scrollbar */
     scrollbar-width: none;
