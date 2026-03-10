@@ -87,7 +87,9 @@
   left: 0;
   right: 0;
   z-index: 2;
-
+  .vd-hero-actions{
+    padding:0;
+  }
   @media (min-width: 768px) {
     bottom: 50px;
   }
@@ -124,12 +126,16 @@
 
 /* ── Badge row ── */
 .vd-hero__badge-row {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.8rem;
   margin-bottom: 1rem;
   flex-wrap: nowrap;
   transition: opacity 0.5s ease, transform 0.5s ease;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 
   @media (min-width: 600px) {
     margin-bottom: 0.6rem;
@@ -139,13 +145,19 @@
   }
 }
 
-/* Exclusive badge inside badges-wrapper: mobile only (image template) */
-.page-video-detail--img .badge-item.exclusive {
+/* Exclusive badge inside badges-wrapper: mobile only (hero area, not sidebar) */
+.page-video-detail .badge-item.exclusive {
   display: inline-flex;
 
   @media (min-width: 768px) {
     display: none;
   }
+}
+
+/* Related videos: exclusive badge always visible */
+.vd-layout__sidebar .badge-item.exclusive,
+.vdi-layout__sidebar .badge-item.exclusive {
+  display: inline-flex;
 }
 
 /* The _vrp-badge.html partial uses hero-banner__badge* classes.
@@ -260,13 +272,15 @@
 /* ── CTA Buttons (same look as hero-banner__cta, own namespace) ── */
 .vd-hero__actions {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: center;  
   flex-wrap: wrap;
   width: 100%;
-
-  @media (min-width: 768px) {
-    gap: 0.75rem;
+  .loged_ctas{
+    display: flex;
+    align-items: center;  
+    gap:0.5rem;
+  }
+  @media (min-width: 768px) {   
     width: auto;
     flex-wrap: nowrap;
   }
@@ -274,6 +288,7 @@
 
 /* Download circle */
 .vd-hero__download {
+ /* display: none;*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -304,13 +319,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.6rem;
+  gap: 0.5rem;
   min-height: 60px;
   flex: 1 1 auto;
   min-width: 0;
   background: #fff;
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
   text-decoration: none;
   color: #000;
   transition: all 0.3s ease;
@@ -328,8 +343,26 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
 }
-
+.play__mrvr-cta{
+  background:#000;
+  color: #fff; 
+  display:none;
+  width: max-content;
+  max-width: max-content;
+  gap: 0.5rem;
+  padding:0 1rem;
+  height: 60px;
+  .vd-hero__cta-line1{
+    font-size: 12px;
+  }
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
 .play__cta {
+  /** PROVISIONAL **/
+  /*display: none;*/
+  /****/
   background: var(--primary);
   color: #fff;
   gap:0.5rem;  
@@ -343,8 +376,8 @@
 }
 
 .vd-hero__cta-logo {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   flex-shrink: 0;
 
@@ -361,8 +394,8 @@
 }
 
 .vd-hero__cta-line1 {
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1.2;
 
   @media (min-width: 768px) { font-size: 0.8rem; }
@@ -370,9 +403,9 @@
 }
 
 .vd-hero__cta-line2 {
-  font-size: 0.8rem;
+  font-size: 15px;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 500;
 
   @media (min-width: 768px) { font-size: 0.8rem; }
   @media (min-width: 1280px) { font-size: 1rem; }
@@ -423,6 +456,7 @@
   transition: opacity 0.5s ease, transform 0.5s ease;
   width: 100%;
   justify-content: space-between;
+  padding:0 0 1.25rem;
 
   @media (min-width: 768px) {
     width: auto;
@@ -505,12 +539,11 @@
   }
 }
 
-/* Actions myrealvr: visible on mobile, hidden on desktop */
+/* Actions myrealvr: hidden on mobile, hidden on desktop */
 .vd-hero-actions > .vd-hero-actions__myrealvr {
-  display: inline-flex;
-
+  display: none;
   @media (min-width: 768px) {
-    display: none;
+    display: block;
   }
 }
 
@@ -584,6 +617,21 @@
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop: reorder description to appear after .vdi-info */
+@media (min-width: 768px) {
+  .vdi-layout__main > .vdi-cover { order: 1; }
+  .vdi-layout__main > .vdi-bar { order: 2; }
+  .vdi-layout__main > .vdi-info { order: 3; }
+  .vdi-layout__main > .vd-hero-actions { order: 4; }
+  .vdi-layout__main > .vdi-info__description { order: 5; }
+  .vdi-layout__main > .vd-pornstars { order: 6; }
+  .vdi-layout__main > .vd-tags { order: 7; }
+  .vdi-layout__main > .vd-downloads { order: 8; }
+  .vdi-layout__main > .vd-screenshots { order: 9; }
 }
 
 .vdi-layout__sidebar {
@@ -613,12 +661,8 @@
   z-index: 1;
   pointer-events: none;
   display: none;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.2) 40%,
-    rgba(0, 0, 0, 0) 70%
-  );
+  background: rgba(0, 0, 0, 10);
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 30%, rgba(0, 0, 0, 0) 50%);
 
   @media (min-width: 768px) {
     display: block;
@@ -632,7 +676,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  padding: 0.75rem;
+  padding: 15px;
 
   @media (min-width: 768px) {
     position: absolute;
@@ -660,6 +704,9 @@
 
   @media (min-width: 600px) {
     flex-direction: row;
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
     align-items: flex-end;
     justify-content: space-between;
     gap: 1rem;
@@ -682,27 +729,24 @@
 
 /* ── Info bar (inside main column, reuses vd-infobar__* classes) ── */
 .vdi-bar {
-  display: flex;
+  display: none;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0.5rem 1.25rem 1.25rem;
+  padding: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 0;
   min-width: 0;
   @media (min-width: 768px) {
-    padding: 0.75rem 0;
+    display: flex;
+    padding: 0.75rem 1.25rem;
     margin-bottom: 1rem;
   }
 }
 
 /* ── Video info (title, meta, description) ── */
 .vdi-info {
-  padding: 1.25rem;
-  @media (min-width: 768px) {
-    padding:0;
-    padding-bottom: 1.25rem;
-  }
+  padding: 0 1.25rem;  
 }
 
 .vdi-info__title {
@@ -740,6 +784,11 @@
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
+  padding: 0 1.25rem 1rem;
+
+  @media (min-width: 768px) {
+    padding:0 1.25rem;
+  }
 }
 
 /* ══════════════════════════════════════════════
@@ -755,12 +804,12 @@
   margin-right: -15px;
   @media (min-width: 768px) {
     gap: 1.5rem;
-    padding: 1.5rem 0;
+    padding: 0;
   }
   @media (min-width: 1024px) {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 3rem;
-    padding: 2.5rem 0;    
+    padding: 0;    
     margin-left: 0;
     margin-right: 0;
   }
@@ -774,6 +823,17 @@
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* Vid template: hide description on desktop (hero handles it) */
+  > .vdi-info__description {
+    padding: 0 1.25rem 1rem;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
 }
 
 .vd-layout__sidebar {
@@ -992,7 +1052,7 @@
   padding:1.25rem;
   margin-bottom: 0;
   @media (min-width: 768px) {
-    padding:0;    
+    padding:0 1.25rem;    
     margin-bottom: 2rem;
   }
 }

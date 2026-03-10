@@ -352,6 +352,7 @@
 .hero-banner__actions {
   display: flex;
   margin-bottom: 1rem;
+  gap:0.5rem;
 }
 
 /* Offer line */
