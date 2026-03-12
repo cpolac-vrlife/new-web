@@ -1,0 +1,349 @@
+/* =============================================
+   JOIN PAGE
+   ============================================= */
+
+/* Hero */
+.join-hero {
+  padding: 3rem 0 1.5rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    padding: 5rem 0 2rem;
+  }
+}
+
+.join-hero__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.join-hero__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  line-height: 1.15;
+
+  span {
+    color: var(--primary);
+  }
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.join-hero__subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.6;
+
+  @media (min-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+/* =============================================
+   PRICING PLANS
+   ============================================= */
+.join-plans {
+  padding: 2rem 0;
+}
+
+.join-plans__grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+}
+
+/* Single Plan Card */
+.join-plan {
+  position: relative;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Featured plan */
+  &--featured {
+    border-color: var(--primary);
+    background: linear-gradient(180deg, rgba(var(--primary-rgb), 0.06) 0%, #111 40%);
+    
+    @media (min-width: 768px) {
+      transform: scale(1.04);
+    }
+
+    &:hover {
+      border-color: var(--primary);
+    }
+  }
+}
+
+.join-plan__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.join-plan__header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.join-plan__name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.join-plan__pricing {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.join-plan__price-old {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: line-through;
+  width: 100%;
+  margin-bottom: 0.15rem;
+}
+
+.join-plan__price {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.join-plan__period {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.join-plan__savings {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.1);
+  padding: 0.2rem 0.65rem;
+  border-radius: 10px;
+}
+
+/* Features List */
+.join-plan__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+
+    .material-symbols-outlined {
+      font-size: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+  }
+}
+
+/* Plan Button */
+.join-plan__btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  font-family: var(--font-base);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  margin-top: auto;
+
+  /* Default: outlined */
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  /* Primary: filled */
+  &--primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+
+    &:hover {
+      background: color-mix(in srgb, var(--primary) 85%, #000);
+      border-color: color-mix(in srgb, var(--primary) 85%, #000);
+    }
+  }
+}
+
+/* =============================================
+   FEATURES SECTION
+   ============================================= */
+.join-features {
+  padding: 3rem 0;
+}
+
+.join-features__title {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 2rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.join-features__grid {
+  display: grid;
+  gap: 1.25rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.join-feature {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0.75rem 0 0.4rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.join-feature__icon {
+  font-size: 32px;
+  color: var(--primary);
+}
+
+/* =============================================
+   TRUST / PAYMENT
+   ============================================= */
+.join-trust {
+  padding: 2rem 0 3rem;
+}
+
+.join-trust__inner {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.join-trust__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 1rem;
+}
+
+.join-trust__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+
+  img {
+    height: 24px;
+    width: auto;
+    opacity: 0.45;
+    filter: grayscale(1) brightness(2);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    @media (min-width: 768px) {
+      height: 28px;
+    }
+  }
+}
+
+.join-trust__note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0;
+  line-height: 1.5;
+}

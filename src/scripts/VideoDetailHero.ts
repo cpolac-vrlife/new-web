@@ -75,3 +75,22 @@ export function initVideoDetailHero(): void {
   // Kick off the first timer
   startTimer();
 }
+
+/**
+ * Initialises read-more / read-less toggle for video description blocks.
+ * Works on both the hero description (.vd-hero__description)
+ * and the info description (.vdi-info__description).
+ */
+function initReadMore(): void {
+  document.addEventListener('click', (e) => {
+    const link = (e.target as Element).closest('.vd-readmore');
+    if (!link) return;
+    e.preventDefault();
+    const desc = link.closest('.vdi-info__description, .vd-hero__description');
+    if (desc) {
+      desc.classList.toggle('expanded');
+    }
+  });
+}
+
+export { initReadMore };

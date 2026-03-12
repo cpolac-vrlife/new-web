@@ -62,6 +62,7 @@ export default defineConfig({
         categories: resolve(__dirname, 'categories.html'),
         'categories-big-tits': resolve(__dirname, 'categories/big-tits.html'),
         models: resolve(__dirname, 'models.html'),
+        join: resolve(__dirname, 'join.html'),
       },
       output: {
         // Mejor hashing para cache

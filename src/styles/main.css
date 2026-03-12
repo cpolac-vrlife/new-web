@@ -22,6 +22,8 @@
 @import "./components/_filters-bar.css";
 @import "./components/_skeleton.css";
 @import "./components/_search-overlay.css";
+@import "./components/_login-modal.css";
+@import "./components/_join.css";
 @import "./components/_video-detail.css";
 @import "./components/_footer.css";
 

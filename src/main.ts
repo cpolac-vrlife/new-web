@@ -7,7 +7,8 @@ import { initDynamicContent } from './scripts/ContentRenderer';
 import { initFilters } from './scripts/FilterManager';
 import { initSearch } from './scripts/SearchModule';
 import { initScrollAnimations } from './scripts/ScrollAnimations';
-import { initVideoDetailHero } from './scripts/VideoDetailHero';
+import { initVideoDetailHero, initReadMore } from './scripts/VideoDetailHero';
+import { initLoginModal } from './scripts/LoginModal';
 
 /**
  * Inicializa componentes críticos above-the-fold (LCP)
@@ -19,6 +20,9 @@ const initCritical = () => {
   // Search overlay (se vincula al botón del header)
   initSearch();
 
+  // Login modal
+  initLoginModal();
+
   // Hero banner es el LCP candidato, inicializar inmediatamente
   if (document.querySelector('.hero-banner')) {
     initHeroBanner({
@@ -29,6 +33,9 @@ const initCritical = () => {
 
   // Video detail hero – overlay auto-hide (same UX as hero-banner)
   initVideoDetailHero();
+
+  // Read more toggle for video descriptions
+  initReadMore();
 };
 
 /**

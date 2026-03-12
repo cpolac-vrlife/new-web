@@ -1,0 +1,318 @@
+/* =============================================
+   LOGIN MODAL
+   ============================================= */
+
+.login-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 1rem;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+
+    .login-modal {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.login-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 480px;
+  background: #111;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.login-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.login-modal__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.login-modal__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.login-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.login-modal__label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-modal__input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  color: #fff;
+  font-family: var(--font-base);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.login-modal__password-wrapper {
+  position: relative;
+
+  .login-modal__input {
+    padding-right: 2.75rem;
+  }
+}
+
+.login-modal__toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  padding: 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.login-modal__remember {
+  display: flex;
+  align-items: center;
+}
+
+.login-modal__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+
+  input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+}
+
+.login-modal__submit {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-base);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  margin-top: 0.25rem;
+
+  &:hover {
+    background: color-mix(in srgb, var(--primary) 85%, #000);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.login-modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.login-modal__link {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &--join {
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+/* =============================================
+   FORGOT PASSWORD VIEW
+   ============================================= */
+
+.login-modal__forgot {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  flex: 1;
+
+  &.is-active {
+    display: flex;
+  }
+
+  .login-modal__title {
+    margin-bottom: 0;
+  }
+
+  .login-modal__form {
+    width: 100%;
+  }
+}
+
+.login-modal__forgot-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--primary);
+  }
+}
+
+.login-modal__forgot-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.login-modal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-base);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+  margin-top: 0.25rem;
+
+  .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+/* Hide login content when forgot view is active */
+.login-modal.show-forgot {
+  .login-modal__header,
+  .login-modal__form#login-modal-form,
+  .login-modal__footer {
+    display: none;
+  }
+}
